@@ -1,0 +1,37 @@
+
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",     /* Recommended React Native TSConfig base */
+  "compilerOptions": {
+    "target": "esnext",                                  /* Latest JS version */
+    "module": "esnext",
+    "lib": ["esnext"],
+    "jsx": "react-native",
+    "noEmit": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "types": ["react-native", "jest"],
+    "moduleResolution": "node",
+    "strict": true,
+    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
+  
+    /* Babel Plugin Module Resolver */
+    "baseUrl": "./src",
+    "paths": {
+      "@shared-constants": ["./shared/constants"],
+      "@shared-components/*": ["./shared/components/*"],
+      "@fonts": ["./shared/theme/fonts"],
+      "@theme/*": ["./shared/theme/*"],
+      "@screens/*": ["./screens/*"],
+      "@models/*": ["./models/*"],
+      
+    },
+  },
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
+  ]
+}
