@@ -2,7 +2,7 @@ import React from "react";
 import { useColorScheme } from "react-native";
 import Icon from "react-native-dynamic-vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer, StackActions } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { isReadyRef, navigationRef } from "react-navigation-helpers";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -12,10 +12,11 @@ import { LightTheme, DarkTheme, palette } from "../shared/theme/themes";
 
 /* Screens */
 import HomeScreen from "../screens/Home/HomeScreen";
+import CallLogScreen from "../screens/CallLog/CallLogScreen";
 
 /* Navigator Types */
 const Tab = createBottomTabNavigator();
-//const Stack = createStackNavigator();
+const Stack = createStackNavigator();
 
 const Navigation = () => {
     const scheme = useColorScheme();
@@ -25,29 +26,29 @@ const Navigation = () => {
         return () => (isReadyRef.current = false);
     }, []);
 
-    const renderTabIcon = (
+    const RenderTabIcon = (
         route: any,
         focused: boolean,
         color: string,
         size: number,
-      ) => {
+    ) => {
         let iconName = "home";
         switch (route.name) {
-          case SCREENS.HOME:
-            iconName = focused ? "home" : "home-outline";
+            case SCREENS.HOME:
+                iconName = focused ? "home" : "home-outline";
             break;
-          default:
-            iconName = focused ? "home" : "home-outline";
+            case SCREENS.CALLLOG:
+                iconName = focused ? "list" : "list-outline";
             break;
         }
         return <Icon name={iconName} type="Ionicons" size={size} color={color} />;
-      };
+    };
     
-    const renderTabNavigation = () => {
+    const RenderTabNavigation = () => {
         return (
             <Tab.Navigator
                 screenOptions={({ route }) => ({
-                headerShown: false, tabBarIcon: ({ focused, color, size }) => renderTabIcon(route, focused, color, size),
+                headerShown: false, tabBarIcon: ({ focused, color, size }) => RenderTabIcon(route, focused, color, size),
                 tabBarActiveTintColor: palette.primary,
                 tabBarInactiveTintColor: "gray",
                 tabBarStyle: {
@@ -55,7 +56,8 @@ const Navigation = () => {
                 },
                 })}
             >
-            <Tab.Screen name={SCREENS.HOME} component={HomeScreen} />
+                <Tab.Screen name={"Home"} component={HomeScreen} />
+                <Tab.Screen name={"CallLog"} component={CallLogScreen} />
             </Tab.Navigator>
         );
     };  
@@ -68,6 +70,11 @@ const Navigation = () => {
             }}
             theme = {isDarkMode ? DarkTheme : LightTheme}
         >
+
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name={"Home"} component={RenderTabNavigation} />
+            <Stack.Screen name={"CallLog"} component={CallLogScreen} />
+        </Stack.Navigator>
 
         </NavigationContainer>
     );

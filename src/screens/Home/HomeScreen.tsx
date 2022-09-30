@@ -1,14 +1,12 @@
 import React, { useMemo } from "react";
-import { View, FlatList, Image } from "react-native";
+import { View } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import * as NavigationService from "react-navigation-helpers";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 /* Local Imports */
 import createStyles from "./HomeScreen.style";
 
 /* Shared Imports */
-import { SCREENS } from "../../shared/constants";
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
 
@@ -18,10 +16,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
-  
-    const handleItemPress = () => {
-      NavigationService.push(SCREENS.HOME);
-    };
   
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */

@@ -4,13 +4,12 @@ import { ViewStyle, StyleSheet, TextStyle } from "react-native";
 
 interface Style {
   container: ViewStyle;
-  descriptionTextStyle: TextStyle;
+  locationTextStyle: TextStyle;
   contentContainer: ViewStyle;
-  languageContainer: ViewStyle;
-  languageColorStyle: ViewStyle;
-  starContainer: ViewStyle;
-  valueTextStyle: TextStyle;
-  forkContainer: ViewStyle;
+  dateContainer: ViewStyle;
+  dateColorStyle: ViewStyle;
+  timeContainer: ViewStyle;
+  valueTextStyle: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -25,7 +24,7 @@ export default (theme: ExtendedTheme) => {
       borderColor: colors.borderColor,
       backgroundColor: colors.dynamicBackground,
     },
-    descriptionTextStyle: {
+    locationTextStyle: {
       marginTop: 8,
     },
     contentContainer: {
@@ -33,11 +32,11 @@ export default (theme: ExtendedTheme) => {
       flexDirection: "row",
       alignItems: "center",
     },
-    languageContainer: {
+    dateContainer: {
       flexDirection: "row",
       alignItems: "center",
     },
-    languageColorStyle: {
+    dateColorStyle: {
       width: 15,
       height: 15,
       borderWidth: 1,
@@ -45,18 +44,13 @@ export default (theme: ExtendedTheme) => {
       borderColor: colors.borderColor,
       backgroundColor: colors.calpyse,
     },
-    starContainer: {
+    timeContainer: {
       marginLeft: 16,
       flexDirection: "row",
       alignItems: "center",
     },
     valueTextStyle: {
       marginLeft: 8,
-    },
-    forkContainer: {
-      marginLeft: 16,
-      flexDirection: "row",
-      alignItems: "center",
-    },
+    }
   });
 };
