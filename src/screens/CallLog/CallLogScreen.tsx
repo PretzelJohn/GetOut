@@ -16,13 +16,17 @@ import { SCREENS } from "../../shared/constants";
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
 
+import test from '../../api/TestInterface'
+
 interface CallLogScreenProps {}
 
 const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
-  
+
+    test();
+
     const handleItemPress = () => {
       NavigationService.push(SCREENS.CALLLOG);
     };
@@ -35,7 +39,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const Header = () => (
         <View style={styles.header}>
         </View>
-      );
+    );
     
     const CallLogsHeader = () => (
       <>

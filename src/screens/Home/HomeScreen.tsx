@@ -29,13 +29,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     const Welcome = () => (
       <>
         <Text h1 bold color={colors.text}>
-          Hello, user.
+          Mr. Anderson,
         </Text>
         <Text
           fontFamily={fonts.montserrat.lightItalic}
           color={colors.placeholder}
         >
-          Welcome Back
+          Welcome back. We missed you.
         </Text>
       </>
     );

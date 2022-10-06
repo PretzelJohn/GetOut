@@ -4,7 +4,7 @@ import { StatusBar, useColorScheme, LogBox } from "react-native";
 import SplashScreen from "react-native-splash-screen";
 
 /** Local Imports */
-import Navigation from './src/navigation';
+import Navigation from './navigation';
 import { isAndroid } from "@freakycoder/react-native-helpers";
 
 LogBox.ignoreAllLogs();
