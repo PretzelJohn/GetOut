@@ -32,13 +32,19 @@ const Navigation = () => {
         color: string,
         size: number,
     ) => {
-        let iconName = "home";
+        let iconName = "history";
         switch (route.name) {
-            case SCREENS.HOME:
-                iconName = focused ? "home" : "home-outline";
-            break;
             case SCREENS.CALLLOG:
-                iconName = focused ? "list" : "list-outline";
+                iconName = focused ? "history" : "history-outline";
+            break;
+            case SCREENS.WHITELIST:
+                iconName = focused ? "phone" : "phone-outline";
+            break;
+            case SCREENS.BLACKLIST:
+                iconName = focused ? "phone-slash" : "phone-slash-outline";
+            break;
+            case SCREENS.SETTINGS:
+                iconName = focused ? "gear" : "gear-outline";
             break;
         }
         return <Icon name={iconName} type="Ionicons" size={size} color={color} />;
@@ -56,8 +62,10 @@ const Navigation = () => {
                 },
                 })}
             >
-                <Tab.Screen name={"Home"} component={HomeScreen} />
-                <Tab.Screen name={"CallLog"} component={CallLogScreen} />
+                <Tab.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
+                <Tab.Screen name={SCREENS.WHITELIST} component={HomeScreen} />
+                <Tab.Screen name={SCREENS.BLACKLIST} component={HomeScreen} />
+                <Tab.Screen name={SCREENS.SETTINGS} component={HomeScreen} />
             </Tab.Navigator>
         );
     };  

@@ -1,4 +1,7 @@
 export const SCREENS = {
     HOME: "Home",
-    CALLLOG: "CallLog"
+    CALLLOG: "Recents",
+    WHITELIST: "Allowed",
+    BLACKLIST: "Blocked",
+    SETTINGS: "Settings"
 }
