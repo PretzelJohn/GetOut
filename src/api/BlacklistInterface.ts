@@ -1,3 +1,4 @@
+import { IListItem } from '@shared-components/list-item/IListItem';
 import { useState, useEffect } from 'react';
 import { getDatabase } from "../database/Database";
 
@@ -26,7 +27,7 @@ const _load = async function() {
 
 //Return the result of _load, since its async
 export const getBlacklist = function() {
-    const [data, setData] = useState(Array);
+    const [data, setData] = useState(Array<IListItem>);
     useEffect(() => {
       const fetchData = async () => {
         const data = await _load();
@@ -45,7 +46,7 @@ export const insert = async function(phone_number : string) {
     const db = await getDatabase();
 
     //Insert a document into the collection
-    await db.blacklist.atomicUpsert({
+    db.blacklist.atomicUpsert({
         phone_number: phone_number
     });
 }

@@ -11,8 +11,11 @@ import { SCREENS } from "../shared/constants";
 import { LightTheme, DarkTheme, palette } from "../shared/theme/themes";
 
 /* Screens */
-import HomeScreen from "../screens/Home/HomeScreen";
+import WelcomeScreen from "../screens/Welcome/WelcomeScreen";
 import CallLogScreen from "../screens/CallLog/CallLogScreen";
+import WhitelistScreen from "../screens/Whitelist/WhitelistScreen";
+import BlacklistScreen from "../screens/Blacklist/BlacklistScreen";
+import SettingsScreen from "../screens/Settings/SettingsScreen";
 
 /* Navigator Types */
 const Tab = createBottomTabNavigator();
@@ -63,9 +66,9 @@ const Navigation = () => {
                 })}
             >
                 <Tab.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
-                <Tab.Screen name={SCREENS.WHITELIST} component={HomeScreen} />
-                <Tab.Screen name={SCREENS.BLACKLIST} component={HomeScreen} />
-                <Tab.Screen name={SCREENS.SETTINGS} component={HomeScreen} />
+                <Tab.Screen name={SCREENS.WHITELIST} component={WhitelistScreen} />
+                <Tab.Screen name={SCREENS.BLACKLIST} component={BlacklistScreen} />
+                <Tab.Screen name={SCREENS.SETTINGS} component={SettingsScreen} />
             </Tab.Navigator>
         );
     };  
@@ -82,6 +85,9 @@ const Navigation = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name={SCREENS.HOME} component={RenderTabNavigation} />
             <Stack.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
+            <Stack.Screen name={SCREENS.WHITELIST} component={WhitelistScreen} />
+            <Stack.Screen name={SCREENS.BLACKLIST} component={BlacklistScreen} />
+            <Stack.Screen name={SCREENS.SETTINGS} component={SettingsScreen} />
         </Stack.Navigator>
 
         </NavigationContainer>

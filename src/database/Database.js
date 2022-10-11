@@ -8,6 +8,7 @@ import SQLiteAdapterFactory from 'pouchdb-adapter-react-native-sqlite'
 import callLogCollection from './models/CallLogModel';
 import blacklistCollection from './models/BlacklistModel';
 import whitelistCollection from './models/WhitelistModel';
+import settingsCollection from './models/SettingsModel';
 
 
 //Enable the SQLite plugin for PouchDB
@@ -23,6 +24,7 @@ const _create = async function() {
     const db = await createRxDatabase({
         name: 'database',
         storage: getRxStoragePouch('react-native-sqlite'),
+        multiInstance: false,
         ignoreDuplicate: true
     });
     
@@ -30,6 +32,7 @@ const _create = async function() {
     await db.addCollections(callLogCollection);
     await db.addCollections(whitelistCollection);
     await db.addCollections(blacklistCollection);
+    await db.addCollections(settingsCollection);
 
     return db;
 }

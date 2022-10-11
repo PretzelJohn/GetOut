@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ICardItem } from '@models/CardItem';
+import { ICallLogItem } from '@screens/CallLog/components/card-item/ICallLogItem';
 import { getDatabase } from '../database/Database';
 
 
@@ -9,7 +9,7 @@ const _load = async function() {
     const db = await getDatabase();
 
     //Query the documents in the collection
-    let list : Array<ICardItem> = [];
+    let list : Array<ICallLogItem> = [];
     await db.callLog.find({sort: [{timestamp: 'desc'}]}).exec().then((result: any[]) => {
         if(!result) return;
         for(let i = 0; i < result.length; i++) {
@@ -31,7 +31,7 @@ const _load = async function() {
 
 //Return the result of _load, since its async
 export const getCallList = function () {
-    const [data, setData] = useState(Array<ICardItem>);
+    const [data, setData] = useState(Array<ICallLogItem>);
     useEffect(() => {
       const fetchData = async () => {
         const data = await _load();
@@ -50,7 +50,7 @@ export const insert = async function(phone_number : string, timestamp=Date.now()
     const db = await getDatabase();
 
     //Insert a document ("row") into the collection ("table")
-    await db.callLog.atomicUpsert({
+    db.callLog.atomicUpsert({
         phone_number: phone_number,
         timestamp: timestamp,
         location: location,

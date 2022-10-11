@@ -5,15 +5,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 /* Local Imports */
 import createStyles from "./CallLogScreen.style";
-import CardItem from "./components/card-item/CardItem";
+import CallLogItem from "./components/card-item/CallLogItem";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
 
 import { getCallList, insert } from "../../api/CallLogInterface";
-import { getWhitelist } from "../../api/WhitelistInterface";
-import { getBlacklist } from "../../api/BlacklistInterface";
 
 
 interface CallLogScreenProps {}
@@ -28,9 +26,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     };
 
 
-    //Testing whitelist, blacklist, and call log - will be moved into their own files
-    const whitelist = getWhitelist();
-    const blacklist = getBlacklist();
+    //Insert mock data - will be removed for production
     insert('678-923-1102', 1664349720000, 'Mableton, GA', false);
     insert('678-223-8694', 1663912800000, 'Mableton, GA', false);
     insert('970-885-8195', 1663887600000, 'Fort Collins, CO', false);
@@ -42,8 +38,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     /* -------------------------------------------------------------------------- */
 
 
-    // TODO: Add menu hamburger here if using menu stack    
-    const CallLogsHeader = () => (
+    const Header = () => (
       <>
         <Text h1 bold color={colors.text}>
           Call Log
@@ -63,7 +58,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
         <FlatList
           data={getCallList()}
           renderItem={({ item }) => (
-            <CardItem data={item} onPress={handleItemPress} />
+            <CallLogItem data={item} onPress={handleItemPress} />
           )}
         />
       </View>
@@ -72,7 +67,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.contentContainer}>
-          <CallLogsHeader />
+          <Header />
           <CallLogs />
         </View>
       </SafeAreaView>
