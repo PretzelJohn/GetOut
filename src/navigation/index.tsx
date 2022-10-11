@@ -80,8 +80,8 @@ const Navigation = () => {
         >
 
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name={"Home"} component={RenderTabNavigation} />
-            <Stack.Screen name={"CallLog"} component={CallLogScreen} />
+            <Stack.Screen name={SCREENS.HOME} component={RenderTabNavigation} />
+            <Stack.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
         </Stack.Navigator>
 
         </NavigationContainer>

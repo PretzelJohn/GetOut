@@ -1,4 +1,4 @@
-//Install dependencies: npx install rxdb rxjs pouchdb-adapter-react-native-sqlite react-native-sqlite-2 --save
+//Install dependencies: npm install rxdb rxjs pouchdb-adapter-react-native-sqlite react-native-sqlite-2 --save
 
 import { createRxDatabase } from 'rxdb';
 import { getRxStoragePouch, addPouchPlugin } from 'rxdb/plugins/pouchdb';
