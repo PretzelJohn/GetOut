@@ -11,7 +11,7 @@ import CardItem from "./components/card-item/CardItem";
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
 
-import { getCallList } from "../../api/CallLogInterface";
+import { getCallList, insert } from "../../api/CallLogInterface";
 import { getWhitelist } from "../../api/WhitelistInterface";
 import { getBlacklist } from "../../api/BlacklistInterface";
 
@@ -28,9 +28,13 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     };
 
 
-    //Testing whitelist and blacklist - will be moved into their own screens
+    //Testing whitelist, blacklist, and call log - will be moved into their own files
     const whitelist = getWhitelist();
     const blacklist = getBlacklist();
+    insert('678-923-1102', 1664349720000, 'Mableton, GA', false);
+    insert('678-223-8694', 1663912800000, 'Mableton, GA', false);
+    insert('970-885-8195', 1663887600000, 'Fort Collins, CO', false);
+    insert('470-303-1102', 1663797600000, 'Atlanta, GA', false);
     
 
     /* -------------------------------------------------------------------------- */
