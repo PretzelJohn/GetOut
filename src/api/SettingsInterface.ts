@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { getDatabase } from '../database/Database';
 
 let contacts = false;
-let notifications = true;
+let notifications = false;
 let whitelist = true;
 let blacklist = true;
 let block_calls = true;

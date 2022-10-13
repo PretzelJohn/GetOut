@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { View, FlatList } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Icon from "react-native-dynamic-vector-icons";
 
 /* Local Imports */
 import createStyles from "./WhitelistScreen.style";

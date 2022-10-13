@@ -23,7 +23,7 @@ const Stack = createStackNavigator();
 
 const Navigation = () => {
     const scheme = useColorScheme();
-    const isDarkMode = scheme === "dark";
+    const isDarkMode = scheme === 'dark';
 
     React.useEffect((): any => {
         return () => (isReadyRef.current = false);
@@ -57,7 +57,8 @@ const Navigation = () => {
         return (
             <Tab.Navigator
                 screenOptions={({ route }) => ({
-                headerShown: false, tabBarIcon: ({ focused, color, size }) => RenderTabIcon(route, focused, color, size),
+                headerShown: false, 
+                tabBarIcon: ({ focused, color, size }) => RenderTabIcon(route, focused, color, size),
                 tabBarActiveTintColor: palette.primary,
                 tabBarInactiveTintColor: "gray",
                 tabBarStyle: {

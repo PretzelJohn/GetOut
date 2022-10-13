@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 /* Local Imports */
 import createStyles from './SettingsScreen.style';
 import * as Settings from '../../api/SettingsInterface'
+import * as SettingsHandlers from "../../services/SettingsServices";
 
 /* Shared Imports */
 import Text from '../../shared/components/text-wrapper/TextWrapper';
@@ -45,8 +46,8 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
     const data = Settings.getSettings();
     const ToggleSettings = () => (
         <View style={styles.listContainer}>
-            <ToggleItem data={data.contacts} name="Use contacts" description="Uses your contact list to block calls" onPress={(value : boolean) => {Settings.setContacts(!value)}} />
-            <ToggleItem data={data.notifications} name="Notifications" description="Silently notifies you when a call is blocked" onPress={(value : boolean) => {Settings.setNotifications(!value)}} />
+            <ToggleItem data={data.contacts} name="Use contacts" description="Uses your contact list to block calls" onPress={(value : boolean) => {SettingsHandlers.contactsPermissionsHandler(!value)}} />
+            <ToggleItem data={data.notifications} name="Notifications" description="Silently notifies you when a call is blocked" onPress={(value : boolean) => {SettingsHandlers.notifsPermissionsHandler(!value)}} />
             <ToggleItem data={data.whitelist} name="Enable whitelist" description="Uses the whitelist to always allow certain calls" onPress={(value : boolean) => {Settings.setWhitelist(!value)}} />
             <ToggleItem data={data.blacklist} name="Enable blacklist" description="Uses the blacklist to always block certain calls" onPress={(value : boolean) => {Settings.setBlacklist(!value)}} />
             <ToggleItem data={data.block_calls} name="Block calls" description="Prevents spammers from interrupting you :D" onPress={(value : boolean) => {Settings.setBlockCalls(!value)}} />
