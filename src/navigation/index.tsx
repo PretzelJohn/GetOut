@@ -20,7 +20,6 @@ import SettingsScreen from "../screens/Settings/SettingsScreen";
 /* Navigator Types */
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
 const Navigation = () => {
     const scheme = useColorScheme();
     const isDarkMode = scheme === "dark";
