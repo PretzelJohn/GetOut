@@ -16,21 +16,18 @@ export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create<Style>({
     container: {
-      padding: 16,
-      marginTop: 16,
+      padding: 10,
+      marginTop: 0,
       borderWidth: 1,
-      borderRadius: 8,
       width: ScreenWidth * 0.9,
-      borderColor: colors.borderColor,
-      backgroundColor: colors.dynamicBackground,
+      borderColor: colors.primary,
+      backgroundColor: colors.white,
     },
     locationTextStyle: {
       marginTop: 8,
     },
     contentContainer: {
-      marginTop: 16,
-      flexDirection: "row",
-      alignItems: "center",
+      marginLeft: 200,
     },
     dateContainer: {
       flexDirection: "row",
@@ -45,9 +42,7 @@ export default (theme: ExtendedTheme) => {
       backgroundColor: colors.calpyse,
     },
     timeContainer: {
-      marginLeft: 16,
-      flexDirection: "row",
-      alignItems: "center",
+      marginRight: 1
     },
     valueTextStyle: {
       marginLeft: 8,

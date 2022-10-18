@@ -1,11 +1,11 @@
 import { DefaultTheme, ExtendedTheme } from "@react-navigation/native";
 
 export const palette = {
-    primary: "#0564d4",
-    secondary: "#ff6a00",
-    background: "#f6f8fa",
-    white: "#fff",
-    black: "#101214",
+    primary: "#5CE1E6",
+    secondary: 'rgba(92, 225, 230, 0.25)',
+    background: "#ffffff",
+    white: "#ffffff",
+    black: "#000000",
     button: "#1c1e21",
     shadow: "#757575",
     text: "#30363b",
