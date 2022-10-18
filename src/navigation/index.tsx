@@ -38,16 +38,16 @@ const Navigation = () => {
         let iconName = "history";
         switch (route.name) {
             case SCREENS.CALLLOG:
-                iconName = focused ? "history" : "history-outline";
+                iconName = focused ? "call" : "call-outline";
             break;
             case SCREENS.WHITELIST:
-                iconName = focused ? "phone" : "phone-outline";
+                iconName = focused ? "shield-checkmark" : "shield-checkmark-outline";
             break;
             case SCREENS.BLACKLIST:
-                iconName = focused ? "phone-slash" : "phone-slash-outline";
+                iconName = focused ? "close" : "close-outline";
             break;
             case SCREENS.SETTINGS:
-                iconName = focused ? "gear" : "gear-outline";
+                iconName = focused ? "cog" : "cog-outline";
             break;
         }
         return <Icon name={iconName} type="Ionicons" size={size} color={color} />;

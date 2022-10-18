@@ -1,3 +1,5 @@
+"use strict"
+
 import { IListItem } from '@shared-components/list-item/IListItem';
 import { useState, useEffect } from 'react';
 import { getDatabase } from "../database/Database";
@@ -19,11 +21,34 @@ const _load = async function() {
         }
     });
 
-    console.log('Whitelist: ');
-    console.log(list);
     return list;
 }
 
+const _search = async function(phone_number : string) {
+    // Create / connect to database
+    const db = await getDatabase();
+
+    // Query database for search term
+    let result_list : Array<any> = [];
+    await db.whitelist.find({
+        selector : {
+            phone_number : phone_number
+        }
+    }).exec().then((result: any[]) => {
+        if (!result) {
+            console.log('Search query not found');
+            return;
+        } else {
+            for (let i = 0; i < result.length; i++) {
+                result_list.push({
+                    phone_number: result[i].phone_number
+                });
+            }
+        }
+    });
+    console.log(result_list);
+    return result_list;
+}
 
 //Return the result of _load, since its async
 export const getWhitelist = function() {
@@ -51,3 +76,15 @@ export const insert = async function(phone_number : string) {
     });
 }
 
+export const search = function(phone_number : string) {
+    const [data, setData] = useState(Array<IListItem>);
+    useEffect(() => {
+      const fetchData = async () => {
+        const data = await _search(phone_number);
+        setData(data);
+      }
+      fetchData();
+    }, []);
+
+    return data;
+}

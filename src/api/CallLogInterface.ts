@@ -22,9 +22,7 @@ const _load = async function() {
             });
         }
     });
-
-    console.log('Call log: ');
-    console.log(list);
+    
     return list;
 }
 
@@ -55,5 +53,5 @@ export const insert = async function(phone_number : string, timestamp=Date.now()
         timestamp: timestamp,
         location: location,
         blocked: blocked
-    });
+    }).catch();
 }
