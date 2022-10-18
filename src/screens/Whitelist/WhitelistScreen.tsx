@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { View, FlatList } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Icon from "react-native-dynamic-vector-icons";
 
 /* Local Imports */
 import createStyles from "./WhitelistScreen.style";
@@ -11,7 +12,7 @@ import ListItem from "../../shared/components/list-item/ListItem";
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
 
-import { getWhitelist, insert } from "../../api/WhitelistInterface";
+import { getWhitelist, insert, search } from "../../api/WhitelistInterface";
 
 
 interface WhitelistScreenProps {}
@@ -31,7 +32,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
     insert('678420*');
     insert('6784205109');
     
-
+    search('6784205109');
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
     /* -------------------------------------------------------------------------- */
