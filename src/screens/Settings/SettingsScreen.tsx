@@ -48,11 +48,11 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
     const data = Settings.getSettings();
     const ToggleSettings = () => (
         <View style={styles.listContainer}>
-            <ToggleItem data={data.contacts} name="Use contacts" description="Uses your contact list to block calls" onPress={(value : boolean) => {SettingsHandlers.getPermission(PERMISSIONS.ANDROID.READ_CONTACTS)}} />
+            <ToggleItem data={data.contacts} name="Use Contacts" description="Uses your contact list to block calls" onPress={(value : boolean) => {SettingsHandlers.getPermission(PERMISSIONS.ANDROID.READ_CONTACTS)}} />
             <ToggleItem data={data.notifications} name="Notifications" description="Silently notifies you when a call is blocked" onPress={(value : boolean) => {SettingsHandlers.notifsPermissionsHandler(!value)}} />
-            <ToggleItem data={data.whitelist} name="Enable whitelist" description="Uses the whitelist to always allow certain calls" onPress={(value : boolean) => {Settings.setWhitelist(!value)}} />
-            <ToggleItem data={data.blacklist} name="Enable blacklist" description="Uses the blacklist to always block certain calls" onPress={(value : boolean) => {Settings.setBlacklist(!value)}} />
-            <ToggleItem data={data.block_calls} name="Block calls" description="Prevents spammers from interrupting you :D" onPress={(value : boolean) => {Settings.setBlockCalls(!value)}} />
+            <ToggleItem data={data.whitelist} name="Enable Whitelist" description="Uses the whitelist to always allow certain calls" onPress={(value : boolean) => {Settings.setWhitelist(!value)}} />
+            <ToggleItem data={data.blacklist} name="Enable Blacklist" description="Uses the blacklist to always block certain calls" onPress={(value : boolean) => {Settings.setBlacklist(!value)}} />
+            <ToggleItem data={data.block_calls} name="Block Calls" description="Prevents spammers from interrupting you :D" onPress={(value : boolean) => {Settings.setBlockCalls(!value)}} />
         </View>
     );
 
