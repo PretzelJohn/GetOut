@@ -10,6 +10,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SCREENS } from "../shared/constants";
 import { LightTheme, DarkTheme, palette } from "../shared/theme/themes";
 
+// pod 'RNVectorIcons', :path => '/node_modules/react-native-vector-icons'
+
+
 /* Screens */
 import WelcomeScreen from "../screens/Welcome/WelcomeScreen";
 import CallLogScreen from "../screens/CallLog/CallLogScreen";
@@ -20,10 +23,9 @@ import SettingsScreen from "../screens/Settings/SettingsScreen";
 /* Navigator Types */
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
 const Navigation = () => {
     const scheme = useColorScheme();
-    const isDarkMode = scheme === "dark";
+    const isDarkMode = scheme === 'dark';
 
     React.useEffect((): any => {
         return () => (isReadyRef.current = false);
@@ -38,16 +40,16 @@ const Navigation = () => {
         let iconName = "history";
         switch (route.name) {
             case SCREENS.CALLLOG:
-                iconName = focused ? "history" : "history-outline";
+                iconName = focused ? "call" : "call-outline";
             break;
             case SCREENS.WHITELIST:
-                iconName = focused ? "phone" : "phone-outline";
+                iconName = focused ? "shield-checkmark" : "shield-checkmark-outline";
             break;
             case SCREENS.BLACKLIST:
-                iconName = focused ? "phone-slash" : "phone-slash-outline";
+                iconName = focused ? "close" : "close-outline";
             break;
             case SCREENS.SETTINGS:
-                iconName = focused ? "gear" : "gear-outline";
+                iconName = focused ? "cog" : "cog-outline";
             break;
         }
         return <Icon name={iconName} type="Ionicons" size={size} color={color} />;
@@ -57,7 +59,8 @@ const Navigation = () => {
         return (
             <Tab.Navigator
                 screenOptions={({ route }) => ({
-                headerShown: false, tabBarIcon: ({ focused, color, size }) => RenderTabIcon(route, focused, color, size),
+                headerShown: false, 
+                tabBarIcon: ({ focused, color, size }) => RenderTabIcon(route, focused, color, size),
                 tabBarActiveTintColor: palette.primary,
                 tabBarInactiveTintColor: "gray",
                 tabBarStyle: {

@@ -43,7 +43,7 @@ const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, 
   const Action = () => (
     <>
       <View style={styles.valueContainer}>
-        <Image style={styles.value} source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}} />
+        {/* <Image style={styles.value} source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}} /> */}
       </View>
     </>
   );

@@ -11,7 +11,7 @@ import ListItem from "../../shared/components/list-item/ListItem";
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
 
-import { getBlacklist, insert } from "../../api/BlacklistInterface";
+import {getBlacklist, insert, edit, remove} from "../../api/BlacklistInterface";
 
 
 interface BlacklistScreenProps {}
@@ -30,7 +30,6 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
     insert('678*');
     insert('678420*');
     insert('6784205109');
-    
 
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */

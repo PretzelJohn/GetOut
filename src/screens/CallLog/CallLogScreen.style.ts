@@ -1,6 +1,7 @@
 import { ViewStyle, StyleSheet, TextStyle, ImageStyle } from "react-native";
 import { ExtendedTheme } from "@react-navigation/native";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
+import { arrayFilterNotEmpty } from "rxdb";
 
 interface Style {
   container: ViewStyle;
@@ -19,7 +20,7 @@ export default (theme: ExtendedTheme) => {
     container: {
       flex: 1,
       alignItems: "center",
-      backgroundColor: colors.background,
+      backgroundColor: colors.white,
     },
     titleTextStyle: {
       fontSize: 32,
@@ -31,7 +32,7 @@ export default (theme: ExtendedTheme) => {
       borderRadius: 12,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: colors.primary,
+      backgroundColor: colors.secondary,
       shadowRadius: 5,
       shadowOpacity: 0.7,
       shadowColor: colors.shadow,
@@ -41,7 +42,7 @@ export default (theme: ExtendedTheme) => {
       },
     },
     buttonTextStyle: {
-      color: colors.white,
+      color: colors.secondary,
       fontWeight: "700",
     },
     header: {
@@ -52,10 +53,10 @@ export default (theme: ExtendedTheme) => {
     },
     contentContainer: {
       flex: 1,
-      marginTop: 16,
+      marginTop: 0,
     },
     listContainer: {
-      marginTop: 8,
+      marginTop: 20,
     },
     profilePicImageStyle: {
       height: 50,

@@ -41,13 +41,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const Header = () => (
       <>
         <Text h1 bold color={colors.text}>
-          Call Log
-        </Text>
-        <Text
-          fontFamily={fonts.montserrat.lightItalic}
-          color={colors.placeholder}
-        >
-          Here are the calls blocked by GetOut.
+          Recents
         </Text>
       </>
     );
