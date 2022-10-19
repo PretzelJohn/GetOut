@@ -53,11 +53,10 @@ export default (theme: ExtendedTheme) => {
     },
     contentContainer: {
       flex: 1,
-      marginTop: 16,
-      marginBottom: 16,
+      marginTop: '3.5%',
     },
     listContainer: {
-      marginTop: 8,
+      marginTop: '1.5%',
     },
     profilePicImageStyle: {
       height: 50,

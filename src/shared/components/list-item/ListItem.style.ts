@@ -17,12 +17,14 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       padding: 16,
-      marginTop: 16,
+      marginTop: 0,
       borderWidth: 1,
-      borderRadius: 8,
+      borderLeftColor: colors.white,
+      borderRightColor: colors.white,
+      borderTopColor: colors.white,
+      borderBottomColor: colors.primary,
+      borderRadius: 0,
       width: ScreenWidth * 0.9,
-      borderColor: colors.borderColor,
-      backgroundColor: colors.dynamicBackground,
     },
     locationTextStyle: {
       marginTop: 8,
