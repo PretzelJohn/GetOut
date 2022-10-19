@@ -34,7 +34,7 @@ export default (theme: ExtendedTheme) => {
       backgroundColor: colors.primary,
       shadowRadius: 5,
       shadowOpacity: 0.7,
-      shadowColor: colors.shadow,
+      shadowColor: colors.black,
       shadowOffset: {
         width: 0,
         height: 3,
@@ -52,10 +52,10 @@ export default (theme: ExtendedTheme) => {
     },
     contentContainer: {
       flex: 1,
-      marginTop: 16,
+      marginTop: '3.5%',
     },
     listContainer: {
-      marginTop: 8,
+      marginTop: '1.5%',
     },
     profilePicImageStyle: {
       height: 50,
