@@ -4,14 +4,11 @@ import Icon from "react-native-dynamic-vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { isReadyRef, navigationRef } from "react-navigation-helpers";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { BottomTabView, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 /* Local Imports */
 import { SCREENS } from "../shared/constants";
 import { LightTheme, DarkTheme, palette } from "../shared/theme/themes";
-
-// pod 'RNVectorIcons', :path => '/node_modules/react-native-vector-icons'
-
 
 /* Screens */
 import WelcomeScreen from "../screens/Welcome/WelcomeScreen";
@@ -19,6 +16,7 @@ import CallLogScreen from "../screens/CallLog/CallLogScreen";
 import WhitelistScreen from "../screens/Whitelist/WhitelistScreen";
 import BlacklistScreen from "../screens/Blacklist/BlacklistScreen";
 import SettingsScreen from "../screens/Settings/SettingsScreen";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 /* Navigator Types */
 const Tab = createBottomTabNavigator();
@@ -52,7 +50,7 @@ const Navigation = () => {
                 iconName = focused ? "cog" : "cog-outline";
             break;
         }
-        return <Icon name={iconName} type="Ionicons" size={size} color={color} />;
+        return <Icon name={iconName} type="Ionicons" size={40} color={color} />;
     };
     
     const RenderTabNavigation = () => {
@@ -61,13 +59,17 @@ const Navigation = () => {
                 screenOptions={({ route }) => ({
                 headerShown: false, 
                 tabBarIcon: ({ focused, color, size }) => RenderTabIcon(route, focused, color, size),
-                tabBarActiveTintColor: palette.primary,
-                tabBarInactiveTintColor: "gray",
+                tabBarActiveTintColor: palette.black,
+                tabBarInactiveTintColor: palette.shadow,
                 tabBarStyle: {
-                    backgroundColor: isDarkMode ? palette.black : palette.white,
+                    backgroundColor: isDarkMode ? palette.black : palette.primary,
+                    height: 80
                 },
+                tabBarLabelStyle: {
+                    fontSize: 17,
+                  },
                 })}
-            >
+                >
                 <Tab.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
                 <Tab.Screen name={SCREENS.WHITELIST} component={WhitelistScreen} />
                 <Tab.Screen name={SCREENS.BLACKLIST} component={BlacklistScreen} />
@@ -84,7 +86,6 @@ const Navigation = () => {
             }}
             theme = {isDarkMode ? DarkTheme : LightTheme}
         >
-
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name={SCREENS.HOME} component={RenderTabNavigation} />
             <Stack.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
@@ -92,7 +93,6 @@ const Navigation = () => {
             <Stack.Screen name={SCREENS.BLACKLIST} component={BlacklistScreen} />
             <Stack.Screen name={SCREENS.SETTINGS} component={SettingsScreen} />
         </Stack.Navigator>
-
         </NavigationContainer>
     );
 };

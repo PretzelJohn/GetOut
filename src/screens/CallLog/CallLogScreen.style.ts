@@ -20,7 +20,7 @@ export default (theme: ExtendedTheme) => {
     container: {
       flex: 1,
       alignItems: "center",
-      backgroundColor: colors.white,
+      backgroundColor: colors.background,
     },
     titleTextStyle: {
       fontSize: 32,
@@ -32,7 +32,7 @@ export default (theme: ExtendedTheme) => {
       borderRadius: 12,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: colors.secondary,
+      backgroundColor: colors.black,
       shadowRadius: 5,
       shadowOpacity: 0.7,
       shadowColor: colors.shadow,
@@ -42,7 +42,7 @@ export default (theme: ExtendedTheme) => {
       },
     },
     buttonTextStyle: {
-      color: colors.secondary,
+      color: colors.black,
       fontWeight: "700",
     },
     header: {
@@ -53,10 +53,11 @@ export default (theme: ExtendedTheme) => {
     },
     contentContainer: {
       flex: 1,
-      marginTop: 0,
+      marginTop: 16,
+      marginBottom: 16,
     },
     listContainer: {
-      marginTop: 20,
+      marginTop: 8,
     },
     profilePicImageStyle: {
       height: 50,

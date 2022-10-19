@@ -40,7 +40,7 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
     // TODO: Add menu hamburger here if using menu stack    
     const Header = () => (
       <>
-        <Text h1 bold color={colors.text}>
+        <Text bold color={colors.black} style={{fontSize: 45}}>
           Blocked
         </Text>
         <Text
