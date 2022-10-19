@@ -10,21 +10,16 @@ import CallLogItem from "./components/card-item/CallLogItem";
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
-
 import { getCallList, insert } from "../../api/CallLogInterface";
 
-
 interface CallLogScreenProps {}
-
 const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
-
     const handleItemPress = () => {
       //NavigationService.push(SCREENS.CALLLOG);
     };
-
 
     //Insert mock data - will be removed for production
     insert('678-923-1102', 1664349720000, 'Mableton, GA', false);
@@ -32,21 +27,25 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     insert('970-885-8195', 1663887600000, 'Fort Collins, CO', false);
     insert('470-303-1102', 1663797600000, 'Atlanta, GA', false);
     
-
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
     /* -------------------------------------------------------------------------- */
 
-
     const Header = () => (
       <>
-        <Text h1 bold color={colors.text}>
+        <Text bold color={colors.black} style={{fontSize: 45}}>
           Recents
+        </Text>
+        <Text
+          fontFamily={fonts.montserrat.lightItalic}
+          color={colors.placeholder}
+          style={{marginBottom: 15}}
+        >
+          Here are your recent calls.
         </Text>
       </>
     );
 
-    
     const CallLogs = () => (
       <View style={styles.listContainer}>
         <FlatList

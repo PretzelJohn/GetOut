@@ -12,7 +12,7 @@ interface Style {
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
 }
-
+ 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create<Style>({

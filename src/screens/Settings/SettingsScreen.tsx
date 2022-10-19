@@ -39,9 +39,15 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
 
     const Label = () => (
         <>
-            <Text h1 bold color={colors.black}>
-                Settings
-            </Text>
+          <Text bold color={colors.black} style={{fontSize: 45}}>
+            Settings
+          </Text>
+          <Text
+            color={colors.placeholder}
+            style={{marginBottom: 15}}
+          >
+            Edit your settings here.
+          </Text>
         </>
     );
 
