@@ -34,7 +34,7 @@ export default (theme: ExtendedTheme) => {
       backgroundColor: colors.primary,
       shadowRadius: 5,
       shadowOpacity: 0.7,
-      shadowColor: colors.shadow,
+      shadowColor: colors.black,
       shadowOffset: {
         width: 0,
         height: 3,

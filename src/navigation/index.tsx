@@ -10,6 +10,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SCREENS } from "../shared/constants";
 import { LightTheme, DarkTheme, palette } from "../shared/theme/themes";
 
+// pod 'RNVectorIcons', :path => '/node_modules/react-native-vector-icons'
+
+
 /* Screens */
 import WelcomeScreen from "../screens/Welcome/WelcomeScreen";
 import CallLogScreen from "../screens/CallLog/CallLogScreen";

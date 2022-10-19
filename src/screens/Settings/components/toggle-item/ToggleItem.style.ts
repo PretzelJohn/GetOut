@@ -14,12 +14,12 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       padding: 16,
-      marginTop: 16,
-      borderWidth: 1,
-      borderRadius: 8,
+      marginTop: 0,
+      // borderTopLeftRadius: 10,
+      // borderTopRightRadius: 10,
       width: ScreenWidth * 0.9,
-      borderColor: colors.borderColor,
-      backgroundColor: colors.dynamicBackground,
+      borderColor: colors.secondary,
+      backgroundColor: colors.secondary,
     },
     contentContainer: {
       marginTop: 16,

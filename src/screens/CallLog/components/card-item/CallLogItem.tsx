@@ -28,35 +28,33 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const Header = () => (
     <>
-      <Text h4 bold color={colors.text}>
-        {number}
+      <Text h4 bold color={colors.black}>
+        {number} 
       </Text>
-      <Text h5 color={colors.placeholder} style={styles.locationTextStyle}>
-        {location}
+      <Text h5 color={colors.black} style={styles.locationTextStyle}>
+        {date} ⚫️ {location}                       
       </Text>
     </>
   );
 
-  const Date = () => (
-    <View style={styles.dateContainer}>
-      <Icon name="" type="FontAwesome" color={colors.text} />
-      <Text style={styles.valueTextStyle}>{date}</Text>
-    </View>
-  );
+  // const Date = () => (
+  //   <View style={styles.dateContainer}>
+  //     <Icon name="" type="FontAwesome" color={colors.text} />
+  //     <Text style={styles.valueTextStyle}>{date}</Text>
+  //   </View>
+  // );
 
   const Time = () => (
     <View style={styles.timeContainer}>
-      <Icon name="" type="FontAwesome" color={colors.text} />
       <Text style={styles.valueTextStyle}>{time}</Text>
     </View>
   );
 
   return (
   <RNBounceable style={[styles.container, style]} onPress={onPress}>
-    <Header />
+    <Header/>
     <View style={styles.contentContainer}>
-      <Date />
-      <Time />
+      <Time/>
     </View>
   </RNBounceable>
   );
