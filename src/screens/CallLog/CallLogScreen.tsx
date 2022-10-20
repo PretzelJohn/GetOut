@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { View, FlatList } from "react-native";
+import React, { useMemo, useState } from "react";
+import { View, FlatList, Switch } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -14,6 +14,8 @@ import { getCallList, insert } from "../../api/CallLogInterface";
 
 interface CallLogScreenProps {}
 const CallLogScreen: React.FC<CallLogScreenProps> = () => {
+    const [isEnabled, setIsEnabled] = React.useState(false);
+    const toggleSwitch = () => setIsEnabled(!isEnabled);
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
@@ -36,6 +38,9 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
         <Text bold color={colors.black} style={{fontSize: 45}}>
           Recents
         </Text>
+        <View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-end" }}>
+          <Switch value={isEnabled} onValueChange={toggleSwitch}/>
+        </View>
         <Text
           fontFamily={fonts.montserrat.lightItalic}
           color={colors.placeholder}

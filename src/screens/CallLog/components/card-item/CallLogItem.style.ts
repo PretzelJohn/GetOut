@@ -2,6 +2,8 @@ import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import { ExtendedTheme } from "@react-navigation/native";
 import { ViewStyle, StyleSheet, TextStyle } from "react-native";
 
+
+
 interface Style {
   container: ViewStyle;
   locationTextStyle: TextStyle;
@@ -10,21 +12,22 @@ interface Style {
   dateColorStyle: ViewStyle;
   timeContainer: ViewStyle;
   valueTextStyle: ViewStyle;
+  roundButtons: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create<Style>({
     container: {
-      padding: 10,
-      marginTop: 0,
-      borderWidth: 1,
+      padding: 0,
+      borderBottomWidth: 2,
+      borderBottomColor: colors.primary,
       width: ScreenWidth * 0.9,
-      borderColor: colors.primary,
       backgroundColor: colors.white,
     },
     locationTextStyle: {
-      marginTop: 8,
+      margin: 1,
+      fontSize: 12
     },
     contentContainer: {
       marginLeft: 200,
@@ -46,6 +49,16 @@ export default (theme: ExtendedTheme) => {
     },
     valueTextStyle: {
       marginLeft: 8,
+      fontSize: 12,
+      fontWeight: "bold"
+    },
+    roundButtons: {
+      width: 60, 
+      height: 28, 
+      justifyContent: "center", 
+      alignItems: "center",
+      borderRadius: 11, 
+      backgroundColor: colors.primary
     }
   });
 };
