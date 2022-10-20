@@ -10,6 +10,7 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
 import createStyles from "./CallLogItem.style";
 import { ICallLogItem } from "./ICallLogItem";
 import Text from "../../../../shared/components/text-wrapper/TextWrapper";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -28,10 +29,10 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const Header = () => (
     <>
-      <Text h4 bold color={colors.black}>
+      <Text bold color={colors.black} style={{fontSize: 23}}>
         {number} 
       </Text>
-      <Text h5 color={colors.black} style={styles.locationTextStyle}>
+      <Text color={colors.black} style={styles.locationTextStyle}>
         {date} ⚫️ {location}                       
       </Text>
     </>
@@ -46,15 +47,20 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const Time = () => (
     <View style={styles.timeContainer}>
-      <Text style={styles.valueTextStyle}>{time}</Text>
+      <Text color={colors.black} style={styles.valueTextStyle}>{time}</Text>
     </View>
   );
 
   return (
   <RNBounceable style={[styles.container, style]} onPress={onPress}>
     <Header/>
-    <View style={styles.contentContainer}>
+    <View style={{ right: "19%", position: "absolute", bottom: 0, top: 16 }}>
       <Time/>
+    </View>
+    <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%" }}>
+      <TouchableOpacity style={styles.roundButtons}>
+        <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>Block</Text>
+      </TouchableOpacity>
     </View>
   </RNBounceable>
   );
