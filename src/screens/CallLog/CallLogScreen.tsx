@@ -38,12 +38,16 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
         <Text bold color={colors.black} style={{fontSize: 45}}>
           Recents
         </Text>
+        <View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-end" }}>
+          <Switch value={isEnabled} onValueChange={toggleSwitch}/>
+        </View>
         <Text
           fontFamily={fonts.montserrat.lightItalic}
           color={colors.placeholder}
-          // style={{marginBottom: 15}}
+          style={{marginBottom: 15}}
         >
-        </Text> */}
+          Here are your recent calls.
+        </Text>
       </>
     );
 
