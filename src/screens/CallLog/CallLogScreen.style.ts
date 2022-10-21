@@ -14,7 +14,7 @@ interface Style {
   profilePicImageStyle: ImageStyle;
   allButton: ViewStyle;
   missedButton: ViewStyle;
-  circle: ViewStyle;
+  allmissedButtons: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -86,12 +86,10 @@ export default (theme: ExtendedTheme) => {
       borderTopRightRadius: 11, 
       backgroundColor: colors.secondary
     },
-    circle: {
-      width: 120,
-      height: 120,
-      borderRadius: 500,
-      backgroundColor: colors.primary,
-      transform: [{ scaleX: 1.3 }]
-  }
+    allmissedButtons: {
+      fontWeight: "bold", 
+      alignSelf: "center", 
+      justifyContent: "center"
+    }
   });
 };

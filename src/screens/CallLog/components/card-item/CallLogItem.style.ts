@@ -49,7 +49,7 @@ export default (theme: ExtendedTheme) => {
       marginRight: 1,
       right: "29%", 
       position: "absolute", 
-      bottom: 0, 
+      bottom: 0,  
       top: 16 
     },
     valueTextStyle: {
@@ -73,7 +73,7 @@ export default (theme: ExtendedTheme) => {
     },
     answeredIcon: {
       position: 'absolute', 
-      top: '-85%', 
+      top: '23%', 
       left: '-9%'
     }
   });

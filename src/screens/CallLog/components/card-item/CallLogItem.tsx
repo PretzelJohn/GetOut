@@ -9,8 +9,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import createStyles from "./CallLogItem.style";
 import { ICallLogItem } from "./ICallLogItem";
 import Text from "../../../../shared/components/text-wrapper/TextWrapper";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { ScreenStackHeaderLeftView } from "react-native-screens";
+// import { TouchableOpacity } from "react-native-gesture-handler";
+// import { ScreenStackHeaderLeftView } from "react-native-screens";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -58,6 +58,7 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
     underlayColor: colors.primary,
     style: styles.buttons,
     onPress: () => setIsPress(current => !current)
+    // onPress: () => console.log("hi")
   };
 
   return (    

@@ -11,6 +11,7 @@ import ListItem from "../../shared/components/list-item/ListItem";
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
+import Styles from "../../shared/theme/styles";
 
 import { getWhitelist, insert, search } from "../../api/WhitelistInterface";
 
@@ -21,6 +22,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
+    const sharedStyles = useMemo(() => Styles(theme), [theme]);
 
     const handleItemPress = () => {
       //NavigationService.push(SCREENS.CALLLOG);
@@ -37,14 +39,9 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
 
     const Header = () => (
       <>
-        <Text bold color={colors.black} style={{fontSize: 45}}>
+        <Text bold color={colors.black} style={sharedStyles.header}>
           Allowed
         </Text>
-        {/* <Text
-          fontFamily={fonts.montserrat.lightItalic}
-          color={colors.placeholder}
-        >
-        </Text> */}
       </>
     );
 
@@ -61,6 +58,8 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
     
     return (
       <SafeAreaView style={styles.container}>
+        <View style={sharedStyles.circle1}/>
+        <View style={sharedStyles.circle2}/> 
         <View style={styles.contentContainer}>
           <Header />
           <Whitelist />

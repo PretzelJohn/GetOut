@@ -12,12 +12,14 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
 import { getCallList, insert } from "../../api/CallLogInterface";
+import Styles from "../../shared/theme/styles";
 
 interface CallLogScreenProps {}
 const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
+    const sharedStyles = useMemo(() => Styles(theme), [theme]);
     const handleItemPress = () => {
       //NavigationService.push(SCREENS.CALLLOG);
     };
@@ -34,25 +36,17 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
 
     const Header = () => (
       <>
-        <View style={{position: 'absolute', marginLeft: "65%", marginTop: -125 }}>
-          <TouchableOpacity style={styles.circle}>
-          </TouchableOpacity>
-        </View>
-        <View style={{position: 'absolute', marginLeft: "85%", marginTop: -60 }}>
-          <TouchableOpacity style={styles.circle}>
-          </TouchableOpacity>
-        </View>
-        <Text bold color={colors.black} style={{fontSize: 45}}>
+        <Text bold color={colors.text} style={sharedStyles.header}>
           Recents
         </Text>
         <View style={{position: 'absolute', top: '2.5%', left: '15%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
           <TouchableOpacity style={styles.allButton}>
-            <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>All</Text>
+            <Text color={colors.black} style={styles.allmissedButtons}>All</Text>
           </TouchableOpacity>
         </View>
         <View style={{position: 'absolute', top: '2.5%', left: '47%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
           <TouchableOpacity style={styles.missedButton}>
-            <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>Missed</Text>
+            <Text color={colors.black} style={styles.allmissedButtons}>Missed</Text>
           </TouchableOpacity>
         </View>
       </>
@@ -71,6 +65,8 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
 
     return (
       <SafeAreaView style={styles.container}>
+        <View style={sharedStyles.circle1}/>
+        <View style={sharedStyles.circle2}/> 
         <View style={styles.contentContainer}>
           <Header />
           <CallLogs />
