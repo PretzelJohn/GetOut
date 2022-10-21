@@ -20,6 +20,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
     const sharedStyles = useMemo(() => Styles(theme), [theme]);
+
     const handleItemPress = () => {
       //NavigationService.push(SCREENS.CALLLOG);
     };
