@@ -2,6 +2,7 @@ import { ViewStyle, StyleSheet, TextStyle, ImageStyle } from "react-native";
 import { ExtendedTheme } from "@react-navigation/native";
 import fonts from "@fonts";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
+import { Icon } from "react-native-vector-icons/Icon";
 
 interface Style {
     circle1: ViewStyle;
