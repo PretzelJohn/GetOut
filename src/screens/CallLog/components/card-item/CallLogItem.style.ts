@@ -12,7 +12,7 @@ interface Style {
   dateColorStyle: ViewStyle;
   timeContainer: ViewStyle;
   valueTextStyle: ViewStyle;
-  roundButtons: ViewStyle;
+  buttons: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -52,13 +52,13 @@ export default (theme: ExtendedTheme) => {
       fontSize: 12,
       fontWeight: "bold"
     },
-    roundButtons: {
+    buttons: {
       width: 60, 
       height: 28, 
       justifyContent: "center", 
       alignItems: "center",
       borderRadius: 11, 
-      backgroundColor: colors.primary
+      backgroundColor: colors.secondary
     }
   });
 };
