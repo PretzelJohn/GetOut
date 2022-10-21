@@ -34,7 +34,7 @@ const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, 
   const Info = () => (
     <>
       <View style={styles.keyContainer}>
-        <Text h3 bold color={colors.text}>{name}</Text>
+        <Text h3 color={colors.text}>{name}</Text>
         <Text h5 color={colors.text}>{description}</Text>
       </View>
     </>

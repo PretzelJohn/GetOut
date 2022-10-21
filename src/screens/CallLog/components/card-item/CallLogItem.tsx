@@ -29,10 +29,10 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const Header = () => (
     <>
-      <Text bold color={colors.black} style={{fontSize: 23}}>
+      <Text color={colors.text} style={{fontSize: 23}}>
         {number} 
       </Text>
-      <Text color={colors.black} style={styles.locationTextStyle}>
+      <Text color={colors.text} style={styles.locationTextStyle}>
         {date} ⚫️ {location}                       
       </Text>
     </>
@@ -47,7 +47,7 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const Time = () => (
     <View style={styles.timeContainer}>
-      <Text color={colors.black} style={styles.valueTextStyle}>{time}</Text>
+      <Text color={colors.text} style={styles.valueTextStyle}>{time}</Text>
     </View>
   );
 
@@ -67,7 +67,7 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
     <Time />
     <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%", right:"10%"}}>
       <TouchableHighlight {...TouchProps}>
-        <Text color={colors.black} style={styles.blocked}>Block</Text>
+        <Text color={colors.text} style={styles.blocked}>Block</Text>
       </TouchableHighlight>
     </View>
     <Icon style={styles.answeredIcon} name="phone-outgoing" color={colors.black} size={30}/>

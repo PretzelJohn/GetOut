@@ -38,7 +38,7 @@ export const DarkTheme: ExtendedTheme = {
     ...DefaultTheme,
     colors: {
       ...LightTheme.colors,
-      background: palette.black,
+      background: palette.dynamicBlack,
       foreground: palette.white,
       text: palette.white,
       tabBar: palette.black,

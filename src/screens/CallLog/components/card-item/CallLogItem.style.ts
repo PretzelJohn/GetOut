@@ -23,7 +23,6 @@ export default (theme: ExtendedTheme) => {
       borderBottomWidth: 2,
       borderBottomColor: colors.primary,
       width: ScreenWidth,
-      backgroundColor: colors.white,
       left: "10%"
     },
     locationTextStyle: {
@@ -55,7 +54,6 @@ export default (theme: ExtendedTheme) => {
     valueTextStyle: {
       marginLeft: 8,
       fontSize: 12,
-      fontWeight: "bold"
     },
     buttons: {
       width: 60, 
@@ -67,11 +65,11 @@ export default (theme: ExtendedTheme) => {
       right:"20%"
     },
     blocked: {
-      fontWeight: "bold", 
       alignSelf: "center", 
       justifyContent: "center"
     },
     answeredIcon: {
+      color: colors.text,
       position: 'absolute', 
       top: '23%', 
       left: '-9%'

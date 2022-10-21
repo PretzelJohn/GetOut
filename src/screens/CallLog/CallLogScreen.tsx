@@ -37,17 +37,17 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
 
     const Header = () => (
       <>
-        <Text bold color={colors.text} style={sharedStyles.header}>
+        <Text color={colors.text} style={sharedStyles.header}>
           Recents
         </Text>
         <View style={{position: 'absolute', top: '2.5%', left: '15%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
           <TouchableOpacity style={styles.allButton}>
-            <Text color={colors.black} style={styles.allmissedButtons}>All</Text>
+            <Text color={colors.text} style={styles.allmissedButtons}>All</Text>
           </TouchableOpacity>
         </View>
         <View style={{position: 'absolute', top: '2.5%', left: '47%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
           <TouchableOpacity style={styles.missedButton}>
-            <Text color={colors.black} style={styles.allmissedButtons}>Missed</Text>
+            <Text color={colors.text} style={styles.allmissedButtons}>Missed</Text>
           </TouchableOpacity>
         </View>
       </>
