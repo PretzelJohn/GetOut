@@ -12,7 +12,7 @@ import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
 import Styles from "../../shared/theme/styles";
 
-import {getBlacklist, insert, edit, remove} from "../../api/BlacklistInterface";
+import {getBlacklist, insert, edit, search, remove} from "../../api/BlacklistInterface";
 
 
 interface BlacklistScreenProps {}
@@ -32,6 +32,11 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
     insert('678*');
     insert('678420*');
     insert('6784205109');
+
+    edit('6784205109', '6788223861');
+
+    let s = search('6788223861');
+    console.log(s[0].phone_number);
 
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
