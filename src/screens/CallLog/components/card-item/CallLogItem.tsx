@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { View, StyleProp, ViewStyle } from "react-native";
+import { View, StyleProp, ViewStyle, TouchableHighlight } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
 import RNBounceable from "@freakycoder/react-native-bounceable";
@@ -52,8 +52,14 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
     </View>
   );
 
-  const [active,setActive] = useState(false);
-  const Press = () => setActive(!active);
+  const [ isPress, setIsPress ] = React.useState(false);
+
+  var touchProps = {
+    activeOpacity: 1,
+    underlayColor: colors.primary,
+    style: styles.buttons,
+    onPress: () => console.log("hi")
+  };
 
   return (
   <RNBounceable style={[styles.container, style]} onPress={onPress}>
@@ -62,9 +68,9 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
       <Time/>
     </View>
     <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%" }}>
-      <TouchableOpacity style={styles.roundButtons}>
+      <TouchableHighlight {...touchProps}>
         <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>Block</Text>
-      </TouchableOpacity>
+      </TouchableHighlight>
     </View>
   </RNBounceable>
   );
