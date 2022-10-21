@@ -48,6 +48,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
         <View style={{position: 'absolute', top: '2.5%', left: '47%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
           <TouchableOpacity style={styles.missedButton}>
           <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>Missed</Text>
+          {/* iconName = focused ? "shield-checkmark" : "shield-checkmark-outline"; */}
           </TouchableOpacity>
         </View>
       </>
