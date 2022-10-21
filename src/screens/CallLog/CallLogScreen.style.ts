@@ -12,6 +12,8 @@ interface Style {
   contentContainer: ViewStyle;
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
+  allButton: ViewStyle;
+  missedButton: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -53,8 +55,7 @@ export default (theme: ExtendedTheme) => {
     },
     contentContainer: {
       flex: 1,
-      marginTop: 16,
-      marginBottom: 16,
+      marginTop: '3.5%',
     },
     listContainer: {
       marginTop: 8,
@@ -66,5 +67,23 @@ export default (theme: ExtendedTheme) => {
       width: 50,
       borderRadius: 30,
     },
+    allButton: {
+      width: 70, 
+      height: '23%', 
+      justifyContent: "center", 
+      alignItems: "center",
+      borderBottomLeftRadius: 11, 
+      borderTopLeftRadius: 11, 
+      backgroundColor: colors.primary
+    },
+    missedButton: {
+      width: 70, 
+      height: '23%', 
+      justifyContent: "center", 
+      alignItems: "center",
+      borderBottomRightRadius: 11, 
+      borderTopRightRadius: 11, 
+      backgroundColor: colors.secondary
+    }
   });
 };

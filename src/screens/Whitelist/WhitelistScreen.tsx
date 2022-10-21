@@ -26,33 +26,28 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
       //NavigationService.push(SCREENS.CALLLOG);
     };
 
-
     //Testing whitelist, blacklist, and call log - will be moved into their own files
     insert('678*');
     insert('678420*');
     insert('6784205109');
-    
     search('6784205109');
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
     /* -------------------------------------------------------------------------- */
-
 
     const Header = () => (
       <>
         <Text bold color={colors.black} style={{fontSize: 45}}>
           Allowed
         </Text>
-        <Text
+        {/* <Text
           fontFamily={fonts.montserrat.lightItalic}
           color={colors.placeholder}
         >
-          Here are the calls allowed by GetOut.
-        </Text>
+        </Text> */}
       </>
     );
 
-    
     const Whitelist = () => (
       <View style={styles.listContainer}>
         <FlatList

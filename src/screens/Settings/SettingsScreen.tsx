@@ -42,12 +42,11 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
           <Text bold color={colors.black} style={{fontSize: 45}}>
             Settings
           </Text>
-          <Text
+          {/* <Text
             color={colors.placeholder}
-            style={{marginBottom: 15}}
+            // style={{marginBottom: 15}}
           >
-            Edit your settings here.
-          </Text>
+          </Text> */}
         </>
     );
 
