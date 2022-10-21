@@ -13,7 +13,7 @@ import * as SettingsHandlers from "../../services/SettingsServices";
 import Text from '../../shared/components/text-wrapper/TextWrapper';
 import ToggleItem from "./components/toggle-item/ToggleItem";
 import SelectItem from "./components/select-item/SelectItem";
-
+import Styles from "../../shared/theme/styles";
 
 
 interface SettingsScreenProps {}
@@ -22,6 +22,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
+    const sharedStyles = useMemo(() => Styles(theme), [theme]);
 
     const handleItemPress = () => {
         //NavigationService.push(SCREENS.CALLLOG);
@@ -39,14 +40,14 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
 
     const Label = () => (
         <>
-          <Text bold color={colors.black} style={{fontSize: 45}}>
+          <Text bold color={colors.black} style={sharedStyles.header}>
             Settings
           </Text>
-          {/* <Text
+          <Text
             color={colors.placeholder}
-            // style={{marginBottom: 15}}
+            style={{marginBottom: 15}}
           >
-          </Text> */}
+          </Text>
         </>
     );
 
@@ -77,6 +78,8 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
 
     return (
         <SafeAreaView style={styles.container}>
+          <View style={sharedStyles.circle1}/>
+          <View style={sharedStyles.circle2}/> 
           <Header />
           <Content />
         </SafeAreaView>

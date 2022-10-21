@@ -3,6 +3,7 @@ import { DefaultTheme, ExtendedTheme } from "@react-navigation/native";
 export const palette = {
     primary: "#5CE1E6",
     secondary: 'rgba(92, 225, 230, 0.25)',
+    transparent: 'rgba(92, 225, 230, 0.65)',
     background: "#ffffff",
     white: "#ffffff",
     black: "#000000",
@@ -22,7 +23,6 @@ export const palette = {
     dynamicWhite: "#fff",
     dynamicBlack: "#1c1e21",
     dynamicBackground: "#fff",
-    transparent: "transparent",
     calpyse: "#2b7488",
 };
   

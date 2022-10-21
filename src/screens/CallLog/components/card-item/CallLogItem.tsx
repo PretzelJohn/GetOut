@@ -1,8 +1,7 @@
-import React, { useMemo } from "react";
-import { View, StyleProp, ViewStyle } from "react-native";
+import React, { useMemo, useState } from "react";
+import { View, StyleProp, ViewStyle, TouchableHighlight } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import Icon from "react-native-dynamic-vector-icons";
-import RNBounceable from "@freakycoder/react-native-bounceable";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 /**
  * ? Local Imports
@@ -10,6 +9,8 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
 import createStyles from "./CallLogItem.style";
 import { ICallLogItem } from "./ICallLogItem";
 import Text from "../../../../shared/components/text-wrapper/TextWrapper";
+// import { TouchableOpacity } from "react-native-gesture-handler";
+// import { ScreenStackHeaderLeftView } from "react-native-screens";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -28,10 +29,10 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const Header = () => (
     <>
-      <Text h4 bold color={colors.black}>
+      <Text bold color={colors.black} style={{fontSize: 23}}>
         {number} 
       </Text>
-      <Text h5 color={colors.black} style={styles.locationTextStyle}>
+      <Text color={colors.black} style={styles.locationTextStyle}>
         {date} ⚫️ {location}                       
       </Text>
     </>
@@ -46,17 +47,31 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const Time = () => (
     <View style={styles.timeContainer}>
-      <Text style={styles.valueTextStyle}>{time}</Text>
+      <Text color={colors.black} style={styles.valueTextStyle}>{time}</Text>
     </View>
   );
 
-  return (
-  <RNBounceable style={[styles.container, style]} onPress={onPress}>
+  const [ isPress, setIsPress ] = React.useState(false);
+  
+  const TouchProps = {
+    activeOpacity: 1,
+    underlayColor: colors.primary,
+    style: styles.buttons,
+    onPress: () => setIsPress(current => !current)
+    // onPress: () => console.log("hi")
+  };
+
+  return (    
+  <View style={[styles.container]}>
     <Header/>
-    <View style={styles.contentContainer}>
-      <Time/>
+    <Time />
+    <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%", right:"10%"}}>
+      <TouchableHighlight {...TouchProps}>
+        <Text color={colors.black} style={styles.blocked}>Block</Text>
+      </TouchableHighlight>
     </View>
-  </RNBounceable>
+    <Icon style={styles.answeredIcon} name="phone-outgoing" color={colors.black} size={30}/>
+  </View>
   );
 };
 
