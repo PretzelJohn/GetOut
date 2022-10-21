@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { View, FlatList, Switch } from "react-native";
+import { View, FlatList } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-dynamic-vector-icons";
@@ -17,7 +17,6 @@ import { getCallList, insert } from "../../api/CallLogInterface";
 interface CallLogScreenProps {}
 const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const [isEnabled, setIsEnabled] = React.useState(false);
-    const toggleSwitch = () => setIsEnabled(!isEnabled);
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
@@ -37,17 +36,25 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
 
     const Header = () => (
       <>
+        <View style={{position: 'absolute', marginLeft: "65%", marginTop: -125 }}>
+          <TouchableOpacity style={styles.circle}>
+          </TouchableOpacity>
+        </View>
+        <View style={{position: 'absolute', marginLeft: "85%", marginTop: -60 }}>
+          <TouchableOpacity style={styles.circle}>
+          </TouchableOpacity>
+        </View>
         <Text bold color={colors.black} style={{fontSize: 45}}>
           Recents
         </Text>
         <View style={{position: 'absolute', top: '2.5%', left: '15%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
           <TouchableOpacity style={styles.allButton}>
-          <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>All</Text>
+            <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>All</Text>
           </TouchableOpacity>
         </View>
         <View style={{position: 'absolute', top: '2.5%', left: '47%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
           <TouchableOpacity style={styles.missedButton}>
-          <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>Missed</Text>
+            <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>Missed</Text>
           </TouchableOpacity>
         </View>
       </>

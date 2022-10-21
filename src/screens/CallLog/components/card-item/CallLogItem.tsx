@@ -54,15 +54,15 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const [ isPress, setIsPress ] = React.useState(false);
 
-  var touchProps = {
+  const touchProps = {
     activeOpacity: 1,
     underlayColor: colors.primary,
     style: styles.buttons,
-    onPress: () => console.log("hi")
+    onPress: () => setIsPress(current => !current)
   };
 
   return (
-  <RNBounceable style={[styles.container, style]} onPress={onPress}>
+  <View style={[styles.container, style]}>
     <Header/>
     <View style={{ right: "19%", position: "absolute", bottom: 0, top: 16 }}>
       <Time/>
@@ -72,7 +72,7 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
         <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>Block</Text>
       </TouchableHighlight>
     </View>
-  </RNBounceable>
+  </View>
   );
 };
 

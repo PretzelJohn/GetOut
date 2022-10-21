@@ -14,6 +14,7 @@ interface Style {
   profilePicImageStyle: ImageStyle;
   allButton: ViewStyle;
   missedButton: ViewStyle;
+  circle: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -84,6 +85,13 @@ export default (theme: ExtendedTheme) => {
       borderBottomRightRadius: 11, 
       borderTopRightRadius: 11, 
       backgroundColor: colors.secondary
-    }
+    },
+    circle: {
+      width: 120,
+      height: 120,
+      borderRadius: 500,
+      backgroundColor: colors.primary,
+      transform: [{ scaleX: 1.3 }]
+  }
   });
 };
