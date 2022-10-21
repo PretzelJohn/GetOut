@@ -28,7 +28,7 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const Header = () => (
     <>
-      <Text h4 bold color={colors.text}>
+      <Text h4 color={colors.text}>
         {phone_number}
       </Text>
     </>

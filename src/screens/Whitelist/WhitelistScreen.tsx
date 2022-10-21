@@ -39,7 +39,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
 
     const Header = () => (
       <>
-        <Text bold color={colors.black} style={sharedStyles.header}>
+        <Text color={colors.black} style={sharedStyles.header}>
           Allowed
         </Text>
       </>

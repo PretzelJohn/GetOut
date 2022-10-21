@@ -33,8 +33,7 @@ export default (theme: ExtendedTheme) => {
             transform: [{ scaleX: 1 }]
         },
         header: {
-            fontSize: 40,
-            fontFamily: 'Roboto'
+            fontSize: 40
         }
     })
 }

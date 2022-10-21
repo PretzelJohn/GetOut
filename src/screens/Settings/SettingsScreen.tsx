@@ -40,7 +40,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
 
     const Label = () => (
         <>
-          <Text bold color={colors.black} style={sharedStyles.header}>
+          <Text color={colors.text} style={sharedStyles.header}>
             Settings
           </Text>
           <Text

@@ -87,7 +87,6 @@ export default (theme: ExtendedTheme) => {
       backgroundColor: colors.secondary
     },
     allmissedButtons: {
-      fontWeight: "bold", 
       alignSelf: "center", 
       justifyContent: "center"
     }
