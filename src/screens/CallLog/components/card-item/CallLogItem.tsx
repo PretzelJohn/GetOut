@@ -51,6 +51,8 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
     </View>
   );
 
+  const [ isPress, setIsPress ] = React.useState(false);
+  
   const TouchProps = {
     activeOpacity: 1,
     underlayColor: colors.primary,
