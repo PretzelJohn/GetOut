@@ -55,7 +55,7 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
     activeOpacity: 1,
     underlayColor: colors.primary,
     style: styles.buttons,
-    onPress: () => console.log("hi")
+    onPress: () => setIsPress(current => !current)
   };
 
   return (    
