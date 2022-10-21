@@ -2,10 +2,12 @@ import React, { useMemo, useState } from "react";
 import { View, FlatList, Switch } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Icon from "react-native-dynamic-vector-icons";
 
 /* Local Imports */
 import createStyles from "./CallLogScreen.style";
 import CallLogItem from "./components/card-item/CallLogItem";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
@@ -38,16 +40,16 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
         <Text bold color={colors.black} style={{fontSize: 45}}>
           Recents
         </Text>
-        <View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-end" }}>
-          <Switch value={isEnabled} onValueChange={toggleSwitch}/>
+        <View style={{position: 'absolute', top: '2.5%', left: '15%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
+          <TouchableOpacity style={styles.allButton}>
+          <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>All</Text>
+          </TouchableOpacity>
         </View>
-        <Text
-          fontFamily={fonts.montserrat.lightItalic}
-          color={colors.placeholder}
-          style={{marginBottom: 15}}
-        >
-          Here are your recent calls.
-        </Text>
+        <View style={{position: 'absolute', top: '2.5%', left: '47%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
+          <TouchableOpacity style={styles.missedButton}>
+          <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>Missed</Text>
+          </TouchableOpacity>
+        </View>
       </>
     );
 
@@ -61,7 +63,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
         />
       </View>
     );
-    
+
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.contentContainer}>
