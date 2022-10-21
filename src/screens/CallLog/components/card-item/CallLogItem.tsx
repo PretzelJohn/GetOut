@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { View, StyleProp, ViewStyle } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
@@ -11,6 +11,7 @@ import createStyles from "./CallLogItem.style";
 import { ICallLogItem } from "./ICallLogItem";
 import Text from "../../../../shared/components/text-wrapper/TextWrapper";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScreenStackHeaderLeftView } from "react-native-screens";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -50,6 +51,9 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
       <Text color={colors.black} style={styles.valueTextStyle}>{time}</Text>
     </View>
   );
+
+  const [active,setActive] = useState(false);
+  const Press = () => setActive(!active);
 
   return (
   <RNBounceable style={[styles.container, style]} onPress={onPress}>
