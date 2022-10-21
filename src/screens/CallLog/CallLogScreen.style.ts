@@ -12,6 +12,9 @@ interface Style {
   contentContainer: ViewStyle;
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
+  allButton: ViewStyle;
+  missedButton: ViewStyle;
+  allmissedButtons: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -56,12 +59,37 @@ export default (theme: ExtendedTheme) => {
       marginTop: '3.5%',
     },
     listContainer: {
-      marginTop: '1.5%',
+      marginTop: 8,
+      borderTopWidth: 2,
+      borderTopColor: colors.primary,
     },
     profilePicImageStyle: {
       height: 50,
       width: 50,
       borderRadius: 30,
     },
+    allButton: {
+      width: 70, 
+      height: '23%', 
+      justifyContent: "center", 
+      alignItems: "center",
+      borderBottomLeftRadius: 11, 
+      borderTopLeftRadius: 11, 
+      backgroundColor: colors.primary
+    },
+    missedButton: {
+      width: 70, 
+      height: '23%', 
+      justifyContent: "center", 
+      alignItems: "center",
+      borderBottomRightRadius: 11, 
+      borderTopRightRadius: 11, 
+      backgroundColor: colors.secondary
+    },
+    allmissedButtons: {
+      fontWeight: "bold", 
+      alignSelf: "center", 
+      justifyContent: "center"
+    }
   });
 };

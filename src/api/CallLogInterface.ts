@@ -18,7 +18,7 @@ const _load = async function() {
                 number: result[i].phone_number,
                 location: result[i].location,
                 date: date.toLocaleDateString(),
-                time: date.toLocaleTimeString()
+                time: date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             });
         }
     });

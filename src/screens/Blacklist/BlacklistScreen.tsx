@@ -10,6 +10,7 @@ import ListItem from "../../shared/components/list-item/ListItem";
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
+import Styles from "../../shared/theme/styles";
 
 import {getBlacklist, insert, edit, remove} from "../../api/BlacklistInterface";
 
@@ -20,6 +21,7 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
+    const sharedStyles = useMemo(() => Styles(theme), [theme]);
 
     const handleItemPress = () => {
       //NavigationService.push(SCREENS.CALLLOG);
@@ -39,7 +41,7 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
     // TODO: Add menu hamburger here if using menu stack    
     const Header = () => (
       <>
-        <Text bold color={colors.black} style={{fontSize: 45}}>
+        <Text bold color={colors.black} style={sharedStyles.header}>
           Blocked
         </Text>
       </>
@@ -59,6 +61,8 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
      
     return (
       <SafeAreaView style={styles.container}>
+        <View style={sharedStyles.circle1}/>
+        <View style={sharedStyles.circle2}/> 
         <View style={styles.contentContainer}>
           <Header />
           <Blacklist />
