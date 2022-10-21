@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { View, StyleProp, ViewStyle, TouchableHighlight } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import Icon from "react-native-dynamic-vector-icons";
-import RNBounceable from "@freakycoder/react-native-bounceable";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 /**
  * ? Local Imports
@@ -52,27 +51,24 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
     </View>
   );
 
-  const [ isPress, setIsPress ] = React.useState(false);
-
-  var touchProps = {
+  const TouchProps = {
     activeOpacity: 1,
     underlayColor: colors.primary,
     style: styles.buttons,
     onPress: () => console.log("hi")
   };
 
-  return (
-  <RNBounceable style={[styles.container, style]} onPress={onPress}>
+  return (    
+  <View style={[styles.container]}>
     <Header/>
-    <View style={{ right: "19%", position: "absolute", bottom: 0, top: 16 }}>
-      <Time/>
-    </View>
-    <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%" }}>
-      <TouchableHighlight {...touchProps}>
-        <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>Block</Text>
+    <Time />
+    <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%", right:"10%"}}>
+      <TouchableHighlight {...TouchProps}>
+        <Text color={colors.black} style={styles.blocked}>Block</Text>
       </TouchableHighlight>
     </View>
-  </RNBounceable>
+    <Icon style={styles.answeredIcon} name="phone-outgoing" color={colors.black} size={30}/>
+  </View>
   );
 };
 

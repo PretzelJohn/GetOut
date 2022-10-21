@@ -2,8 +2,6 @@ import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import { ExtendedTheme } from "@react-navigation/native";
 import { ViewStyle, StyleSheet, TextStyle } from "react-native";
 
-
-
 interface Style {
   container: ViewStyle;
   locationTextStyle: TextStyle;
@@ -13,6 +11,8 @@ interface Style {
   timeContainer: ViewStyle;
   valueTextStyle: ViewStyle;
   buttons: ViewStyle;
+  blocked: ViewStyle;
+  answeredIcon: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -22,8 +22,9 @@ export default (theme: ExtendedTheme) => {
       padding: 0,
       borderBottomWidth: 2,
       borderBottomColor: colors.primary,
-      width: ScreenWidth * 0.9,
+      width: ScreenWidth,
       backgroundColor: colors.white,
+      left: "10%"
     },
     locationTextStyle: {
       margin: 1,
@@ -45,7 +46,11 @@ export default (theme: ExtendedTheme) => {
       backgroundColor: colors.calpyse,
     },
     timeContainer: {
-      marginRight: 1
+      marginRight: 1,
+      right: "29%", 
+      position: "absolute", 
+      bottom: 0, 
+      top: 16 
     },
     valueTextStyle: {
       marginLeft: 8,
@@ -58,7 +63,18 @@ export default (theme: ExtendedTheme) => {
       justifyContent: "center", 
       alignItems: "center",
       borderRadius: 11, 
-      backgroundColor: colors.secondary
+      backgroundColor: colors.secondary,
+      right:"20%"
+    },
+    blocked: {
+      fontWeight: "bold", 
+      alignSelf: "center", 
+      justifyContent: "center"
+    },
+    answeredIcon: {
+      position: 'absolute', 
+      top: '-85%', 
+      left: '-9%'
     }
   });
 };

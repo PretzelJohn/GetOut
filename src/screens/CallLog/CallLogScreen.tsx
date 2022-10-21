@@ -2,7 +2,6 @@ import React, { useMemo, useState } from "react";
 import { View, FlatList, Switch } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Icon from "react-native-dynamic-vector-icons";
 
 /* Local Imports */
 import createStyles from "./CallLogScreen.style";
@@ -16,8 +15,6 @@ import { getCallList, insert } from "../../api/CallLogInterface";
 
 interface CallLogScreenProps {}
 const CallLogScreen: React.FC<CallLogScreenProps> = () => {
-    const [isEnabled, setIsEnabled] = React.useState(false);
-    const toggleSwitch = () => setIsEnabled(!isEnabled);
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
@@ -37,7 +34,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
 
     const Header = () => (
       <>
-        <Text bold color={colors.black} style={{fontSize: 45}}>
+        <Text bold color={colors.black} style={{fontSize: 45, left:'5%'}}>
           Recents
         </Text>
         <View style={{position: 'absolute', top: '2.5%', left: '15%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
@@ -48,7 +45,6 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
         <View style={{position: 'absolute', top: '2.5%', left: '47%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
           <TouchableOpacity style={styles.missedButton}>
           <Text color={colors.black} style={{fontWeight: "bold", alignSelf: "center", justifyContent: "center"}}>Missed</Text>
-          {/* iconName = focused ? "shield-checkmark" : "shield-checkmark-outline"; */}
           </TouchableOpacity>
         </View>
       </>
