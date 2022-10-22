@@ -33,6 +33,7 @@
     "react-native-screens": "^3.17.0",
     "react-native-splash-screen": "^3.3.0",
     "react-native-sqlite-2": "^3.6.1",
+    "react-native-switch": "^1.5.1",
     "react-native-vector-icons": "^9.2.0",
     "react-native-webview": "^11.23.1",
     "react-navigation-helpers": "^2.1.0",
