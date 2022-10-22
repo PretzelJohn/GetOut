@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { View, FlatList } from "react-native";
 import { useTheme } from "@react-navigation/native";
+import SearchBar from "react-native-dynamic-search-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 /* Local Imports */
@@ -36,7 +37,7 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
     edit('6784205109', '6788223861');
 
     let s = search('6788223861');
-    // console.log(s[0].phone_number);
+    // //console.log(s[0].phone_number);
 
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
@@ -74,6 +75,13 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
         </View>
         <View style={styles.contentContainer}>
           <Header />
+          <View>
+            <SearchBar
+              placeholder="Search"
+              onSearchPress={() => alert("onpress")}
+              style={{borderWidth: 2, borderColor: colors.primary, borderRadius: 5,alignSelf: "flex-start", width: "85%"}}
+            />
+          </View>
           <Blacklist />
         </View>
       </SafeAreaView>

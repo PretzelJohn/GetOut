@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { View, FlatList } from "react-native";
 import { useTheme } from "@react-navigation/native";
+import SearchBar from "react-native-dynamic-search-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 /* Local Imports */
@@ -68,7 +69,14 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
         </View>
         <View style={styles.contentContainer}>
           <Header />
-          <Whitelist/>
+          <View>
+            <SearchBar
+              placeholder="Search here"
+              onSearchPress={() => alert("onpress")}
+              style={{borderWidth: 2, borderColor: colors.primary, borderRadius: 5,alignSelf: "flex-start", width: "85%"}}
+            />
+          </View>
+          <Whitelist />
         </View>
       </SafeAreaView>
     );

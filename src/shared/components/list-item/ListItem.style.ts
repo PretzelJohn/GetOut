@@ -21,12 +21,9 @@ export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create<Style>({
     container: {
-      padding: 16,
+      padding: 7,
       marginTop: 0,
-      borderWidth: 1,
-      borderLeftColor: colors.white,
-      borderRightColor: colors.white,
-      borderTopColor: colors.white,
+      borderBottomWidth: 1,
       borderBottomColor: colors.primary,
       borderRadius: 0,
       width: ScreenWidth * 0.9,

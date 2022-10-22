@@ -52,6 +52,8 @@ export default (theme: ExtendedTheme) => {
     },
     listContainer: {
       marginTop: '1.5%',
+      borderTopWidth: 1,
+      borderTopColor: colors.primary,
     },
     profilePicImageStyle: {
       height: 50,

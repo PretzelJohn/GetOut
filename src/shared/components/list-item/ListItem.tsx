@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { View, StyleProp, ViewStyle, Button, Alert, Pressable } from "react-native";
+import { View, StyleProp, ViewStyle, TextStyle, Button, Alert, Pressable } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import Modal from "react-native-modal";
 import Feather from 'react-native-vector-icons/Feather';
@@ -53,7 +53,7 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data }) => {
 
   const Header = () => (
     <>
-      <Text h4 color={colors.text}>
+      <Text color={colors.text} style={{fontSize: 25}}>
         {phone_number}
       </Text>
     </>
