@@ -15,7 +15,7 @@ interface Style {
   cancelButton: ViewStyle;
   doneButton: ViewStyle;
   modalView: ViewStyle;
-}
+} 
 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
@@ -60,13 +60,13 @@ export default (theme: ExtendedTheme) => {
       color: colors.text,
       position: 'absolute', 
       left: '83%',
-      top: 10,
+      top: 6,
     },
     trashIcon: {
       color: colors.text,
       position: 'absolute', 
       left: '95%',
-      top: 10,
+      top: 6,
     },
     cancelButton: {
       width: 70, 
@@ -95,6 +95,6 @@ export default (theme: ExtendedTheme) => {
       paddingBottom: 85, 
       borderColor: colors.black,
       borderWidth: 1.5
-    },
+    }
   });
 };

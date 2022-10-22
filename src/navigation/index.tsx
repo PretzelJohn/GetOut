@@ -62,7 +62,7 @@ const Navigation = () => {
                 tabBarActiveTintColor: palette.black,
                 tabBarInactiveTintColor: palette.shadow,
                 tabBarStyle: {
-                    backgroundColor: isDarkMode ? palette.black : palette.primary,
+                    backgroundColor: isDarkMode ? palette.primary : palette.primary,
                     height: 80
                 },
                 tabBarLabelStyle: {
