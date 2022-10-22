@@ -24,6 +24,28 @@ const _load = async function() {
     return list;
 }
 
+// TODO: Possibly handle more than one value, depends on how we're handling removal on the frontend
+// Returns true if query and removal was successful, otherwise returns false.
+const _remove = async function(phone_number : string) {
+    // Create/ connect to databse
+    const db = await getDatabase();
+
+    // Initial Attempt:
+    const query = db.whitelist.findOne(phone_number);
+    const result = await query.exec();
+
+    if (result != null) {
+        let removeState = false;
+        result.deleted$.subscribe((state : any) => removeState = state);
+
+        await result.remove();
+
+        return removeState;
+    } else {
+        return false;
+    }
+}
+
 const _search = async function(phone_number : string) {
     // Create / connect to database
     const db = await getDatabase();
@@ -74,6 +96,26 @@ export const insert = async function(phone_number : string) {
     db.whitelist.atomicUpsert({
         phone_number: phone_number
     });
+}
+
+// Remove a phone number (full or partial) from the blacklist
+export const remove = function(phone_number : string) {
+    const [data, setData] = useState(Boolean);
+    useEffect(() => {
+      const fetchData = async () => {
+        const data = await _remove(phone_number);
+        setData(data);
+      }
+      fetchData();
+    }, []);
+
+    return data;
+}
+
+// Edit an existing phone number in the blacklist
+export const edit = function(old_value : string, new_value : string) {
+    remove(old_value);
+    insert(new_value);
 }
 
 export const search = function(phone_number : string) {
