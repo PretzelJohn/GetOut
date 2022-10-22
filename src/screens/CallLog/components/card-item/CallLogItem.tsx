@@ -44,7 +44,7 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
   //     <Text style={styles.valueTextStyle}>{date}</Text>
   //   </View>
   // );
-
+ 
   const Time = () => (
     <View style={styles.timeContainer}>
       <Text color={colors.text} style={styles.valueTextStyle}>{time}</Text>

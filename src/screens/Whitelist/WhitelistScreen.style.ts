@@ -62,12 +62,14 @@ export default (theme: ExtendedTheme) => {
     },
     editIcon: {
       color: colors.text,
+      backgroundColor: colors.white,
       position: 'absolute', 
       top: '23%', 
       left: '0%',
     },
     trashIcon: {
       color: colors.text,
+      backgroundColor: colors.white,
       position: 'absolute', 
       top: '23%', 
       left: '0%'
