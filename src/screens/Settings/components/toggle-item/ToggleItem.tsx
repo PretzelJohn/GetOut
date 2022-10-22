@@ -4,9 +4,7 @@ import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
 import RNBounceable from "@freakycoder/react-native-bounceable";
 
-/**
- * ? Local Imports
- */
+/* Local Imports */
 import createStyles from "./ToggleItem.style";
 import Text from "../../../../shared/components/text-wrapper/TextWrapper";
 import { Switch } from 'react-native-switch';
@@ -18,20 +16,25 @@ interface ICardItemProps {
   data: boolean;
   name: String;
   description: String;
+  hasPermission?: boolean;
   onPress: (value : boolean) => void;
 }
 
-const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, onPress }) => {
+const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, hasPermission=true, onPress }) => {
   const systemTheme = useTheme();
   const { colors } = systemTheme;
   const styles = useMemo(() => createStyles(systemTheme), [systemTheme]);
 
+
+  //Updates the toggle state
   const [isEnabled, setIsEnabled] = useState(data);
   const toggle = () => {
-    onPress(isEnabled);
-    setIsEnabled((previous : Boolean) => !previous);
+    onPress(isEnabled && hasPermission);
+    setIsEnabled((previous : boolean) => !previous && hasPermission);
   }
 
+
+  //Render methods...
   const Info = () => (
     <>
       <View style={styles.keyContainer}>
@@ -47,7 +50,7 @@ const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, 
         <View style={{}}>
           <Switch 
             value={isEnabled} 
-            onValueChange={toggle} 
+            onValueChange={toggle}
             activeText={''}
             inActiveText={''}
             circleSize={20}

@@ -27,11 +27,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
       //NavigationService.push(SCREENS.CALLLOG);
     };
 
-    //Insert mock data - will be removed for production
-    // insert('678-923-1102', 1664349720000, 'Mableton, GA', false);
-    // insert('678-223-8694', 1663912800000, 'Mableton, GA', false);
-    // insert('970-885-8195', 1663887600000, 'Fort Collins, CO', false);
-    // insert('470-303-1102', 1663797600000, 'Atlanta, GA', false);
+    
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
     /* -------------------------------------------------------------------------- */

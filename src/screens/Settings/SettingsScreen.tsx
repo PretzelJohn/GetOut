@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,7 +7,7 @@ import { PERMISSIONS } from "react-native-permissions";
 /* Local Imports */
 import createStyles from './SettingsScreen.style';
 import * as Settings from '../../api/SettingsInterface'
-import * as SettingsHandlers from "../../services/SettingsServices";
+import * as Permissions from "../../api/PermissionInterface";
 
 /* Shared Imports */
 import Text from '../../shared/components/text-wrapper/TextWrapper';
@@ -19,75 +19,112 @@ import Styles from "../../shared/theme/styles";
 interface SettingsScreenProps {}
 
 const SettingsScreen: React.FC<SettingsScreenProps> = () => {
-    const theme = useTheme();
-    const { colors } = theme;
-    const styles = useMemo(() => createStyles(theme), [theme]);
-    const sharedStyles = useMemo(() => Styles(theme), [theme]);
-
-    const handleItemPress = () => {
-        //NavigationService.push(SCREENS.CALLLOG);
-    };
+  const theme = useTheme();
+  const { colors } = theme;
+  const styles = useMemo(() => createStyles(theme), [theme]);
+  const sharedStyles = useMemo(() => Styles(theme), [theme]);
 
 
-    /* -------------------------------------------------------------------------- */
-    /*                               Render Methods                               */
-    /* -------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------- */
+  /*                               State Handlers                               */
+  /* -------------------------------------------------------------------------- */
 
-    const Header = () => (
-        <View style={styles.header}>
-        </View>
-    );
+  //Updates the contact permission state
+  const [canUseContacts, setCanUseContacts] = useState(Settings.getContacts());
+  const getCanUseContacts = async(shouldRequest : boolean = false) => {
+    setCanUseContacts(await Permissions.getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, shouldRequest));
+  }
 
-    const Label = () => (
-        <>
-          <Text color={colors.text} style={sharedStyles.header}>
-            Settings
-          </Text>
-          <Text
-            color={colors.placeholder}
-            style={{marginBottom: 15}}
-          >
-          </Text>
-        </>
-    );
+  //Updates the notification permission state
+  const [canUseNotifs, setCanUseNotifs] = useState(Settings.getNotifications());
+  const getCanUseNotifs = async(shouldRequest : boolean = false) => {
+    setCanUseNotifs(await Permissions.getNotifPermission());
+  }
 
-    const data = Settings.getSettings();
-    const ToggleSettings = () => (
-        <View style={styles.listContainer}>
-            <ToggleItem data={data.contacts} name="Use Contacts" description="Uses your contact list to block calls" onPress={(value : boolean) => {SettingsHandlers.getPermission(PERMISSIONS.ANDROID.READ_CONTACTS)}} />
-            <ToggleItem data={data.notifications} name="Notifications" description="Silently notifies you when a call is blocked" onPress={(value : boolean) => {SettingsHandlers.notifsPermissionsHandler(!value)}} />
-            <ToggleItem data={data.whitelist} name="Enable Whitelist" description="Uses the whitelist to always allow certain calls" onPress={(value : boolean) => {Settings.setWhitelist(!value)}} />
-            <ToggleItem data={data.blacklist} name="Enable Blacklist" description="Uses the blacklist to always block certain calls" onPress={(value : boolean) => {Settings.setBlacklist(!value)}} />
-            <ToggleItem data={data.block_calls} name="Block Calls" description="Prevents spammers from interrupting you :D" onPress={(value : boolean) => {Settings.setBlockCalls(!value)}} />
-        </View>
-    );
+  //Updates the database with the new contact value
+  const updateContacts = async(value : boolean) => {
+    if(!value && canUseContacts) {
+      Settings.setContacts(true);
+    } else if(!value) {
+      await getCanUseContacts(!canUseContacts);
+      Settings.setContacts(canUseContacts);
+    } else {
+      Settings.setContacts(false);
+    }
+  }
 
-    const SelectSettings = () =>(
-        <View>
-            <SelectItem data={data.theme} name="Select Theme" description={data.theme} onPress={() => {}} />
-        </View>
-    );
+  //Updates the database with the new contact value
+  const updateNotifs = async(value : boolean) => {
+    if(!value && canUseNotifs) {
+      Settings.setNotifications(true);
+    } else if(!value) {
+      await getCanUseNotifs(!canUseNotifs);
+      Settings.setNotifications(canUseNotifs);
+    } else {
+      Settings.setNotifications(false);
+    }
+  }
 
-    const Content = () => (
-        <View style={styles.contentContainer}>
-          <Label />
-          <ToggleSettings />
-          <SelectSettings />
-        </View>
-      );
 
-    return (
-        <SafeAreaView style={sharedStyles.container}>
-          <View style={sharedStyles.circle1}>
-            <View style={sharedStyles.circle}/>
-          </View>
-          <View style={sharedStyles.circle2}> 
-            <View style={sharedStyles.circle}/>
-          </View>
-          <Header />
-          <Content />
-        </SafeAreaView>
-      );
+  /* -------------------------------------------------------------------------- */
+  /*                               Render Methods                               */
+  /* -------------------------------------------------------------------------- */
+
+  const Header = () => (
+    <View style={styles.header}>
+    </View>
+  );
+
+  const Label = () => (
+    <>
+      <Text color={colors.text} style={sharedStyles.header}>
+        Settings
+      </Text>
+      <Text
+        color={colors.placeholder}
+        style={{marginBottom: 15}}
+      >
+      </Text>
+    </>
+  );
+
+  const data = Settings.getSettings();
+  const ToggleSettings = () => (
+    <View style={styles.listContainer}>
+      <ToggleItem data={data.contacts} name="Use Contacts" description="Uses your contact list to block calls" hasPermission={canUseContacts} onPress={updateContacts} />
+      <ToggleItem data={data.notifications} name="Notifications" description="Silently notifies you when a call is blocked" hasPermission={canUseNotifs} onPress={updateNotifs} />
+      <ToggleItem data={data.whitelist} name="Enable Whitelist" description="Uses the whitelist to always allow certain calls" onPress={(value : boolean) => {Settings.setWhitelist(!value)}} />
+      <ToggleItem data={data.blacklist} name="Enable Blacklist" description="Uses the blacklist to always block certain calls" onPress={(value : boolean) => {Settings.setBlacklist(!value)}} />
+      <ToggleItem data={data.block_calls} name="Block Calls" description="Prevents spammers from interrupting you :D" onPress={(value : boolean) => {Settings.setBlockCalls(!value)}} />
+    </View>
+  );
+
+  const SelectSettings = () =>(
+    <View>
+      <SelectItem data={data.theme} name="Select Theme" description={data.theme} onPress={() => {}} />
+    </View>
+  );
+
+  const Content = () => (
+    <View style={styles.contentContainer}>
+      <Label />
+      <ToggleSettings />
+      <SelectSettings />
+    </View>
+  );
+
+  return (
+    <SafeAreaView style={sharedStyles.container}>
+      <View style={sharedStyles.circle1}>
+        <View style={sharedStyles.circle}/>
+      </View>
+      <View style={sharedStyles.circle2}> 
+        <View style={sharedStyles.circle}/>
+      </View>
+      <Header />
+      <Content />
+    </SafeAreaView>
+  );
 };
 
 export default SettingsScreen;

@@ -15,111 +15,126 @@ import ListItem from "../../shared/components/list-item/ListItem";
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import Styles from "../../shared/theme/styles";
 
-import {getBlacklist, insert, edit, search, remove} from "../../api/BlacklistInterface";
+import {getBlacklist, insert, edit, remove} from "../../api/BlacklistInterface";
 
 
 interface BlacklistScreenProps {}
 
 const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
-    const theme = useTheme();
-    const { colors } = theme;
-    const styles = useMemo(() => createStyles(theme), [theme]);
-    const sharedStyles = useMemo(() => Styles(theme), [theme]);
-    const [isModalVisible, setModalVisible] = useState(false);
-    const scheme = useColorScheme();
-    const isDarkMode = scheme === "dark";
+  const theme = useTheme();
+  const { colors } = theme;
+  const styles = useMemo(() => createStyles(theme), [theme]);
+  const sharedStyles = useMemo(() => Styles(theme), [theme]);
+  const scheme = useColorScheme();
+  const isDarkMode = scheme === "dark";
 
-    const handleItemPress = () => {
-      //NavigationService.push(SCREENS.CALLLOG);
-    };
+  
+  /* -------------------------------------------------------------------------- */
+  /*                               State Handlers                               */
+  /* -------------------------------------------------------------------------- */
+
+  //Updates the search text state
+  const [searchText, setSearchText] = useState('');
+  const submitSearch = async(phone_number : string) => {
+    setSearchText(phone_number);
+  }
+
+  //Updates the modal visibility state
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  //Uses the apis to add/edit/delete items
+  const [loaded, setLoaded] = useState(false);
+  const submitAdd = async(phone_number : string) => {
+    await insert(phone_number);
+    toggleModal();
+  }
+  const submitEdit = async(old_number : string, new_number : string) => {
+    setLoaded(false);
+    await edit(old_number, new_number);
+    setLoaded(true);
+  }
+  const submitRemove = async(phone_number : string) => {
+    setLoaded(false);
+    await remove(phone_number);
+    setLoaded(true);
+  }
 
 
-    //Testing whitelist, blacklist, and call log - will be moved into their own files
-    // insert('678*');
-    // insert('678420*');
-    // insert('6784205109');
+  /* -------------------------------------------------------------------------- */
+  /*                               Render Methods                               */
+  /* -------------------------------------------------------------------------- */
 
-    // edit('6784205109', '6788223861');
+  // TODO: Add menu hamburger here if using menu stack    
+  const Header = () => (
+    <>
+      <Text color={colors.text} style={sharedStyles.header}>
+        Blocked
+      </Text>
+    </>
+  );
+  
+  const Blacklist = () => (
+    <View style={styles.listContainer}>
+      <FlatList
+        data={getBlacklist(searchText)}
+        renderItem={({ item }) => (
+          <ListItem data={item} onEdit={submitEdit} onDelete={submitRemove} />
+        )}
+      />
+    </View>
+  );
 
-    // let s = search('6788223861');
-    // //console.log(s[0].phone_number);
-
-    /* -------------------------------------------------------------------------- */
-    /*                               Render Methods                               */
-    /* -------------------------------------------------------------------------- */
-
-
-    // TODO: Add menu hamburger here if using menu stack    
-    const Header = () => (
-      <>
-        <Text color={colors.text} style={sharedStyles.header}>
-          Blocked
-        </Text>
-      </>
-    );
-    
-    const Blacklist = () => (
-      <View style={styles.listContainer}>
-        <FlatList
-          data={getBlacklist()}
-          renderItem={({ item }) => (
-            <ListItem data={item} onPress={handleItemPress} />
-          )}
-        />
-      </View>
-    );
-
-    const toggleModal = () => {
-      setModalVisible(!isModalVisible);
-    };
-
-    const AddButton = () => {
-      const [number, onChangeNumber] = React.useState('');
-      return(
-      <>
-        <AntDesign style={styles.plusIcon} name="pluscircle"size={40} onPress={toggleModal}/>
-          <Modal isVisible={isModalVisible} animationIn={'fadeIn'} animationOut={'fadeIn'}>
-            <View style={styles.modalView}>
-              <Text h1 color={colors.text}>Add Phone Number</Text>
-              <TextInput style={sharedStyles.textBox} value={number} placeholder="Enter Phone Number" keyboardType="numeric" onChangeText={onChangeNumber} />
-              <View style={{flex: 1, flexDirection: "row"}}>
-                <Pressable style={styles.cancelButton} onPress={toggleModal}>
-                  <Text color={colors.text}>Cancel</Text>
-                </Pressable>
-                <Pressable style={styles.addButton} onPress={toggleModal}>
-                  <Text color={colors.text}>Add</Text>
-                </Pressable>
-              </View>
-            </View>
-          </Modal>
-      </>
-      )
-    }
-
-    return (
-      <SafeAreaView style={sharedStyles.container}>
-        <View style={sharedStyles.circle1}>
-          <View style={sharedStyles.circle}/>
-        </View>
-        <View style={sharedStyles.circle2}> 
-          <View style={sharedStyles.circle}/>
-        </View>
-        <View style={styles.contentContainer}>
-          <Header />
-          <View>
-            <SearchBar
-              placeholder="Search here"
-              onSearchPress={() => alert("onpress")}
-              keyboardType='phone-pad'
-              style={{borderWidth: 2, borderColor: colors.primary, borderRadius: 5,alignSelf: "flex-start", width: "85%"}}
-              darkMode={isDarkMode}
-            />
-            <AddButton/>
+  const AddButton = () => {
+    const [number, onChangeNumber] = React.useState('');
+    return(
+    <>
+      <AntDesign style={styles.plusIcon} name="pluscircle"size={40} onPress={toggleModal}/>
+      <Modal isVisible={isModalVisible} animationIn={'fadeIn'} animationOut={'fadeIn'}>
+        <View style={styles.modalView}>
+          <Text h1 color={colors.text}>Add Phone Number</Text>
+          <TextInput style={sharedStyles.textBox} value={number} placeholder="Enter Phone Number" keyboardType="numeric" onChangeText={onChangeNumber} />
+          <View style={{flex: 1, flexDirection: "row"}}>
+            <Pressable style={styles.cancelButton} onPress={toggleModal}>
+              <Text color={colors.text}>Cancel</Text>
+            </Pressable>
+            <Pressable style={styles.addButton} onPress={() => submitAdd(number)}>
+              <Text color={colors.text}>Add</Text>
+            </Pressable>
           </View>
-          <Blacklist />
         </View>
-      </SafeAreaView>
-    );
+      </Modal>
+    </>
+    )
+  }
+
+  return (
+    <SafeAreaView style={sharedStyles.container}>
+      <View style={sharedStyles.circle1}>
+        <View style={sharedStyles.circle}/>
+      </View>
+      <View style={sharedStyles.circle2}> 
+        <View style={sharedStyles.circle}/>
+      </View>
+      <View style={styles.contentContainer}>
+        <Header />
+        <View>
+          <SearchBar
+            placeholder="Search"
+            onChangeText={submitSearch}
+            onClearPress={() => submitSearch('')}
+            keyboardType='phone-pad'
+            style={{borderWidth: 2, borderColor: colors.primary, borderRadius: 5,alignSelf: "flex-start", width: "85%"}}
+            darkMode={isDarkMode}
+          />
+          <AddButton/>
+        </View>
+        <Blacklist />
+      </View>
+    </SafeAreaView>
+  );
 };
 
 export default BlacklistScreen;

@@ -45,7 +45,8 @@ export default (theme: ExtendedTheme) => {
             borderRadius: 5,
             borderWidth: 2,
             textAlign: "center",
-            color: colors.text
+            color: colors.text,
+            width: "90%"
         }
     })
 }

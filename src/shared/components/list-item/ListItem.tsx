@@ -19,42 +19,52 @@ type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 interface ICardItemProps {
   style?: CustomStyleProp;
   data: IListItem;
-  onPress: () => void;
+  onEdit: (old_number : string, new_number : string) => void;
+  onDelete: (phone_number : string) => void;
 }
 
-const ListItem: React.FC<ICardItemProps> = ({ style, data }) => {
+
+const ListItem: React.FC<ICardItemProps> = ({ style, data, onEdit, onDelete }) => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const sharedStyles = useMemo(() => Styles(theme), [theme]);
-  const [isModalEdit, setModalEdit] = useState(false);
-  const [isModalTrash, setModalTrash] = useState(false);
-  const { phone_number } = data;
+  const phone_number = data.phone_number;
+  //const phone_number = formatPhoneNumber(data.phone_number);
   
+
+  /* -------------------------------------------------------------------------- */
+  /*                               State Handlers                               */
+  /* -------------------------------------------------------------------------- */
+
+  //Updates the edit modal visibility state
+  const [isModalEdit, setModalEdit] = useState(false);
   const toggleModalEdit = () => {
     setModalEdit(!isModalEdit);
   };
 
+  //Updates the trash modal visibility state
+  const [isModalTrash, setModalTrash] = useState(false);
   const toggleModalTrash = () => {
     setModalTrash(!isModalTrash);
   };
 
-  const deleteModal = () => {
-    Alert.alert(
-      'Delete Phone Number?',
-      `Are you sure you want to delete?`,
-      [
-          {
-              text: 'Go Back',
-              style: 'default',
-          },
-          {
-              text: 'Delete',
-              // onPress: 
-          },
-      ]
-  );
-  };
+  //Submits the edit request to the parent
+  const submitEdit = (new_number : string) => {
+    onEdit(phone_number, new_number);
+    toggleModalEdit();
+  }
+
+  //Submits the delete request to the parent
+  const submitDelete = () => {
+    onDelete(phone_number);
+    toggleModalTrash();
+  }
+
+
+  /* -------------------------------------------------------------------------- */
+  /*                               Render Methods                               */
+  /* -------------------------------------------------------------------------- */
 
   const Header = () => (
     <>
@@ -65,24 +75,24 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data }) => {
   );
 
   const EditIcon = () => {
-    const [number, onChangeNumber] = React.useState('');
+    const [number, onChangeNumber] = React.useState(phone_number);
     return(
     <>
       <Feather style={styles.editIcon} name="edit"size={35} onPress={toggleModalEdit}/>
-        <Modal isVisible={isModalEdit} animationIn={'fadeIn'} animationOut={'fadeIn'}>
-          <View style={styles.modalView}>
-            <Text h1 color={colors.text}>Edit Phone Number</Text>
-            <TextInput style={sharedStyles.textBox} value={number} placeholder="Enter Phone Number" keyboardType="numeric" onChangeText={onChangeNumber}/>
-            <View style={{flex: 1, flexDirection: "row"}}>
-              <Pressable style={styles.cancelButton} onPress={toggleModalEdit}>
-                <Text color={colors.text}>Cancel</Text>
-              </Pressable>
-              <Pressable style={styles.doneButton} onPress={toggleModalEdit}>
-                <Text color={colors.text}>Done</Text>
-              </Pressable>
-            </View>
+      <Modal isVisible={isModalEdit} animationIn={'fadeIn'} animationOut={'fadeIn'}>
+        <View style={styles.modalView}>
+          <Text h1 color={colors.text}>Edit Phone Number</Text>
+          <TextInput style={sharedStyles.textBox} value={number} placeholder={phone_number} keyboardType="phone-pad" onChangeText={onChangeNumber}/>
+          <View style={{flex: 1, flexDirection: "row"}}>
+            <Pressable style={styles.cancelButton} onPress={toggleModalEdit}>
+              <Text color={colors.text}>Cancel</Text>
+            </Pressable>
+            <Pressable style={styles.doneButton} onPress={() => submitEdit(number)}>
+              <Text color={colors.text}>Done</Text>
+            </Pressable>
           </View>
-        </Modal>
+        </View>
+      </Modal>
     </>
     )
   }
@@ -90,20 +100,20 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data }) => {
   const TrashIcon = () => (
     <>
       <Ionicons style={styles.trashIcon} name="trash"size={35} onPress={toggleModalTrash}/>
-        <Modal isVisible={isModalTrash} animationIn={'fadeIn'} animationOut={'fadeIn'}>
-          <View style={styles.modalView}>
-            <Text h1 color={colors.text}>Delete Phone Number</Text>
-            <Text h4 color={colors.text}>Are you sure you want to erase this phone number?</Text>
-            <View style={{flex: 1, flexDirection: "row"}}>
-              <Pressable style={styles.cancelButton} onPress={toggleModalTrash}>
-                <Text color={colors.text}>Cancel</Text>
-              </Pressable>
-              <Pressable style={styles.doneButton} onPress={toggleModalTrash}>
-                <Text color={colors.text}>Yes</Text>
-              </Pressable>
-            </View>
+      <Modal isVisible={isModalTrash} animationIn={'fadeIn'} animationOut={'fadeIn'}>
+        <View style={styles.modalView}>
+          <Text h1 color={colors.text}>Delete Phone Number</Text>
+          <Text h4 color={colors.text}>Are you sure you want to erase this phone number?</Text>
+          <View style={{flex: 1, flexDirection: "row"}}>
+            <Pressable style={styles.cancelButton} onPress={toggleModalTrash}>
+              <Text color={colors.text}>Cancel</Text>
+            </Pressable>
+            <Pressable style={styles.doneButton} onPress={submitDelete}>
+              <Text color={colors.text}>Yes</Text>
+            </Pressable>
           </View>
-        </Modal>
+        </View>
+      </Modal>
     </>
   );
 
