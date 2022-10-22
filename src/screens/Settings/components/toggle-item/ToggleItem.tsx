@@ -47,7 +47,7 @@ const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, 
         <View style={{}}>
           <Switch 
             value={isEnabled} 
-            onValueChange={() => {}} 
+            onValueChange={toggle} 
             activeText={''}
             inActiveText={''}
             circleSize={20}
