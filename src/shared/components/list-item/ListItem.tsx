@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { View, StyleProp, ViewStyle } from "react-native";
+import { View, StyleProp, ViewStyle, TextStyle } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
 import RNBounceable from "@freakycoder/react-native-bounceable";
@@ -28,16 +28,16 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const Header = () => (
     <>
-      <Text h4 color={colors.text}>
+      <Text color={colors.text} style={{fontSize: 25}}>
         {phone_number}
       </Text>
     </>
   );
 
   return (
-  <RNBounceable style={[styles.container, style]} onPress={onPress}>
+  <View style={[styles.container, style]}>
     <Header />
-  </RNBounceable>
+  </View>
   );
 };
 

@@ -9,7 +9,7 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
  */
 import createStyles from "./ToggleItem.style";
 import Text from "../../../../shared/components/text-wrapper/TextWrapper";
-import { Switch } from "react-native-gesture-handler";
+import { Switch } from 'react-native-switch';
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -44,7 +44,24 @@ const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, 
   const Action = () => (
     <>
       <View style={styles.valueContainer}>
-        <Switch trackColor={colors.text} value={isEnabled} onValueChange={() => {}} />
+        <View style={{}}>
+          <Switch 
+            value={isEnabled} 
+            onValueChange={() => {}} 
+            activeText={''}
+            inActiveText={''}
+            circleSize={20}
+            barHeight={25}
+            switchBorderRadius={500}
+            switchLeftPx={2}
+            switchRightPx={2}
+            switchWidthMultiplier={2.5}
+            backgroundActive={colors.black}
+            backgroundInactive={colors.white}
+            circleBorderWidth={2}
+            innerCircleStyle={{borderWidth: 2}}
+          />
+        </View>
       </View>
     </>
   );
