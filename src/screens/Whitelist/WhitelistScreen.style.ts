@@ -3,7 +3,6 @@ import { ExtendedTheme } from "@react-navigation/native";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 
 interface Style {
-  container: ViewStyle;
   titleTextStyle: TextStyle;
   buttonStyle: ViewStyle;
   buttonTextStyle: TextStyle;
@@ -16,11 +15,6 @@ interface Style {
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create<Style>({
-    container: {
-      flex: 1,
-      alignItems: "center",
-      backgroundColor: colors.background,
-    },
     titleTextStyle: {
       fontSize: 32,
     },

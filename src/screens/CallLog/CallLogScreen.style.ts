@@ -4,7 +4,6 @@ import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import { arrayFilterNotEmpty } from "rxdb";
 
 interface Style {
-  container: ViewStyle;
   titleTextStyle: TextStyle;
   buttonStyle: ViewStyle;
   buttonTextStyle: TextStyle;
@@ -20,11 +19,6 @@ interface Style {
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create<Style>({
-    container: {
-      flex: 1,
-      alignItems: "center",
-      backgroundColor: colors.background,
-    },
     titleTextStyle: {
       fontSize: 32,
     },
@@ -60,7 +54,7 @@ export default (theme: ExtendedTheme) => {
     },
     listContainer: {
       marginTop: 8,
-      borderTopWidth: 2,
+      borderTopWidth: 1,
       borderTopColor: colors.primary,
     },
     profilePicImageStyle: {
