@@ -2,7 +2,6 @@ import { ViewStyle, StyleSheet, TextStyle, ImageStyle } from "react-native";
 import { ExtendedTheme } from "@react-navigation/native";
 import fonts from "@fonts";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
-import { Icon } from "react-native-vector-icons/Icon";
 
 interface Style {
     container: ViewStyle;
@@ -10,6 +9,7 @@ interface Style {
     circle2: ViewStyle;
     circle: ViewStyle;
     header: ViewStyle;
+    textBox: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -39,6 +39,12 @@ export default (theme: ExtendedTheme) => {
         },
         header: {
             fontSize: 40
+        },
+        textBox: {
+            borderColor: colors.transparent,
+            borderRadius: 5,
+            borderWidth: 2,
+            textAlign: "center"
         }
     })
 }

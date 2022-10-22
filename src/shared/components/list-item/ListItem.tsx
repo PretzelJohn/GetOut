@@ -1,15 +1,18 @@
-import React, { useMemo } from "react";
-import { View, StyleProp, ViewStyle } from "react-native";
+import React, { useMemo, useState } from "react";
+import { View, StyleProp, ViewStyle, Button, Alert, Pressable } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import Icon from "react-native-dynamic-vector-icons";
-import RNBounceable from "@freakycoder/react-native-bounceable";
+import Modal from "react-native-modal";
+import Feather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { TextInput, TouchableHighlight} from "react-native-gesture-handler";
 
-/**
- * ? Local Imports
- */
+//Local Imports
 import createStyles from "./ListItem.style";
 import { IListItem } from "./IListItem";
 import Text from "../text-wrapper/TextWrapper";
+
+//Shared Imports
+import Styles from "../../theme/styles";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -19,12 +22,34 @@ interface ICardItemProps {
   onPress: () => void;
 }
 
-const ListItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
+const ListItem: React.FC<ICardItemProps> = ({ style, data }) => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
-
+  const sharedStyles = useMemo(() => Styles(theme), [theme]);
+  const [isModalVisible, setModalVisible] = useState(false);
   const { phone_number } = data;
+  
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  const deleteModal = () => {
+    Alert.alert(
+      'Delete Phone Number?',
+      `Are you sure you want to delete?`,
+      [
+          {
+              text: 'Go Back',
+              style: 'default',
+          },
+          {
+              text: 'Delete',
+              // onPress: 
+          },
+      ]
+  );
+  };
 
   const Header = () => (
     <>
@@ -34,10 +59,41 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
     </>
   );
 
+  const EditIcon = () => {
+    const [number, onChangeNumber] = React.useState('');
+    return(
+    <>
+      <Feather style={styles.editIcon} name="edit"size={35} onPress={toggleModal}/>
+        <Modal isVisible={isModalVisible} animationIn={'fadeIn'} animationOut={'fadeIn'}>
+          <View style={styles.modalView}>
+            <Text h1 color={colors.text}>Edit Phone Number</Text>
+            <TextInput style={sharedStyles.textBox} value={number} placeholder="Enter Phone Number" keyboardType="numeric" onChangeText={onChangeNumber}/>
+            <View style={{flex: 1, flexDirection: "row"}}>
+              <Pressable style={styles.cancelButton} onPress={toggleModal}>
+                <Text color={colors.text}>Cancel</Text>
+              </Pressable>
+              <Pressable style={styles.doneButton} onPress={toggleModal}>
+                <Text color={colors.text}>Done</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+    </>
+    )
+  }
+
+  const TrashIcon = () => (
+    <>
+      <Ionicons style={styles.trashIcon} name="trash" size={35} onPress={deleteModal}/>
+    </>
+  )
+
   return (
-  <RNBounceable style={[styles.container, style]} onPress={onPress}>
-    <Header />
-  </RNBounceable>
+  <View style={[styles.container, style]}>
+    <Header/>
+    <EditIcon/>
+    <TrashIcon/>
+  </View>
   );
 };
 

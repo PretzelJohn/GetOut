@@ -2,11 +2,11 @@ import React, { useMemo, useState } from "react";
 import { View, FlatList } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 /* Local Imports */
 import createStyles from "./CallLogScreen.style";
 import CallLogItem from "./components/card-item/CallLogItem";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";

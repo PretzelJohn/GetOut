@@ -2,8 +2,6 @@ import React, { useMemo } from "react";
 import { View, FlatList } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Feather from 'react-native-vector-icons/Feather';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 /* Local Imports */
 import createStyles from "./WhitelistScreen.style";
@@ -15,7 +13,7 @@ import fonts from "../../shared/theme/fonts";
 import Styles from "../../shared/theme/styles";
 
 import { getWhitelist, insert, search } from "../../api/WhitelistInterface";
-import Icon from "react-native-dynamic-vector-icons";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 
 interface WhitelistScreenProps {}
@@ -54,8 +52,6 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
             renderItem={({ item }) => (
               <>
               <ListItem data={item} onPress={handleItemPress} />
-              <Feather.Button style={styles.editIcon} name="edit" color={colors.text} size={30}/>
-              <Ionicons.Button style={styles.trashIcon} name="trash" color={colors.text} size={30}/>
               </>
             )}
           />
@@ -72,7 +68,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
         </View>
         <View style={styles.contentContainer}>
           <Header />
-          <Whitelist />
+          <Whitelist/>
         </View>
       </SafeAreaView>
     );

@@ -36,7 +36,7 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
     edit('6784205109', '6788223861');
 
     let s = search('6788223861');
-    console.log(s[0].phone_number);
+    // console.log(s[0].phone_number);
 
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
