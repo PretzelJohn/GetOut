@@ -11,6 +11,8 @@ interface Style {
   contentContainer: ViewStyle;
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
+  editIcon: ViewStyle;
+  trashIcon: ViewStyle;
 }
  
 export default (theme: ExtendedTheme) => {
@@ -62,5 +64,17 @@ export default (theme: ExtendedTheme) => {
       width: 50,
       borderRadius: 30,
     },
+    editIcon: {
+      color: colors.text,
+      position: 'absolute', 
+      top: '23%', 
+      left: '0%',
+    },
+    trashIcon: {
+      color: colors.text,
+      position: 'absolute', 
+      top: '23%', 
+      left: '0%'
+    }
   });
 };
