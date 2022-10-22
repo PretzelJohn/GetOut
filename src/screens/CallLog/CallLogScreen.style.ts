@@ -64,16 +64,16 @@ export default (theme: ExtendedTheme) => {
     },
     allButton: {
       width: 70, 
-      height: '23%', 
+      height: '5%', 
       justifyContent: "center", 
       alignItems: "center",
       borderBottomLeftRadius: 11, 
       borderTopLeftRadius: 11, 
-      backgroundColor: colors.primary
+      backgroundColor: colors.transparent
     },
     missedButton: {
       width: 70, 
-      height: '23%', 
+      height: '5%', 
       justifyContent: "center", 
       alignItems: "center",
       borderBottomRightRadius: 11, 

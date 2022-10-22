@@ -44,7 +44,8 @@ export default (theme: ExtendedTheme) => {
             borderColor: colors.transparent,
             borderRadius: 5,
             borderWidth: 2,
-            textAlign: "center"
+            textAlign: "center",
+            color: colors.text
         }
     })
 }

@@ -61,8 +61,9 @@ const Navigation = () => {
                 tabBarIcon: ({ focused, color, size }) => RenderTabIcon(route, focused, color, size),
                 tabBarActiveTintColor: palette.black,
                 tabBarInactiveTintColor: palette.shadow,
+                tabBarHideOnKeyboard: true,
                 tabBarStyle: {
-                    backgroundColor: isDarkMode ? palette.black : palette.primary,
+                    backgroundColor: isDarkMode ? palette.primary : palette.primary,
                     height: 80
                 },
                 tabBarLabelStyle: {

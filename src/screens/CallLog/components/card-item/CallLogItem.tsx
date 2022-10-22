@@ -29,11 +29,11 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const Header = () => (
     <>
-      <Text color={colors.text} style={{fontSize: 23}}>
+      <Text color={colors.text} style={{fontSize: 25}}>
         {number} 
       </Text>
-      <Text color={colors.text} style={styles.locationTextStyle}>
-        {date} ⚫️ {location}                       
+      <Text color={colors.text} style={styles.locationTextStyle} >
+        {date} ● {location}                       
       </Text>
     </>
   );
@@ -56,7 +56,7 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
   const TouchProps = {
     activeOpacity: 1,
     underlayColor: colors.primary,
-    style: [styles.buttons, {backgroundColor: isPress ? colors.primary : colors.secondary}],
+    style: [styles.buttons, {backgroundColor: isPress ? colors.transparent : colors.secondary}],
     onPress: () => setIsPress(current => !current)
   };
 
