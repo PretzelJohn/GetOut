@@ -45,25 +45,6 @@ const _remove = async function(phone_number : string) {
     }
 }
 
-// Returns updated RxDocument if query and edit was successful, otherwise returns null.
-const _edit = async function(old_value : string, new_value : string) {
-    // Create/ connect to databse
-    const db = await getDatabase();
-
-    // Initial Attempt:
-    const query = db.blacklist.findOne(old_value);
-    const result = await query.exec();
-
-    if (result != null) {
-        await result.atomicPatch({
-            phone_number : new_value
-        });
-        return new_value;
-    } else {
-        return old_value;
-    }
-}
-
 // TODO: Improve search functionality by allowing partial numbers, characters, etc.
 const _search = async function(phone_number : string) {
     // Create / connect to database
@@ -119,16 +100,8 @@ export const insert = async function(phone_number : string) {
 
 // Edit an existing phone number in the blacklist
 export const edit = function(old_value : string, new_value : string) {
-    const [data, setData] = useState(String);
-    useEffect(() => {
-      const fetchData = async () => {
-        const data = await _edit(old_value, new_value);
-        setData(data);
-      }
-      fetchData();
-    }, []);
-
-    return data;
+    remove(old_value);
+    insert(new_value);
 }
 
 // Remove a phone number (full or partial) from the blacklist
