@@ -22,6 +22,8 @@
     "pouchdb-adapter-react-native-sqlite": "^3.0.1",
     "react": "18.1.0",
     "react-native": "0.70.2",
+    "react-native-animated-spinkit": "^1.5.2",
+    "react-native-dynamic-search-bar": "^2.0.2",
     "react-native-dynamic-vector-icons": "^1.2.0",
     "react-native-eject": "^0.1.2",
     "react-native-gesture-handler": "^2.6.2",
