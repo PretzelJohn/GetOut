@@ -52,25 +52,24 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
   );
 
   const [ isPress, setIsPress ] = React.useState(false);
-  
+
   const TouchProps = {
     activeOpacity: 1,
     underlayColor: colors.primary,
-    style: styles.buttons,
+    style: [styles.buttons, {backgroundColor: isPress ? colors.primary : colors.secondary}],
     onPress: () => setIsPress(current => !current)
-    // onPress: () => console.log("hi")
   };
 
   return (    
-  <View style={[styles.container]}>
+  <View style={styles.container}>
+    <Icon style={styles.answeredIcon} name="phone-outgoing" color={colors.Text} size={30}/>
     <Header/>
     <Time />
-    <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%", right:"10%"}}>
-      <TouchableHighlight {...TouchProps}>
-        <Text color={colors.text} style={styles.blocked}>Block</Text>
-      </TouchableHighlight>
-    </View>
-    <Icon style={styles.answeredIcon} name="phone-outgoing" color={colors.black} size={30}/>
+      <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%", right:"10%"}}>
+        <TouchableHighlight {...TouchProps}>
+          <Text color={colors.text} style={styles.blocked}>{isPress ? "Block" : "Unblock"}</Text>
+        </TouchableHighlight>
+      </View>
   </View>
   );
 };

@@ -39,7 +39,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
 
     const Header = () => (
       <>
-        <Text color={colors.black} style={sharedStyles.header}>
+        <Text color={colors.text} style={sharedStyles.header}>
           Allowed
         </Text>
       </>
@@ -57,9 +57,13 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
     );
     
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={sharedStyles.circle1}/>
-        <View style={sharedStyles.circle2}/> 
+      <SafeAreaView style={sharedStyles.container}>
+        <View style={sharedStyles.circle1}>
+          <View style={sharedStyles.circle}/>
+        </View>
+        <View style={sharedStyles.circle2}> 
+          <View style={sharedStyles.circle}/>
+        </View>
         <View style={styles.contentContainer}>
           <Header />
           <Whitelist />

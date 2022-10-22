@@ -20,9 +20,9 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       padding: 0,
-      borderBottomWidth: 2,
+      borderBottomWidth: 1,
       borderBottomColor: colors.primary,
-      width: ScreenWidth,
+      width: ScreenWidth*0.9,
       left: "10%"
     },
     locationTextStyle: {
@@ -49,7 +49,7 @@ export default (theme: ExtendedTheme) => {
       right: "29%", 
       position: "absolute", 
       bottom: 0,  
-      top: 16 
+      top: 17 
     },
     valueTextStyle: {
       marginLeft: 8,
@@ -57,12 +57,11 @@ export default (theme: ExtendedTheme) => {
     },
     buttons: {
       width: 60, 
-      height: 28, 
+      height: 29, 
       justifyContent: "center", 
       alignItems: "center",
       borderRadius: 11, 
-      backgroundColor: colors.secondary,
-      right:"20%"
+      backgroundColor: colors.secondary
     },
     blocked: {
       alignSelf: "center", 
@@ -71,8 +70,8 @@ export default (theme: ExtendedTheme) => {
     answeredIcon: {
       color: colors.text,
       position: 'absolute', 
-      top: '23%', 
-      left: '-9%'
+      top: '23%',
+      left: "-11%"
     }
   });
 };
