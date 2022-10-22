@@ -49,12 +49,14 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
 
     const Whitelist = () => (
       <View style={styles.listContainer}>
-        <Feather style={styles.editIcon} name="edit" color={colors.black} size={30}/>
-        <Ionicons style={styles.trashIcon} name="trash" color={colors.black} size={30}/>
         <FlatList
           data={getWhitelist()}
             renderItem={({ item }) => (
+              <>
               <ListItem data={item} onPress={handleItemPress} />
+              <Feather.Button style={styles.editIcon} name="edit" color={colors.text} size={30}/>
+              <Ionicons.Button style={styles.trashIcon} name="trash" color={colors.text} size={30}/>
+              </>
             )}
           />
       </View>
