@@ -67,6 +67,7 @@ const Navigation = () => {
                 },
                 tabBarLabelStyle: {
                     fontSize: 17,
+                    fontFamily: "JockeyOne-Regular"
                   },
                 })}
                 >
