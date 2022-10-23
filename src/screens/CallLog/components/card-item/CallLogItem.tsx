@@ -29,11 +29,11 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   const Header = () => (
     <>
-      <Text bold color={colors.black} style={{fontSize: 23}}>
+      <Text color={colors.text} style={{fontSize: 25}}>
         {number} 
       </Text>
-      <Text color={colors.black} style={styles.locationTextStyle}>
-        {date} ⚫️ {location}                       
+      <Text color={colors.text} style={styles.locationTextStyle} >
+        {date} ● {location}                       
       </Text>
     </>
   );
@@ -44,33 +44,32 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
   //     <Text style={styles.valueTextStyle}>{date}</Text>
   //   </View>
   // );
-
+ 
   const Time = () => (
     <View style={styles.timeContainer}>
-      <Text color={colors.black} style={styles.valueTextStyle}>{time}</Text>
+      <Text color={colors.text} style={styles.valueTextStyle}>{time}</Text>
     </View>
   );
 
   const [ isPress, setIsPress ] = React.useState(false);
-  
+
   const TouchProps = {
     activeOpacity: 1,
     underlayColor: colors.primary,
-    style: styles.buttons,
+    style: [styles.buttons, {backgroundColor: isPress ? colors.transparent : colors.secondary}],
     onPress: () => setIsPress(current => !current)
-    // onPress: () => console.log("hi")
   };
 
   return (    
-  <View style={[styles.container]}>
+  <View style={styles.container}>
+    <Icon style={styles.answeredIcon} name="phone-outgoing" color={colors.Text} size={30}/>
     <Header/>
     <Time />
-    <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%", right:"10%"}}>
-      <TouchableHighlight {...TouchProps}>
-        <Text color={colors.black} style={styles.blocked}>Block</Text>
-      </TouchableHighlight>
-    </View>
-    <Icon style={styles.answeredIcon} name="phone-outgoing" color={colors.black} size={30}/>
+      <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%", right:"10%"}}>
+        <TouchableHighlight {...TouchProps}>
+          <Text color={colors.text} style={styles.blocked}>{isPress ? "Block" : "Unblock"}</Text>
+        </TouchableHighlight>
+      </View>
   </View>
   );
 };

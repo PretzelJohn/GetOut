@@ -20,15 +20,15 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       padding: 0,
-      borderBottomWidth: 2,
+      borderBottomWidth: 1,
       borderBottomColor: colors.primary,
-      width: ScreenWidth,
-      backgroundColor: colors.white,
+      width: ScreenWidth*0.9,
       left: "10%"
     },
     locationTextStyle: {
       margin: 1,
-      fontSize: 12
+      fontSize: 13,
+      marginTop: -4
     },
     contentContainer: {
       marginLeft: 200,
@@ -50,31 +50,29 @@ export default (theme: ExtendedTheme) => {
       right: "29%", 
       position: "absolute", 
       bottom: 0,  
-      top: 16 
+      top: 17 
     },
     valueTextStyle: {
       marginLeft: 8,
-      fontSize: 12,
-      fontWeight: "bold"
+      fontSize: 13,
     },
     buttons: {
       width: 60, 
-      height: 28, 
+      height: 29, 
       justifyContent: "center", 
       alignItems: "center",
       borderRadius: 11, 
-      backgroundColor: colors.secondary,
-      right:"20%"
+      backgroundColor: colors.secondary
     },
     blocked: {
-      fontWeight: "bold", 
       alignSelf: "center", 
       justifyContent: "center"
     },
     answeredIcon: {
+      color: colors.text,
       position: 'absolute', 
-      top: '23%', 
-      left: '-9%'
+      top: '23%',
+      left: "-11%"
     }
   });
 };

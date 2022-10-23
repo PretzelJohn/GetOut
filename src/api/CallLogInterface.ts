@@ -22,7 +22,7 @@ const _load = async function() {
             });
         }
     });
-    
+
     return list;
 }
 
