@@ -54,15 +54,17 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
         <Text color={colors.text} style={sharedStyles.header}>
           Recents
         </Text>
-        <View style={{position: 'absolute', top: '2.5%', left: '15%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
-          <TouchableHighlight {...allProps}>
-            <Text color={colors.text} style={styles.allmissedButtons}>All</Text>
-          </TouchableHighlight>
-        </View>
-        <View style={{position: 'absolute', top: '2.5%', left: '47%', right: 0, bottom: 0, justifyContent: 'flex-start', alignItems: 'center'}}>
-          <TouchableHighlight {...missedProps}>
-            <Text color={colors.text} style={styles.allmissedButtons}>Missed</Text>
-          </TouchableHighlight>
+        <View style={{flex: 1, flexDirection: "row", position: "absolute", top: "2.75%", left: "37%"}}>
+          <View style={{justifyContent: 'flex-start', alignItems: 'center'}}>
+            <TouchableHighlight {...allProps}>
+              <Text color={colors.text} style={styles.allmissedButtons}>All</Text>
+            </TouchableHighlight>
+          </View>
+          <View style={{justifyContent: 'flex-start', alignItems: 'center'}}>
+            <TouchableHighlight {...missedProps}>
+              <Text color={colors.text} style={styles.allmissedButtons}>Missed</Text>
+            </TouchableHighlight>
+          </View>
         </View>
       </>
       )

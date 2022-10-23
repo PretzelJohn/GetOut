@@ -31,41 +31,41 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
   /*                               State Handlers                               */
   /* -------------------------------------------------------------------------- */
 
-  //Updates the contact permission state
-  const [canUseContacts, setCanUseContacts] = useState(Settings.getContacts());
-  const getCanUseContacts = async(shouldRequest : boolean = false) => {
-    setCanUseContacts(await Permissions.getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, shouldRequest));
-  }
+  // //Updates the contact permission state
+  // const [canUseContacts, setCanUseContacts] = useState(Settings.getContacts());
+  // const getCanUseContacts = async(shouldRequest : boolean = false) => {
+  //   setCanUseContacts(await Permissions.getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, shouldRequest));
+  // }
 
-  //Updates the notification permission state
-  const [canUseNotifs, setCanUseNotifs] = useState(Settings.getNotifications());
-  const getCanUseNotifs = async(shouldRequest : boolean = false) => {
-    setCanUseNotifs(await Permissions.getNotifPermission());
-  }
+  // //Updates the notification permission state
+  // const [canUseNotifs, setCanUseNotifs] = useState(Settings.getNotifications());
+  // const getCanUseNotifs = async(shouldRequest : boolean = false) => {
+  //   setCanUseNotifs(await Permissions.getNotifPermission());
+  // }
 
-  //Updates the database with the new contact value
-  const updateContacts = async(value : boolean) => {
-    if(!value && canUseContacts) {
-      Settings.setContacts(true);
-    } else if(!value) {
-      await getCanUseContacts(!canUseContacts);
-      Settings.setContacts(canUseContacts);
-    } else {
-      Settings.setContacts(false);
-    }
-  }
+  // //Updates the database with the new contact value
+  // const updateContacts = async(value : boolean) => {
+  //   if(!value && canUseContacts) {
+  //     Settings.setContacts(true);
+  //   } else if(!value) {
+  //     await getCanUseContacts(!canUseContacts);
+  //     Settings.setContacts(canUseContacts);
+  //   } else {
+  //     Settings.setContacts(false);
+  //   }
+  // }
 
-  //Updates the database with the new contact value
-  const updateNotifs = async(value : boolean) => {
-    if(!value && canUseNotifs) {
-      Settings.setNotifications(true);
-    } else if(!value) {
-      await getCanUseNotifs(!canUseNotifs);
-      Settings.setNotifications(canUseNotifs);
-    } else {
-      Settings.setNotifications(false);
-    }
-  }
+  // //Updates the database with the new contact value
+  // const updateNotifs = async(value : boolean) => {
+  //   if(!value && canUseNotifs) {
+  //     Settings.setNotifications(true);
+  //   } else if(!value) {
+  //     await getCanUseNotifs(!canUseNotifs);
+  //     Settings.setNotifications(canUseNotifs);
+  //   } else {
+  //     Settings.setNotifications(false);
+  //   }
+  // }
 
 
   /* -------------------------------------------------------------------------- */
@@ -81,15 +81,24 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
   );
 
   const data = Settings.getSettings();
-  const ToggleSettings = () => (
-    <View style={styles.listContainer}>
-      <ToggleItem style={{borderTopLeftRadius: 10, borderTopRightRadius: 10, marginTop: -5}} data={data.contacts} name="Use Contacts" description="Uses your contact list to block calls" hasPermission={canUseContacts} onPress={updateContacts} />
-      <ToggleItem data={data.notifications} name="Notifications" description="Silently notifies you when a call is blocked" hasPermission={canUseNotifs} onPress={updateNotifs} />
-      <ToggleItem data={data.whitelist} name="Enable Whitelist" description="Uses the whitelist to always allow certain calls" onPress={(value : boolean) => {Settings.setWhitelist(!value)}} />
-      <ToggleItem data={data.blacklist} name="Enable Blacklist" description="Uses the blacklist to always block certain calls" onPress={(value : boolean) => {Settings.setBlacklist(!value)}} />
-      <ToggleItem style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 10}} data={data.block_calls} name="Block Calls" description="Prevents spammers from interrupting you :D" onPress={(value : boolean) => {Settings.setBlockCalls(!value)}} />
-    </View>
-  );
+  const ToggleSettings = () => {
+
+    return(
+      <View style={styles.listContainer}>
+        <ToggleItem style={{borderTopLeftRadius: 10, borderTopRightRadius: 10, marginTop: -5}} data={data.contacts} name="Use Contacts" description="Uses your contact list to block calls" onPress={(value : boolean) => {
+          if(!value) Permissions.getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, true);
+          Settings.setContacts(!value);
+        }} />
+        <ToggleItem data={data.notifications} name="Notifications" description="Silently notifies you when a call is blocked" onPress={(value : boolean) => {
+          if(!value) Permissions.getNotifPermission();
+          Settings.setNotifications(!value);
+        }} />
+        <ToggleItem data={data.whitelist} name="Enable Whitelist" description="Uses the whitelist to always allow certain calls" onPress={(value : boolean) => {Settings.setWhitelist(!value)}} />
+        <ToggleItem data={data.blacklist} name="Enable Blacklist" description="Uses the blacklist to always block certain calls" onPress={(value : boolean) => {Settings.setBlacklist(!value)}} />
+        <ToggleItem style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 10}} data={data.block_calls} name="Block Calls" description="Prevents spammers from interrupting you" onPress={(value : boolean) => {Settings.setBlockCalls(!value)}} />
+      </View>
+    );
+  };
 
   const SelectSettings = () =>(
     <View>

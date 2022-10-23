@@ -64,7 +64,6 @@ export default (theme: ExtendedTheme) => {
     allButton: {
       width: 77, 
       height: 32,
-      left: -30,
       justifyContent: "center", 
       borderBottomLeftRadius: 10,
       borderTopLeftRadius: 10,
@@ -73,7 +72,6 @@ export default (theme: ExtendedTheme) => {
     missedButton: {
       width: 76, 
       height: 32,
-      left: -20,
       justifyContent: "center", 
       borderBottomRightRadius: 10,
       borderTopRightRadius: 10,
