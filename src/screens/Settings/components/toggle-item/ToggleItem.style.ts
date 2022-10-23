@@ -33,6 +33,7 @@ export default (theme: ExtendedTheme) => {
       flex: 1,
       flexDirection: "row",
       justifyContent: "flex-end",
+      bottom: 35,
     }
   });
 };

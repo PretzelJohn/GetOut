@@ -1,17 +1,24 @@
 import { IListItem } from '@shared-components/list-item/IListItem';
 import { useState, useEffect } from 'react';
-import { RxDocument } from 'rxdb';
 import { getDatabase } from "../database/Database";
 
 
 //Private function that loads the blacklist
-const _load = async function() {
+export const _load = async function(searchText : string) : Promise<IListItem[]> {
     //Create/connect to the database
     const db = await getDatabase();
 
-    //Query the documents in the collection
-    let list : Array<any> = [];
-    await db.blacklist.find().exec().then((result : any[]) => {
+    //Initialize empty list and search regex
+    let list : Array<IListItem> = [];
+    searchText = searchText.replace(/[^0-9]/gim,"");
+    let regex = new RegExp(searchText.trim());
+
+    //Find all matching documents in the database
+    await db.blacklist.find({
+        selector: {
+            phone_number: {$regex: regex}
+        }
+    }).exec().then((result: any[]) => {
         if(!result) return;
         for(let i = 0; i < result.length; i++) {
             list.push({
@@ -23,80 +30,14 @@ const _load = async function() {
     return list;
 }
 
-// TODO: Possibly handle more than one value, depends on how we're handling removal on the frontend
-// Returns true if query and removal was successful, otherwise returns false.
-const _remove = async function(phone_number : string) {
-    // Create/ connect to databse
-    const db = await getDatabase();
-
-    // Initial Attempt:
-    const query = db.blacklist.findOne(phone_number);
-    const result = await query.exec();
-
-    if (result != null) {
-        let removeState = false;
-        result.deleted$.subscribe((state : any) => removeState = state);
-
-        await result.remove();
-
-        return removeState;
-    } else {
-        return false;
-    }
-}
-
-// Returns updated RxDocument if query and edit was successful, otherwise returns null.
-const _edit = async function(old_value : string, new_value : string) {
-    // Create/ connect to databse
-    const db = await getDatabase();
-
-    // Initial Attempt:
-    const query = db.blacklist.findOne(old_value);
-    const result = await query.exec();
-
-    if (result != null) {
-        await result.atomicPatch({
-            phone_number : new_value
-        });
-        return new_value;
-    } else {
-        return old_value;
-    }
-}
-
-// TODO: Improve search functionality by allowing partial numbers, characters, etc.
-const _search = async function(phone_number : string) {
-    // Create / connect to database
-    const db = await getDatabase();
-
-    // Query database for search term
-    let result_list : Array<any> = [];
-    await db.blacklist.find({
-        selector : {
-            phone_number : phone_number
-        }
-    }).exec().then((result: any[]) => {
-        if (!result) {
-            console.log('Search query not found');
-            return;
-        } else {
-            for (let i = 0; i < result.length; i++) {
-                result_list.push({
-                    phone_number: result[i].phone_number
-                });
-            }
-        }
-    });
-    console.log(result_list);
-    return result_list;
-}
 
 //Return the result of _load, since its async
-export const getBlacklist = function() {
+export const getBlacklist = function(searchText : string) : IListItem[] {
     const [data, setData] = useState(Array<IListItem>);
+
     useEffect(() => {
       const fetchData = async () => {
-        const data = await _load();
+        const data = await _load(searchText);
         setData(data);
       }
       fetchData();
@@ -106,55 +47,32 @@ export const getBlacklist = function() {
 }
 
 
-//Insert a phone number (full or partial) into the blacklist
-export const insert = async function(phone_number : string) {
+// Remove a phone number (full or partial) from the list
+export const remove = async function(phone_number : string) : Promise<void> {
+    // Create/ connect to databse
+    const db = await getDatabase();
+
+    // Initial Attempt:
+    const result = await db.blacklist.findOne(phone_number).exec();
+    if(!result) return;
+    await result.remove();
+}
+
+
+//Insert a phone number (full or partial) into the list
+export const insert = async function(phone_number : string) : Promise<void> {
     //Create/connect to the database
     const db = await getDatabase();
 
     //Insert a document into the collection
-    db.blacklist.atomicUpsert({
+    await db.blacklist.atomicUpsert({
         phone_number: phone_number
     });
 }
 
-// Edit an existing phone number in the blacklist
-export const edit = function(old_value : string, new_value : string) {
-    const [data, setData] = useState(String);
-    useEffect(() => {
-      const fetchData = async () => {
-        const data = await _edit(old_value, new_value);
-        setData(data);
-      }
-      fetchData();
-    }, []);
 
-    return data;
-}
-
-// Remove a phone number (full or partial) from the blacklist
-export const remove = function(phone_number : string) {
-    const [data, setData] = useState(Boolean);
-    useEffect(() => {
-      const fetchData = async () => {
-        const data = await _remove(phone_number);
-        setData(data);
-      }
-      fetchData();
-    }, []);
-
-    return data;
-}
-
-// Returns an array of RxDocuments to be displayed on the frontend
-export const search = function(phone_number : string) {
-    const [data, setData] = useState(Array<IListItem>);
-    useEffect(() => {
-      const fetchData = async () => {
-        const data = await _search(phone_number);
-        setData(data);
-      }
-      fetchData();
-    }, []);
-
-    return data;
+// Edit an existing phone number in the list
+export const edit = async function(old_value : string, new_value : string) : Promise<void> {
+    await remove(old_value);
+    await insert(new_value);
 }

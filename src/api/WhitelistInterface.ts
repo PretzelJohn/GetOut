@@ -1,18 +1,24 @@
-"use strict"
-
 import { IListItem } from '@shared-components/list-item/IListItem';
 import { useState, useEffect } from 'react';
 import { getDatabase } from "../database/Database";
 
 
 //Private function that loads the whitelist
-const _load = async function() {
+export const _load = async function(searchText : string) : Promise<IListItem[]> {
     //Create/connect to the database
     const db = await getDatabase();
 
-    //Query the documents in the collection
-    let list : Array<any> = [];
-    await db.whitelist.find().exec().then((result: any[]) => {
+    //Initialize empty list and search regex
+    let list : Array<IListItem> = [];
+    searchText = searchText.replace(/[^0-9]/gim,"");
+    let regex = new RegExp(searchText.trim());
+
+    //Find all matching documents in the database
+    await db.whitelist.find({
+        selector: {
+            phone_number: {$regex: regex}
+        }
+    }).exec().then((result: any[]) => {
         if(!result) return;
         for(let i = 0; i < result.length; i++) {
             list.push({
@@ -24,38 +30,14 @@ const _load = async function() {
     return list;
 }
 
-const _search = async function(phone_number : string) {
-    // Create / connect to database
-    const db = await getDatabase();
-
-    // Query database for search term
-    let result_list : Array<any> = [];
-    await db.whitelist.find({
-        selector : {
-            phone_number : phone_number
-        }
-    }).exec().then((result: any[]) => {
-        if (!result) {
-            console.log('Search query not found');
-            return;
-        } else {
-            for (let i = 0; i < result.length; i++) {
-                result_list.push({
-                    phone_number: result[i].phone_number
-                });
-            }
-        }
-    });
-    console.log(result_list);
-    return result_list;
-}
 
 //Return the result of _load, since its async
-export const getWhitelist = function() {
+export const getWhitelist = function(searchText : string) : IListItem[] {
     const [data, setData] = useState(Array<IListItem>);
+
     useEffect(() => {
       const fetchData = async () => {
-        const data = await _load();
+        const data = await _load(searchText);
         setData(data);
       }
       fetchData();
@@ -65,26 +47,32 @@ export const getWhitelist = function() {
 }
 
 
-//Insert a phone number (full or partial) into the whitelist
-export const insert = async function(phone_number : string) {
+// Remove a phone number (full or partial) from the list
+export const remove = async function(phone_number : string) : Promise<void> {
+    // Create/ connect to databse
+    const db = await getDatabase();
+
+    // Initial Attempt:
+    const result = await db.whitelist.findOne(phone_number).exec();
+    if(!result) return;
+    await result.remove();
+}
+
+
+//Insert a phone number (full or partial) into the list
+export const insert = async function(phone_number : string) : Promise<void> {
     //Create/connect to the database
     const db = await getDatabase();
 
     //Insert a document into the collection
-    db.whitelist.atomicUpsert({
+    await db.whitelist.atomicUpsert({
         phone_number: phone_number
     });
 }
 
-export const search = function(phone_number : string) {
-    const [data, setData] = useState(Array<IListItem>);
-    useEffect(() => {
-      const fetchData = async () => {
-        const data = await _search(phone_number);
-        setData(data);
-      }
-      fetchData();
-    }, []);
 
-    return data;
+// Edit an existing phone number in the list
+export const edit = async function(old_value : string, new_value : string) : Promise<void> {
+    await remove(old_value);
+    await insert(new_value);
 }

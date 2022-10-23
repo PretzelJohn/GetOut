@@ -17,8 +17,6 @@ export default (theme: ExtendedTheme) => {
       padding: 16,
       marginTop: 16,
       borderRadius: 10,
-      // borderTopLeftRadius: 10,
-      // borderTopRightRadius: 10,
       width: ScreenWidth * 0.9,
       borderColor: colors.secondary,
       backgroundColor: colors.secondary,

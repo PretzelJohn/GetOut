@@ -21,26 +21,3 @@ export default {
       thinItalic: "JockeyOne-Regular",
     },
   };
-
-  // export default {
-  //   montserrat: {
-  //     black: "jockeyone",
-  //     blackItalic: "jockeyone",
-  //     bold: "jockeyone",
-  //     boldItalic: "jockeyone",
-  //     extraBold: "jockeyone",
-  //     extraBoldItalic: "jockeyone",
-  //     extraLight: "jockeyone",
-  //     extraLightItalic: "jockeyone",
-  //     italic: "jockeyone",
-  //     light: "jockeyone",
-  //     lightItalic: "jockeyone",
-  //     medium: "jockeyone",
-  //     mediumItalic: "jockeyone",
-  //     regular: "jockeyone",
-  //     semiBold: "jockeyone",
-  //     semiBoldItalic: "jockeyone",
-  //     thin: "jockeyone",
-  //     thinItalic: "jockeyone",
-  //   },
-  // };

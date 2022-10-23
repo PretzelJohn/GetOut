@@ -3,7 +3,6 @@ import { ExtendedTheme } from "@react-navigation/native";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 
 interface Style {
-  container: ViewStyle;
   titleTextStyle: TextStyle;
   buttonStyle: ViewStyle;
   buttonTextStyle: TextStyle;
@@ -11,16 +10,15 @@ interface Style {
   contentContainer: ViewStyle;
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
+  modalView: ViewStyle;
+  cancelButton: ViewStyle;
+  addButton: ViewStyle;
+  plusIcon: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create<Style>({
-    container: {
-      flex: 1,
-      alignItems: "center",
-      backgroundColor: colors.background,
-    },
     titleTextStyle: {
       fontSize: 32,
     },
@@ -56,11 +54,47 @@ export default (theme: ExtendedTheme) => {
     },
     listContainer: {
       marginTop: '1.5%',
+      borderTopWidth: 1,
+      borderTopColor: colors.primary,
     },
     profilePicImageStyle: {
       height: 50,
       width: 50,
       borderRadius: 30,
+    },
+    modalView:{
+      justifyContent: "center", 
+      alignItems: "center", 
+      backgroundColor: colors.dynamicBackground, 
+      paddingTop: 25,
+      paddingBottom: 85, 
+      borderColor: colors.black,
+      borderWidth: 1.5
+    },
+    cancelButton: {
+      width: 70, 
+      height: 40, 
+      justifyContent: "center", 
+      alignItems: "center",
+      borderRadius: 10,
+      marginTop: 10,
+      marginRight: 10,
+      backgroundColor: colors.transparent 
+    },
+    addButton: {
+      width: 70, 
+      height: 40, 
+      justifyContent: "center", 
+      alignItems: "center",
+      borderRadius: 10,
+      marginTop: 10,
+      backgroundColor: colors.transparent 
+    },
+    plusIcon: {
+      color: colors.transparent,
+      position: 'absolute', 
+      left: '87%',
+      top: 2
     },
   });
 };
