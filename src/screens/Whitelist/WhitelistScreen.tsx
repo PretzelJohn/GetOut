@@ -17,6 +17,7 @@ import Styles from "../../shared/theme/styles";
 
 import { getWhitelist, insert, edit, remove, _load } from "../../api/WhitelistInterface";
 import { IListItem } from "../../shared/components/list-item/IListItem";
+import { ScreenHeight } from "@freakycoder/react-native-helpers";
 
 
 interface WhitelistScreenProps {}
@@ -80,6 +81,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
     <View style={styles.listContainer}>
       <FlatList
         data={getWhitelist(searchText)}
+        style={{maxHeight: ScreenHeight-329}}
         renderItem={({ item }) => (
           <ListItem data={item} onEdit={submitEdit} onDelete={submitRemove} />
         )}
@@ -91,7 +93,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
     const [number, onChangeNumber] = React.useState('');
     return(
     <>
-      <AntDesign style={styles.plusIcon} name="pluscircle"size={40} onPress={toggleModal}/>
+      <AntDesign style={styles.plusIcon} name="pluscircle"size={42} onPress={toggleModal}/>
       <Modal isVisible={isModalVisible} animationIn={'fadeIn'} animationOut={'fadeIn'}>
         <View style={styles.modalView}>
           <Text h1 color={colors.text}>Add phone number</Text>
@@ -127,7 +129,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
             onChangeText={submitSearch}
             onClearPress={() => submitSearch('')}
             keyboardType='phone-pad'
-            style={{borderWidth: 2, borderColor: colors.primary, borderRadius: 5,alignSelf: "flex-start", width: "85%"}}
+            style={{borderWidth: 2, borderColor: colors.primary, borderRadius: 5,alignSelf: "flex-start", width: "85%", height: 48}}
             darkMode={isDarkMode}
           />
           <AddButton/>

@@ -50,7 +50,7 @@ const Navigation = () => {
                 iconName = focused ? "cog" : "cog-outline";
             break;
         }
-        return <Icon name={iconName} type="Ionicons" size={40} color={color} />;
+        return <Icon name={iconName} type="Ionicons" size={43} color={color} />;
     };
     
     const RenderTabNavigation = () => {
@@ -64,11 +64,12 @@ const Navigation = () => {
                 tabBarHideOnKeyboard: true,
                 tabBarStyle: {
                     backgroundColor: isDarkMode ? palette.primary : palette.primary,
-                    height: 80
+                    height: 100
                 },
                 tabBarLabelStyle: {
-                    fontSize: 17,
-                    fontFamily: "JockeyOne-Regular"
+                    fontSize: 18,
+                    fontFamily: "JockeyOne-Regular",
+                    bottom: 15
                   },
                 })}
                 >

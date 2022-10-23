@@ -1,13 +1,12 @@
 import React, { useMemo, useState } from "react";
 import { View, StyleProp, ViewStyle } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import Icon from "react-native-dynamic-vector-icons";
-import RNBounceable from "@freakycoder/react-native-bounceable";
 
 /* Local Imports */
 import createStyles from "./ToggleItem.style";
 import Text from "../../../../shared/components/text-wrapper/TextWrapper";
 import { Switch } from 'react-native-switch';
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -49,8 +48,7 @@ const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, 
       <View style={styles.valueContainer}>
         <View style={{}}>
           <Switch 
-            value={isEnabled} 
-            onValueChange={toggle}
+            value={isEnabled}
             activeText={''}
             inActiveText={''}
             circleSize={20}
@@ -70,10 +68,12 @@ const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, 
   );
 
   return (
-    <RNBounceable style={[styles.container, style]} onPress={toggle}>
-      <Info />
-      <Action />
-    </RNBounceable>
+    <TouchableHighlight style={[styles.container, style]} onPress={toggle} underlayColor={colors.transparent}>
+      <View>
+        <Info />
+        <Action />
+      </View>
+    </TouchableHighlight>
   );
 };
 

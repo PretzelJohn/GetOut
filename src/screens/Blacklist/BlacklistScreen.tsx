@@ -16,6 +16,7 @@ import Text from "../../shared/components/text-wrapper/TextWrapper";
 import Styles from "../../shared/theme/styles";
 
 import {getBlacklist, insert, edit, remove} from "../../api/BlacklistInterface";
+import { ScreenHeight } from "@freakycoder/react-native-helpers";
 
 
 interface BlacklistScreenProps {}
@@ -80,6 +81,7 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
     <View style={styles.listContainer}>
       <FlatList
         data={getBlacklist(searchText)}
+        style={{maxHeight: ScreenHeight-329}}
         renderItem={({ item }) => (
           <ListItem data={item} onEdit={submitEdit} onDelete={submitRemove} />
         )}
@@ -90,23 +92,24 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
   const AddButton = () => {
     const [number, onChangeNumber] = React.useState('');
     return(
-    <>
-      <AntDesign style={styles.plusIcon} name="pluscircle"size={40} onPress={toggleModal}/>
-      <Modal isVisible={isModalVisible} animationIn={'fadeIn'} animationOut={'fadeIn'}>
-        <View style={styles.modalView}>
-          <Text h1 color={colors.text}>Add Phone Number</Text>
-          <TextInput style={sharedStyles.textBox} value={number} placeholder="Enter Phone Number" keyboardType="numeric" onChangeText={onChangeNumber} />
-          <View style={{flex: 1, flexDirection: "row"}}>
-            <Pressable style={styles.cancelButton} onPress={toggleModal}>
-              <Text color={colors.text}>Cancel</Text>
-            </Pressable>
-            <Pressable style={styles.addButton} onPress={() => submitAdd(number)}>
-              <Text color={colors.text}>Add</Text>
-            </Pressable>
+      <>
+        <AntDesign style={styles.plusIcon} name="pluscircle"size={42} onPress={toggleModal}/>
+        <Modal isVisible={isModalVisible} animationIn={'fadeIn'} animationOut={'fadeIn'}>
+          <View style={styles.modalView}>
+            <Text h1 color={colors.text}>Add phone number</Text>
+            <Text h4 color={colors.text}>Enter the phone number you wish to add to the blacklist:</Text>
+            <TextInput style={sharedStyles.textBox} value={number} placeholder="(###) ###-####" keyboardType="phone-pad" onChangeText={onChangeNumber} />
+            <View style={{flex: 1, flexDirection: "row"}}>
+              <Pressable style={styles.cancelButton} onPress={toggleModal}>
+                <Text color={colors.text}>Cancel</Text>
+              </Pressable>
+              <Pressable style={styles.addButton} onPress={() => submitAdd(number)}>
+                <Text color={colors.text}>Add</Text>
+              </Pressable>
+            </View>
           </View>
-        </View>
-      </Modal>
-    </>
+        </Modal>
+      </>
     )
   }
 
@@ -126,7 +129,7 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
             onChangeText={submitSearch}
             onClearPress={() => submitSearch('')}
             keyboardType='phone-pad'
-            style={{borderWidth: 2, borderColor: colors.primary, borderRadius: 5,alignSelf: "flex-start", width: "85%"}}
+            style={{borderWidth: 2, borderColor: colors.primary, borderRadius: 5,alignSelf: "flex-start", width: "85%", height: 48}}
             darkMode={isDarkMode}
           />
           <AddButton/>

@@ -27,7 +27,7 @@ export default (theme: ExtendedTheme) => {
     },
     locationTextStyle: {
       margin: 1,
-      fontSize: 14,
+      fontSize: 13,
       marginTop: -4
     },
     contentContainer: {
@@ -54,7 +54,7 @@ export default (theme: ExtendedTheme) => {
     },
     valueTextStyle: {
       marginLeft: 8,
-      fontSize: 12,
+      fontSize: 13,
     },
     buttons: {
       width: 60, 

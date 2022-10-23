@@ -1,7 +1,6 @@
-import { ViewStyle, StyleSheet, TextStyle, ImageStyle } from "react-native";
+import { ViewStyle, StyleSheet } from "react-native";
 import { ExtendedTheme } from "@react-navigation/native";
-import fonts from "@fonts";
-import { ScreenWidth } from "@freakycoder/react-native-helpers";
+
 
 interface Style {
     container: ViewStyle;
@@ -38,7 +37,7 @@ export default (theme: ExtendedTheme) => {
             transform: [{ scaleX: 1.3 }]
         },
         header: {
-            fontSize: 40
+            fontSize: 45
         },
         textBox: {
             borderColor: colors.transparent,

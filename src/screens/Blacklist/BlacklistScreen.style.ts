@@ -93,7 +93,8 @@ export default (theme: ExtendedTheme) => {
     plusIcon: {
       color: colors.transparent,
       position: 'absolute', 
-      left: '87%'
+      left: '87%',
+      top: 2
     },
   });
 };
