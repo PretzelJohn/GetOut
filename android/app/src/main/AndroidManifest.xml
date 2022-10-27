@@ -39,12 +39,15 @@
 
     <receiver
         android:exported="false"
-        android:name=".call.CallBootReceiver">
+        android:name="com.getout.call.CallBootReceiver"
+        android:enabled="true"
+        android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED"/>
       </intent-filter>
     </receiver>
 
+    <service android:name="com.getout.call.CallService" />
     <service android:name="com.getout.call.CallHeadlessService" />
 
   </application>

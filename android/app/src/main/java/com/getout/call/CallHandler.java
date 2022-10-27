@@ -53,7 +53,7 @@ public class CallHandler extends CallScreeningService {
         bundle.putString("location", location);
         Intent service = new Intent(getApplicationContext(), CallHeadlessService.class);
         service.putExtras(bundle);
-        startForegroundService(service);
+        startService(service);
         Log.d(TAG, "Sent to JS!");
     }
 

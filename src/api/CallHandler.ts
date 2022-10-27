@@ -54,7 +54,7 @@ const _sendNotif = async(title : string, body : string) => {
 }
 
 //Blocks or allows a call
-export const handleCall = async(data : any) => {
+export const HandleCall = async(data : any) => {
     if(data.phoneNumber == null) return;
     console.log("CallHandler.js: Received incoming call "+data.phoneNumber+", "+data.timestamp+", "+data.location);
 
@@ -71,5 +71,4 @@ export const handleCall = async(data : any) => {
     //Send notification if blocked and useNotifs = true
     if(displayName == null) displayName = data.phoneNumber;
     if(block && useNotifs) _sendNotif("GetOut", "Blocked call from "+displayName+". Tap for details.");
-    
 }
