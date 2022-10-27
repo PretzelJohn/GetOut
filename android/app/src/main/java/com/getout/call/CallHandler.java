@@ -1,4 +1,4 @@
-package com.getout;
+package com.getout.call;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -12,6 +12,9 @@ import android.telecom.CallScreeningService;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
+
+import com.getout.MainActivity;
+import com.getout.R;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class CallHandler extends CallScreeningService {
@@ -40,7 +43,7 @@ public class CallHandler extends CallScreeningService {
 
 
         //Send a notification if blocked
-        //TODO: Uncomment the below "if" statement
+        //TODO: Uncomment the below "if" statement, or move to JS
         //if(blocked) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             NotificationChannel channel = new NotificationChannel("102", "com.getout.notifs.blocked", NotificationManager.IMPORTANCE_DEFAULT);
