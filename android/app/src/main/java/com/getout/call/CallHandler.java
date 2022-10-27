@@ -1,10 +1,8 @@
 package com.getout.call;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.telecom.Call;
 import android.telecom.CallScreeningService;
 import android.util.Log;
@@ -24,31 +22,13 @@ public class CallHandler extends CallScreeningService {
         Log.d(TAG, "CallHandler()");
     }
 
-    //Returns the contact that called, if it exists
-    private CallContact getContact() {
-        String phoneNumber = details.getHandle().toString().replace("tel:", "");
-        Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, phoneNumber);
-        String[] projection = {ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME };
-        try (Cursor cursor = getApplicationContext().getContentResolver().query(lookupUri, projection, null, null, null)) {
-            if(cursor.moveToFirst()) return new CallContact(cursor.getString(0), cursor.getString(1), cursor.getString(2));
-        }
-        return null;
-    }
-
     //Responds to an incoming call - must be called within 5 seconds of onScreenCall()
-    public void respond(boolean block, boolean useContacts) {
+    public void respond(boolean block) {
         if(details == null) {
             Log.d(TAG, "Error: details is null");
             return;
         }
 
-        CallContact contact = getContact();
-        if(contact == null) {
-            Log.d(TAG, "contact is null");
-        } else {
-            Log.d(TAG, "Found contact: {id: "+contact.getId()+", number: "+contact.getPhoneNumber()+", display: "+contact.getDisplayName());
-        }
-        if(useContacts && contact == null) block = true;
         respondToCall(details, block ? BLOCK : ALLOW);
     }
 

@@ -1,7 +1,5 @@
 package com.getout.call;
 
-import android.os.Build;
-
 import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -15,8 +13,8 @@ public class CallModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void sendResponse(boolean block, boolean useContacts) {
-        CallHandler.getInstance().respond(block, useContacts);
+    public void sendResponse(boolean block) {
+        CallHandler.getInstance().respond(block);
     }
 
     @NonNull

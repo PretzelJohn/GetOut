@@ -1,7 +1,6 @@
 package com.getout.call;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
