@@ -25,29 +25,27 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  const { number, location, date, time  } = data;
+  const { number, location, timestamp, blocked } = data;
+  const phoneNumber = number.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2 $3");
+  const datetime = new Date(timestamp);
+  const date = datetime.toLocaleDateString();
+  const time = datetime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const date_or_time = (date === new Date(Date.now()).toLocaleDateString() ? time : date);
 
   const Header = () => (
     <>
-      <Text color={colors.text} style={{fontSize: 25}}>
-        {number} 
+      <Text color={blocked ? colors.red : colors.text} style={{fontSize: 25}}>
+        {phoneNumber} 
       </Text>
       <Text color={colors.text} style={styles.locationTextStyle} >
-        {date} ● {location}                       
+        {blocked ? "Blocked call" : "Allowed Call"} ● {location}                       
       </Text>
     </>
   );
 
-  // const Date = () => (
-  //   <View style={styles.dateContainer}>
-  //     <Icon name="" type="FontAwesome" color={colors.text} />
-  //     <Text style={styles.valueTextStyle}>{date}</Text>
-  //   </View>
-  // );
- 
   const Time = () => (
     <View style={styles.timeContainer}>
-      <Text color={colors.text} style={styles.valueTextStyle}>{time}</Text>
+      <Text color={colors.text} style={styles.valueTextStyle}>{date_or_time}</Text>
     </View>
   );
 
@@ -62,7 +60,7 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
 
   return (    
   <View style={styles.container}>
-    <Icon style={styles.answeredIcon} name="phone-outgoing" color={colors.Text} size={30}/>
+    <Icon color={blocked ? colors.red : colors.text} style={styles.answeredIcon} name="phone-incoming" size={30}/>
     <Header/>
     <Time />
       <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%", right:"10%"}}>

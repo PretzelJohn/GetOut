@@ -14,8 +14,6 @@ import Text from '../../shared/components/text-wrapper/TextWrapper';
 import ToggleItem from "./components/toggle-item/ToggleItem";
 import SelectItem from "./components/select-item/SelectItem";
 import Styles from "../../shared/theme/styles";
-import { ScrollView } from "react-native-gesture-handler";
-import { ScreenHeight } from "@freakycoder/react-native-helpers";
 
 
 interface SettingsScreenProps {}
@@ -87,14 +85,14 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
       <View style={styles.listContainer}>
         <ToggleItem style={{borderTopLeftRadius: 10, borderTopRightRadius: 10, marginTop: -5}} data={data.contacts} name="Use Contacts" description="Uses your contact list to block calls" onPress={(value : boolean) => {
           if(!value) Permissions.getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, true);
-          Settings.setContacts(!value);
+          Settings.setUseContacts(!value);
         }} />
         <ToggleItem data={data.notifications} name="Notifications" description="Silently notifies you when a call is blocked" onPress={(value : boolean) => {
           if(!value) Permissions.getNotifPermission();
-          Settings.setNotifications(!value);
+          Settings.setUseNotifications(!value);
         }} />
-        <ToggleItem data={data.whitelist} name="Enable Whitelist" description="Uses the whitelist to always allow certain calls" onPress={(value : boolean) => {Settings.setWhitelist(!value)}} />
-        <ToggleItem data={data.blacklist} name="Enable Blacklist" description="Uses the blacklist to always block certain calls" onPress={(value : boolean) => {Settings.setBlacklist(!value)}} />
+        <ToggleItem data={data.whitelist} name="Enable Whitelist" description="Uses the whitelist to always allow certain calls" onPress={(value : boolean) => {Settings.setUseWhitelist(!value)}} />
+        <ToggleItem data={data.blacklist} name="Enable Blacklist" description="Uses the blacklist to always block certain calls" onPress={(value : boolean) => {Settings.setUseBlacklist(!value)}} />
         <ToggleItem style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 10}} data={data.block_calls} name="Block Calls" description="Prevents spammers from interrupting you" onPress={(value : boolean) => {Settings.setBlockCalls(!value)}} />
       </View>
     );
