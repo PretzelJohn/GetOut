@@ -1,4 +1,4 @@
-package com.getout;
+package com.getout.role;
 
 import static android.content.Context.ROLE_SERVICE;
 
@@ -14,11 +14,13 @@ import com.facebook.react.bridge.ReactMethod;
 
 public class RoleModule extends ReactContextBaseJavaModule {
 
+    public static final int REQUEST_CODE = 101;
     private final ReactApplicationContext context;
 
     public RoleModule(ReactApplicationContext context) {
         super(context);
         this.context = context;
+        context.addActivityEventListener(new RoleListener());
     }
 
     @ReactMethod
@@ -27,7 +29,7 @@ public class RoleModule extends ReactContextBaseJavaModule {
         RoleManager roleManager = (RoleManager) context.getSystemService(ROLE_SERVICE);
         Intent intent = roleManager.createRequestRoleIntent("android.app.role." + role);
         Activity activity = getCurrentActivity();
-        if(activity != null) activity.startActivityForResult(intent, 101);
+        if(activity != null) activity.startActivityForResult(intent, REQUEST_CODE);
     }
 
     @NonNull

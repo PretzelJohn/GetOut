@@ -13,8 +13,7 @@ import androidx.annotation.RequiresApi;
 import com.getout.MainActivity;
 import com.getout.R;
 
-@RequiresApi(api = Build.VERSION_CODES.O)
-public class CallNotificationSticky {
+public class CallNotification {
     private final static String CHANNEL_ID = "101";
     private final static NotificationChannel CHANNEL = new NotificationChannel(CHANNEL_ID, "com.getout.notifs.blocked", NotificationManager.IMPORTANCE_HIGH);
 

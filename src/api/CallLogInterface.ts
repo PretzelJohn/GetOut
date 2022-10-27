@@ -4,7 +4,7 @@ import { getDatabase } from '../database/Database';
 
 
 //Private function that loads the call log
-const _load = async function() {
+const _load = async function(showAll : boolean) {
     //Create/connect to the database
     const db = await getDatabase();
 
@@ -13,12 +13,12 @@ const _load = async function() {
     await db.callLog.find({sort: [{timestamp: 'desc'}]}).exec().then((result: any[]) => {
         if(!result) return;
         for(let i = 0; i < result.length; i++) {
-            const date = new Date(result[i].timestamp);
+            if(!showAll && !result[i].blocked) continue;
             list.push({
                 number: result[i].phone_number,
                 location: result[i].location,
-                date: date.toLocaleDateString(),
-                time: date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                timestamp: result[i].timestamp,
+                blocked: result[i].blocked
             });
         }
     });
@@ -28,11 +28,11 @@ const _load = async function() {
 
 
 //Return the result of _load, since its async
-export const getCallList = function () {
+export const getCallList = function (showAll : boolean) {
     const [data, setData] = useState(Array<ICallLogItem>);
     useEffect(() => {
       const fetchData = async () => {
-        const data = await _load();
+        const data = await _load(showAll);
         setData(data);
       }
       fetchData();
@@ -48,10 +48,10 @@ export const insert = async function(phone_number : string, timestamp=Date.now()
     const db = await getDatabase();
 
     //Insert a document ("row") into the collection ("table")
-    db.callLog.atomicUpsert({
+    await db.callLog.atomicUpsert({
         phone_number: phone_number,
         timestamp: timestamp,
         location: location,
         blocked: blocked
-    }).catch();
+    });
 }

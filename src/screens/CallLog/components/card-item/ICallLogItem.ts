@@ -2,6 +2,6 @@
 export interface ICallLogItem {
     number: string;
     location: string;
-    date: string;
-    time: string;
+    timestamp: number;
+    blocked: boolean;
 }

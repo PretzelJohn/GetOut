@@ -1,71 +1,82 @@
 package com.getout.call;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
+import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.telecom.Call;
 import android.telecom.CallScreeningService;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
-
-import com.getout.MainActivity;
-import com.getout.R;
-
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class CallHandler extends CallScreeningService {
 
-    @Override
-    public void onScreenCall(Call.Details callDetails) {
-        //Check android version
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            Log.d("MainActivity", "Error: Android OS version is less than 10");
+    private static final String TAG = "CallHandler";
+    private static final CallResponse BLOCK = new CallResponse.Builder().setDisallowCall(true).build();
+    private static final CallResponse ALLOW = new CallResponse.Builder().setDisallowCall(false).build();
+
+    private static CallHandler INSTANCE;
+
+    private Call.Details details = null;
+
+    public CallHandler() {
+        INSTANCE = this;
+        Log.d(TAG, "CallHandler()");
+    }
+
+    //Returns the contact that called, if it exists
+    private CallContact getContact() {
+        String phoneNumber = details.getHandle().toString().replace("tel:", "");
+        Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, phoneNumber);
+        String[] projection = {ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME };
+        try (Cursor cursor = getApplicationContext().getContentResolver().query(lookupUri, projection, null, null, null)) {
+            if(cursor.moveToFirst()) return new CallContact(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+        }
+        return null;
+    }
+
+    //Responds to an incoming call - must be called within 5 seconds of onScreenCall()
+    public void respond(boolean block, boolean useContacts) {
+        if(details == null) {
+            Log.d(TAG, "Error: details is null");
             return;
         }
 
+        CallContact contact = getContact();
+        if(contact == null) {
+            Log.d(TAG, "contact is null");
+        } else {
+            Log.d(TAG, "Found contact: {id: "+contact.getId()+", number: "+contact.getPhoneNumber()+", display: "+contact.getDisplayName());
+        }
+        if(useContacts && contact == null) block = true;
+        respondToCall(details, block ? BLOCK : ALLOW);
+    }
+
+    @Override
+    public void onScreenCall(Call.Details callDetails) {
         //Check for incoming calls
         if(callDetails.getCallDirection() != Call.Details.DIRECTION_INCOMING) return;
 
+        Log.d(TAG, "Fetching call details...");
+        details = callDetails;
 
         //Get the phone number (without the "tel:+1" part), timestamp, location, and whether to block
         String phoneNumber = Uri.decode(callDetails.getHandle().toString().replace("tel:%2B1", ""));
         long timestamp = callDetails.getCreationTimeMillis();
         String location = "Unknown"; //TODO: Get from geolocation library???
-        boolean blocked = false; //TODO: Get from JS instead of hardcoding
 
-
-        //TODO: Insert call into database
-        //insert(phoneNumber, timestamp, location, blocked);
-
-
-        //Send a notification if blocked
-        //TODO: Uncomment the below "if" statement, or move to JS
-        //if(blocked) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            NotificationChannel channel = new NotificationChannel("102", "com.getout.notifs.blocked", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-            Notification.Builder notif = new Notification.Builder(getApplicationContext(), "102")
-                    .setSmallIcon(R.drawable.node_modules_reactnativedynamicsearchbar_build_dist_localassets_cleariconwhite)
-                    .setContentTitle("GetOut")
-                    .setContentText("Blocked call from: "+phoneNumber.substring(0, 3)+"-"+phoneNumber.substring(3, 6)+"-"+phoneNumber.substring(6))
-                    .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE));
-            manager.notify(102, notif.build());
-        //}
-
-
-        //Sends a response - must be called within 5 seconds
-        CallResponse response = new CallResponse.Builder()
-                .setDisallowCall(blocked)
-                .setSkipCallLog(false)
-                .setRejectCall(false)
-                .setSilenceCall(false)
-                .setSkipNotification(false)
-                .build();
-        respondToCall(callDetails, response);
+        //Send event to JS
+        Log.d(TAG, "Details fetched! Sending to JS...");
+        Bundle bundle = new Bundle();
+        bundle.putString("phoneNumber", phoneNumber);
+        bundle.putLong("timestamp", timestamp);
+        bundle.putString("location", location);
+        Intent service = new Intent(getApplicationContext(), CallHeadlessService.class);
+        service.putExtras(bundle);
+        startForegroundService(service);
+        Log.d(TAG, "Sent to JS!");
     }
+
+    //Getters
+    public static CallHandler getInstance() { return INSTANCE; }
 }

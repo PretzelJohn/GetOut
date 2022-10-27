@@ -1,8 +1,5 @@
 package com.getout;
 
-import android.content.Intent;
-import android.util.Log;
-
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
@@ -46,19 +43,6 @@ public class MainActivity extends ReactActivity {
             // If you opted-in for the New Architecture, we enable Concurrent Root (i.e. React 18).
             // More on this on https://reactjs.org/blog/2022/03/29/react-v18.html
             return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
-        }
-
-
-        @Override
-        //Listens for the RoleModule#requestRole result
-        public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            if (requestCode != 101) return;
-            if (resultCode == android.app.Activity.RESULT_OK) {
-                Log.d("MainActivity", "GetOut is the default app!");
-            } else {
-                Log.d("MainActivity", "GetOut is not the default app!");
-                getPlainActivity().finish();
-            }
         }
     }
 }

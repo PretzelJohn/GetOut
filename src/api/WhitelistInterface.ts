@@ -4,7 +4,7 @@ import { getDatabase } from "../database/Database";
 
 
 //Private function that loads the whitelist
-export const _load = async function(searchText : string) : Promise<IListItem[]> {
+export const _loadWhitelist = async function(searchText : string) : Promise<IListItem[]> {
     //Create/connect to the database
     const db = await getDatabase();
 
@@ -37,7 +37,7 @@ export const getWhitelist = function(searchText : string) : IListItem[] {
 
     useEffect(() => {
       const fetchData = async () => {
-        const data = await _load(searchText);
+        const data = await _loadWhitelist(searchText);
         setData(data);
       }
       fetchData();

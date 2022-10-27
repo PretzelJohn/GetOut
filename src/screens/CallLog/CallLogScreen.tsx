@@ -9,8 +9,9 @@ import CallLogItem from "./components/card-item/CallLogItem";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
-import { getCallList, insert } from "../../api/CallLogInterface";
+import { getCallList } from "../../api/CallLogInterface";
 import Styles from "../../shared/theme/styles";
+import { ScreenHeight } from "@freakycoder/react-native-helpers";
 
 
 interface CallLogScreenProps {}
@@ -19,35 +20,34 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
     const sharedStyles = useMemo(() => Styles(theme), [theme]);
+    const [ showAll, setShowAll ] = useState(true);
 
     const handleItemPress = () => {
       //NavigationService.push(SCREENS.CALLLOG);
     };
-
-    //Insert mock data - will be removed for production
-    insert('678-923-1102', 1664349720000, 'Mableton, GA', false);
-    insert('678-223-8694', 1663912800000, 'Mableton, GA', true);
-    insert('970-885-8195', 1663887600000, 'Fort Collins, CO', true);
-    insert('470-303-1102', 1663797600000, 'Atlanta, GA', false);
-
+    
     
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
     /* -------------------------------------------------------------------------- */
 
     const Header = () => {
-      const [ isPressed, setIsPressed ] = React.useState(true);
+      
       const allProps = {
         activeOpacity: 1,
         underlayColor: colors.primary,
-        style: [styles.allButton, {backgroundColor: isPressed ? colors.transparent : colors.secondary}],
-        onPress: () => setIsPressed(true)
+        style: [styles.allButton, {backgroundColor: showAll ? colors.transparent : colors.secondary}],
+        onPress: () => {
+          setShowAll(true);
+        }
       };
       const missedProps = {
         activeOpacity: 1,
         underlayColor: colors.primary,
-        style: [styles.missedButton, {backgroundColor: isPressed ? colors.secondary : colors.transparent}],
-        onPress: () => setIsPressed(false)
+        style: [styles.missedButton, {backgroundColor: showAll ? colors.secondary : colors.transparent}],
+        onPress: () => {
+          setShowAll(false);
+        }
       }; 
       return(
       <>
@@ -62,7 +62,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
           </View>
           <View style={{justifyContent: 'flex-start', alignItems: 'center'}}>
             <TouchableHighlight {...missedProps}>
-              <Text color={colors.text} style={styles.allmissedButtons}>Missed</Text>
+              <Text color={colors.text} style={styles.allmissedButtons}>Blocked</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -73,7 +73,8 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const CallLogs = () => (
       <View style={styles.listContainer}>
         <FlatList
-          data={getCallList()}
+          data={getCallList(showAll)}
+          style={{maxHeight: ScreenHeight-275}}
           renderItem={({ item }) => (
             <CallLogItem data={item} onPress={handleItemPress} />
           )}

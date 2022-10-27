@@ -15,7 +15,7 @@ import ListItem from "../../shared/components/list-item/ListItem";
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import Styles from "../../shared/theme/styles";
 
-import { getWhitelist, insert, edit, remove, _load } from "../../api/WhitelistInterface";
+import { getWhitelist, insert, edit, remove } from "../../api/WhitelistInterface";
 import { IListItem } from "../../shared/components/list-item/IListItem";
 import { ScreenHeight } from "@freakycoder/react-native-helpers";
 

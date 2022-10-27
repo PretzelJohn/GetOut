@@ -10,7 +10,7 @@ let block_calls = true;
 let theme = "system";
 
 //Private function that loads the settings interface
-const _load = async function() {
+export const _loadSettings = async function() {
     // Create/connect to the database
     const db = await getDatabase();
 
@@ -46,7 +46,7 @@ const _update = async function() {
     //Create/connect to the database
     const db = await getDatabase();
 
-    db.settings.atomicUpsert({
+    await db.settings.atomicUpsert({
         id: "0",
         contacts: contacts,
         notifications: notifications,
@@ -59,39 +59,39 @@ const _update = async function() {
 
 // ---------- Setters ----------
 //Updates a setting
-export const setContacts = async function(value: boolean) {
+export const setUseContacts = async function(value: boolean) {
     contacts = value;
-    _update();
+    await _update();
 }
 
 //Updates a setting
-export const setNotifications = async function(value: boolean) {
+export const setUseNotifications = async function(value: boolean) {
     notifications = value;
-    _update();
+    await _update();
 }
 
 //Updates a setting
-export const setWhitelist = async function(value: boolean) {
+export const setUseWhitelist = async function(value: boolean) {
     whitelist = value;
-    _update();
+    await _update();
 }
 
 //Updates a setting
-export const setBlacklist = async function(value: boolean) {
+export const setUseBlacklist = async function(value: boolean) {
     blacklist = value;
-    _update();
+    await _update();
 }
 
 //Updates a setting
 export const setBlockCalls = async function(value: boolean) {
     block_calls = value;
-    _update();
+    await _update();
 }
 
 //Updates a setting
 export const setTheme = async function(value: string) {
     theme = value;
-    _update();
+    await _update();
 }
 
 
@@ -101,7 +101,7 @@ export const getSettings = function() {
     const [data, setData] = useState(Object);
     useEffect(() => {
       const fetchData = async () => {
-        const data = await _load();
+        const data = await _loadSettings();
         setData(data);
       }
       fetchData();
@@ -110,9 +110,9 @@ export const getSettings = function() {
     return data;
 }
 
-export const getContacts = function() { return contacts; }
-export const getNotifications = function() { return notifications; }
-export const getWhitelist = function() { return whitelist; }
-export const getBlacklist = function() { return blacklist; }
+export const getUseContacts = function() { return contacts; }
+export const getUseNotifications = function() { return notifications; }
+export const getUseWhitelist = function() { return whitelist; }
+export const getUseBlacklist = function() { return blacklist; }
 export const getBlockCalls = function() { return block_calls; }
 export const getTheme = function() { return theme; }
