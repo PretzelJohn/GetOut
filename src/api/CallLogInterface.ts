@@ -9,21 +9,9 @@ const _load = async function(showAll : boolean) {
     const db = await getDatabase();
 
     //Query the documents in the collection
-    let list : Array<ICallLogItem> = [];
-    await db.callLog.find({sort: [{timestamp: 'desc'}]}).exec().then((result: any[]) => {
-        if(!result) return;
-        for(let i = 0; i < result.length; i++) {
-            if(!showAll && !result[i].blocked) continue;
-            list.push({
-                number: result[i].phone_number,
-                location: result[i].location,
-                timestamp: result[i].timestamp,
-                blocked: result[i].blocked
-            });
-        }
-    });
-
-    return list;
+    const query = {selector: {}, sort: [{timestamp: 'desc'}], limit: 100};
+    if(!showAll) query["selector"] = ({blocked: true});
+    return await db.callLog.find(query).exec();
 }
 
 

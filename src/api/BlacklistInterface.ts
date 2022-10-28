@@ -9,25 +9,12 @@ export const _loadBlacklist = async function(searchText : string) : Promise<ILis
     const db = await getDatabase();
 
     //Initialize empty list and search regex
-    let list : Array<IListItem> = [];
-    searchText = searchText.replace(/[^0-9]/gim,"");
-    let regex = new RegExp(searchText.trim());
+    let search = searchText.replace(/[^0-9]/gim,"");
+    let regex = new RegExp(search.trim());
 
     //Find all matching documents in the database
-    await db.blacklist.find({
-        selector: {
-            phone_number: {$regex: regex}
-        }
-    }).exec().then((result: any[]) => {
-        if(!result) return;
-        for(let i = 0; i < result.length; i++) {
-            list.push({
-                phone_number: result[i].phone_number
-            });
-        }
-    });
-
-    return list;
+    const query = { selector: { phone_number: {$regex: regex} }, limit: 100 };
+    return await db.blacklist.find(query).exec();
 }
 
 
