@@ -11,7 +11,9 @@ import com.facebook.react.bridge.ReactMethod;
 
 public class CallModule extends ReactContextBaseJavaModule {
 
+    private final static String TAG = "CallModule";
     private final ReactApplicationContext context;
+    private Intent service = null;
 
     public CallModule(ReactApplicationContext context) {
         super(context);
@@ -25,13 +27,23 @@ public class CallModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startService() {
-        this.context.startForegroundService(new Intent(this.context, CallService.class));
-        Log.d("CallModule", "Service started");
+        if(this.service != null) return;
+        this.service = new Intent(this.context, CallService.class);
+        this.context.startForegroundService(service);
+        Log.d(TAG, "Service started");
+    }
+
+    @ReactMethod
+    public void stopService() {
+        if(this.service == null) return;
+        this.context.stopService(this.service);
+        this.service = null;
+        Log.d(TAG, "Service stopped");
     }
 
     @NonNull
     @Override
     public String getName() {
-        return "CallModule";
+        return TAG;
     }
 }

@@ -51,7 +51,7 @@ public class CallHandler extends CallScreeningService {
         bundle.putString("phoneNumber", phoneNumber);
         bundle.putLong("timestamp", timestamp);
         bundle.putString("location", location);
-        Intent service = new Intent(getApplicationContext(), CallHeadlessService.class);
+        Intent service = new Intent(getApplicationContext(), JSHandleCall.class);
         service.putExtras(bundle);
         startService(service);
         Log.d(TAG, "Sent to JS!");

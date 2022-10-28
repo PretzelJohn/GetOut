@@ -8,6 +8,7 @@ import { PERMISSIONS } from "react-native-permissions";
 import createStyles from './SettingsScreen.style';
 import * as Settings from '../../api/SettingsInterface'
 import * as Permissions from "../../api/PermissionInterface";
+import { StartService, StopService } from "../../api/CallHandler";
 
 /* Shared Imports */
 import Text from '../../shared/components/text-wrapper/TextWrapper';
@@ -93,14 +94,23 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
         }} />
         <ToggleItem data={data.whitelist} name="Enable Whitelist" description="Uses the whitelist to always allow certain calls" onPress={(value : boolean) => {Settings.setUseWhitelist(!value)}} />
         <ToggleItem data={data.blacklist} name="Enable Blacklist" description="Uses the blacklist to always block certain calls" onPress={(value : boolean) => {Settings.setUseBlacklist(!value)}} />
-        <ToggleItem style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 10}} data={data.block_calls} name="Block Calls" description="Prevents spammers from interrupting you" onPress={(value : boolean) => {Settings.setBlockCalls(!value)}} />
+        <ToggleItem style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 10}} data={data.block_calls} name="Block Calls" description="Prevents spammers from interrupting you" onPress={async(value : boolean) => {
+          await Settings.setBlockCalls(!value);
+          if(value) {
+            StopService();
+          } else {
+            StartService(null);
+          }
+        }} />
       </View>
     );
   };
 
   const SelectSettings = () =>(
     <View>
-      <SelectItem data={data.theme} name="Select Theme" description={data.theme} onPress={() => {}} />
+      <SelectItem data={data.theme} name="Select Theme" description={data.theme} onPress={(value: string) => {
+        Settings.setTheme(value);
+      }} />
     </View>
   );
 

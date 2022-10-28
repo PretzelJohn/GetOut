@@ -42,13 +42,14 @@
         android:name="com.getout.call.CallBootReceiver"
         android:enabled="true"
         android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
-      <intent-filter>
+      <intent-filter android:priority="999">
         <action android:name="android.intent.action.BOOT_COMPLETED"/>
       </intent-filter>
     </receiver>
 
     <service android:name="com.getout.call.CallService" />
-    <service android:name="com.getout.call.CallHeadlessService" />
+    <service android:name="com.getout.call.JSHandleCall" />
+    <service android:name="com.getout.call.JSStartService" />
 
   </application>
 </manifest>

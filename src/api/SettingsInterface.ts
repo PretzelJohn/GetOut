@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { getDatabase } from '../database/Database';
 
 let contacts = false;
-let notifications = false;
+let notifications = true;
 let whitelist = true;
 let blacklist = true;
 let block_calls = true;
@@ -17,14 +17,12 @@ export const _loadSettings = async function() {
     // Query the documents in the collection
     await db.settings.find().exec().then((result : any[]) => {
         if(!result) return;
-        for(let i = 0; i < result.length; i++) {
-            contacts = result[0].contacts;
-            notifications = result[0].notifications;
-            whitelist = result[0].whitelist;
-            blacklist = result[0].blacklist;
-            block_calls = result[0].block_calls;
-            theme = result[0].theme;
-        }
+        contacts = result[0].contacts;
+        notifications = result[0].notifications;
+        whitelist = result[0].whitelist;
+        blacklist = result[0].blacklist;
+        block_calls = result[0].block_calls;
+        theme = result[0].theme;
     });
 
     let res : ISettingItem = {

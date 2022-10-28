@@ -20,11 +20,11 @@ public class CallService extends Service {
         bundle.putString("phoneNumber", null);
         bundle.putLong("timestamp", -1);
         bundle.putString("location", null);
-        Intent headlessService = new Intent(context, CallHeadlessService.class);
+        Intent headlessService = new Intent(context, JSHandleCall.class);
         headlessService.putExtras(bundle);
         context.startService(headlessService);
         HeadlessJsTaskService.acquireWakeLockNow(context);
-        startForeground(1, CallNotification.build(getApplicationContext(), "GetOut", "Call blocking is enabled!"));
+        startForeground(1, CallServiceNotification.build(getApplicationContext(), "GetOut", "Call blocking is enabled!"));
         return START_STICKY;
     }
 

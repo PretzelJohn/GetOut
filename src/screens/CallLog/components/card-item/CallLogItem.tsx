@@ -25,8 +25,8 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  const { number, location, timestamp, blocked } = data;
-  const phoneNumber = number.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2 $3");
+  const { phone_number, location, timestamp, blocked } = data;
+  const phoneNumber = phone_number.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2 $3");
   const datetime = new Date(timestamp);
   const date = datetime.toLocaleDateString();
   const time = datetime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
