@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -40,7 +40,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
     const Content = () => (
       <View style={{bottom: "26%"}}>
         <Welcome />
-        <View style={{bottom: "8%"}}>
+        <View>
           <View style={{borderBottomColor: colors.primary, borderBottomWidth: 1}}>
             <Text color={colors.text} style={{fontSize: 28, textAlign: "center", marginBottom: 20}}>
               Ready for your troubles and spammers to go away?
@@ -52,6 +52,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
         </View>
       </View>
     );
+
+
   
     return (
       <SafeAreaView style={sharedStyles.container}>
@@ -64,9 +66,12 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
         <View>
           <Header />
           <Content />
-          <View style={{position: "absolute", justifyContent: "center", left: "5%", right: "5%"}}>
+          <View style={{position: "absolute"}}>
+            <Image style={{resizeMode: "stretch", width: 350, height: 350, top: "20%", right: "10%"}} source={theme === "dark" ? require("../../../assets/img/getout_dark.png") : require("../../../assets/img/getout_light.png")} />
+          </View>
+          <View style={{position: "absolute", justifyContent: "center", top: "80%",left: "5%", right: "5%"}}>
             <TouchableHighlight style={{backgroundColor: colors.primary, borderRadius: 15, height: 80, borderColor: colors.primary}}>
-              <Text color={colors.text} style={{fontSize: 30, alignSelf: "center",textAlign: "center"}}>Get Started</Text>
+              <Text color={colors.text} style={{top: "22%",fontSize: 30, alignSelf: "center",textAlign: "center"}}>Get Started</Text>
             </TouchableHighlight>
           </View>
         </View>

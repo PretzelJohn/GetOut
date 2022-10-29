@@ -9,6 +9,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import createStyles from "./CallLogItem.style";
 import { ICallLogItem } from "./ICallLogItem";
 import Text from "../../../../shared/components/text-wrapper/TextWrapper";
+import * as Whitelist from "../../../../api/WhitelistInterface";
+import * as Blacklist from "../../../../api/BlacklistInterface";
+import blacklistCollection from "database/models/BlacklistModel";
 // import { TouchableOpacity } from "react-native-gesture-handler";
 // import { ScreenStackHeaderLeftView } from "react-native-screens";
 
@@ -55,7 +58,16 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
     activeOpacity: 1,
     underlayColor: colors.primary,
     style: [styles.buttons, {backgroundColor: isPress ? colors.transparent : colors.secondary}],
-    onPress: () => setIsPress(current => !current)
+    onPress: () => {
+      setIsPress(current => !current);
+      if (isPress) {
+        Whitelist.remove(phoneNumber);
+        Blacklist.insert(phoneNumber);
+      } else {
+        Blacklist.remove(phoneNumber);
+        Whitelist.insert(phoneNumber);
+      }
+    }
   };
 
   return (    
