@@ -65,11 +65,11 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
     <Icon style={styles.answeredIcon} name="phone-outgoing" color={colors.Text} size={30}/>
     <Header/>
     <Time />
-      <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%", right:"10%"}}>
-        <TouchableHighlight {...TouchProps}>
-          <Text color={colors.text} style={styles.blocked}>{isPress ? "Block" : "Unblock"}</Text>
-        </TouchableHighlight>
-      </View>
+    <View style={{ alignSelf: "flex-end", position: "absolute", top: "21%", right:"10%"}}>
+      <TouchableHighlight {...TouchProps}>
+        <Text color={colors.text} style={styles.blocked}>{isPress ? "Block" : "Unblock"}</Text>
+      </TouchableHighlight>
+    </View>
   </View>
   );
 };

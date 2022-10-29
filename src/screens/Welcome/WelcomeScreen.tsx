@@ -9,6 +9,8 @@ import createStyles from "./WelcomeScreen.style";
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import fonts from "../../shared/theme/fonts";
+import Styles from "../../shared/theme/styles";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 interface WelcomeScreenProps {}
 
@@ -16,40 +18,58 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
+    const sharedStyles = useMemo(() => Styles(theme), [theme]);
   
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
     /* -------------------------------------------------------------------------- */
 
     const Header = () => (
-      <View style={styles.header}>
+      <View style={sharedStyles.header}>
       </View>
     );
   
     const Welcome = () => (
-      <>
-        <Text h1 bold color={colors.text}>
-          Mr. Anderson,
+      <View style={styles.contentContainer}>
+        <Text color={colors.text} style={{fontSize: 25}}>
+          Hello, welcome to:
         </Text>
-        <Text
-          fontFamily={fonts.montserrat.lightItalic}
-          color={colors.placeholder}
-        >
-          Welcome back. We missed you.
-        </Text>
-      </>
+      </View>
     );
   
     const Content = () => (
-      <View style={styles.contentContainer}>
+      <View style={{bottom: "26%"}}>
         <Welcome />
+        <View style={{bottom: "8%"}}>
+          <View style={{borderBottomColor: colors.primary, borderBottomWidth: 1}}>
+            <Text color={colors.text} style={{fontSize: 28, textAlign: "center", marginBottom: 20}}>
+              Ready for your troubles and spammers to go away?
+            </Text>
+          </View>
+          <Text color={colors.text} style={{marginTop: 20, fontSize: 28, textAlign: "center"}}>
+            Let me get you started!
+          </Text>
+        </View>
       </View>
     );
   
     return (
-      <SafeAreaView style={styles.container}>
-        <Header />
-        <Content />
+      <SafeAreaView style={sharedStyles.container}>
+        <View style={sharedStyles.circle1}>
+          <View style={sharedStyles.circle}/>
+        </View>
+        <View style={sharedStyles.circle2}> 
+          <View style={sharedStyles.circle}/>
+        </View>
+        <View>
+          <Header />
+          <Content />
+          <View style={{position: "absolute", justifyContent: "center", left: "5%", right: "5%"}}>
+            <TouchableHighlight style={{backgroundColor: colors.primary, borderRadius: 15, height: 80, borderColor: colors.primary}}>
+              <Text color={colors.text} style={{fontSize: 30, alignSelf: "center",textAlign: "center"}}>Get Started</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
       </SafeAreaView>
     );
 };
