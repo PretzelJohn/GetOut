@@ -8,6 +8,8 @@ interface Style {
   keyContainer: ViewStyle;
   valueContainer: ViewStyle;
   value: ImageStyle;
+  modalView: ViewStyle;
+  select: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -17,8 +19,6 @@ export default (theme: ExtendedTheme) => {
       padding: 16,
       marginTop: 16,
       borderRadius: 10,
-      // borderTopLeftRadius: 10,
-      // borderTopRightRadius: 10,
       width: ScreenWidth * 0.9,
       borderColor: colors.secondary,
       backgroundColor: colors.secondary,
@@ -40,6 +40,25 @@ export default (theme: ExtendedTheme) => {
       width: 50,
       height: 50,
       alignSelf: 'flex-end',
+    },
+    modalView:{
+      justifyContent: "center", 
+      alignItems: "center", 
+      backgroundColor: colors.dynamicBackground, 
+      paddingTop: 25,
+      paddingBottom: 85, 
+      borderColor: colors.black,
+      borderWidth: 1.5
+    },
+    select: {
+      width: 200,
+      height: 40, 
+      justifyContent: "center", 
+      alignItems: "center",
+      borderRadius: 10,
+      marginTop: 10,
+      marginRight: 10,
+      backgroundColor: colors.transparent 
     }
   });
 };

@@ -27,7 +27,8 @@ export default (theme: ExtendedTheme) => {
     },
     locationTextStyle: {
       margin: 1,
-      fontSize: 12
+      fontSize: 13,
+      marginTop: -4
     },
     contentContainer: {
       marginLeft: 200,
@@ -53,7 +54,7 @@ export default (theme: ExtendedTheme) => {
     },
     valueTextStyle: {
       marginLeft: 8,
-      fontSize: 12,
+      fontSize: 13,
     },
     buttons: {
       width: 60, 
@@ -68,7 +69,6 @@ export default (theme: ExtendedTheme) => {
       justifyContent: "center"
     },
     answeredIcon: {
-      color: colors.text,
       position: 'absolute', 
       top: '23%',
       left: "-11%"

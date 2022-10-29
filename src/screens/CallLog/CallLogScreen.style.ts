@@ -1,7 +1,7 @@
 import { ViewStyle, StyleSheet, TextStyle, ImageStyle } from "react-native";
 import { ExtendedTheme } from "@react-navigation/native";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
-import { arrayFilterNotEmpty } from "rxdb";
+
 
 interface Style {
   titleTextStyle: TextStyle;
@@ -53,7 +53,6 @@ export default (theme: ExtendedTheme) => {
       marginTop: '3.5%',
     },
     listContainer: {
-      marginTop: 8,
       borderTopWidth: 1,
       borderTopColor: colors.primary,
     },
@@ -63,26 +62,25 @@ export default (theme: ExtendedTheme) => {
       borderRadius: 30,
     },
     allButton: {
-      width: 70, 
-      height: '23%', 
+      width: 77, 
+      height: 32,
       justifyContent: "center", 
-      alignItems: "center",
-      borderBottomLeftRadius: 11, 
-      borderTopLeftRadius: 11, 
-      backgroundColor: colors.primary
+      borderBottomLeftRadius: 10,
+      borderTopLeftRadius: 10,
+      backgroundColor: colors.transparent
     },
     missedButton: {
-      width: 70, 
-      height: '23%', 
+      width: 76, 
+      height: 32,
       justifyContent: "center", 
-      alignItems: "center",
-      borderBottomRightRadius: 11, 
-      borderTopRightRadius: 11, 
+      borderBottomRightRadius: 10,
+      borderTopRightRadius: 10,
       backgroundColor: colors.secondary
     },
     allmissedButtons: {
       alignSelf: "center", 
-      justifyContent: "center"
+      justifyContent: "center",
+      fontSize: 18
     }
   });
 };

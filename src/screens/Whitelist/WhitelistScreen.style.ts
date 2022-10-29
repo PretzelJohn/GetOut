@@ -10,8 +10,10 @@ interface Style {
   contentContainer: ViewStyle;
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
-  editIcon: ViewStyle;
-  trashIcon: ViewStyle;
+  modalView: ViewStyle;
+  cancelButton: ViewStyle;
+  addButton: ViewStyle;
+  plusIcon: ViewStyle;
 }
  
 export default (theme: ExtendedTheme) => {
@@ -60,17 +62,39 @@ export default (theme: ExtendedTheme) => {
       width: 50,
       borderRadius: 30,
     },
-    editIcon: {
-      color: colors.text,
-      position: 'absolute', 
-      top: '23%', 
-      left: '0%',
+    modalView:{
+      justifyContent: "center", 
+      alignItems: "center", 
+      backgroundColor: colors.dynamicBackground, 
+      paddingTop: 25,
+      paddingBottom: 85, 
+      borderColor: colors.black,
+      borderWidth: 1.5
     },
-    trashIcon: {
-      color: colors.text,
+    cancelButton: {
+      width: 70, 
+      height: 40, 
+      justifyContent: "center", 
+      alignItems: "center",
+      borderRadius: 10,
+      marginTop: 10,
+      marginRight: 10,
+      backgroundColor: colors.transparent 
+    },
+    addButton: {
+      width: 70, 
+      height: 40, 
+      justifyContent: "center", 
+      alignItems: "center",
+      borderRadius: 10,
+      marginTop: 10,
+      backgroundColor: colors.transparent 
+    },
+    plusIcon: {
+      color: colors.transparent,
       position: 'absolute', 
-      top: '23%', 
-      left: '0%'
-    }
+      left: '87%',
+      top: 2
+    },
   });
 };

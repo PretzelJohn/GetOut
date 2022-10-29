@@ -7,6 +7,7 @@ export const palette = {
     background: "#ffffff",
     white: "#ffffff",
     black: "#000000",
+    red: "#ff0000",
     button: "#1c1e21",
     shadow: "#3A8689",
     text: "#30363b",

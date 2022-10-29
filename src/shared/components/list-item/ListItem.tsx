@@ -1,30 +1,70 @@
-import React, { useMemo } from "react";
-import { View, StyleProp, ViewStyle, TextStyle } from "react-native";
+import React, { useMemo, useState } from "react";
+import { View, StyleProp, ViewStyle, TextStyle, Button, Alert, Pressable } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import Icon from "react-native-dynamic-vector-icons";
-import RNBounceable from "@freakycoder/react-native-bounceable";
+import Modal from "react-native-modal";
+import Feather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { TextInput } from "react-native-gesture-handler";
 
-/**
- * ? Local Imports
- */
+//Local Imports
 import createStyles from "./ListItem.style";
 import { IListItem } from "./IListItem";
 import Text from "../text-wrapper/TextWrapper";
+
+//Shared Imports
+import Styles from "../../theme/styles";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
 interface ICardItemProps {
   style?: CustomStyleProp;
   data: IListItem;
-  onPress: () => void;
+  onEdit: (old_number : string, new_number : string) => void;
+  onDelete: (phone_number : string) => void;
 }
 
-const ListItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
+
+const ListItem: React.FC<ICardItemProps> = ({ style, data, onEdit, onDelete }) => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
+  const sharedStyles = useMemo(() => Styles(theme), [theme]);
+  const phone_number = data.phone_number;
+  //const phone_number = formatPhoneNumber(data.phone_number);
+  
 
-  const { phone_number } = data;
+  /* -------------------------------------------------------------------------- */
+  /*                               State Handlers                               */
+  /* -------------------------------------------------------------------------- */
+
+  //Updates the edit modal visibility state
+  const [isModalEdit, setModalEdit] = useState(false);
+  const toggleModalEdit = () => {
+    setModalEdit(!isModalEdit);
+  };
+
+  //Updates the trash modal visibility state
+  const [isModalTrash, setModalTrash] = useState(false);
+  const toggleModalTrash = () => {
+    setModalTrash(!isModalTrash);
+  };
+
+  //Submits the edit request to the parent
+  const submitEdit = (new_number : string) => {
+    onEdit(phone_number, new_number);
+    toggleModalEdit();
+  }
+
+  //Submits the delete request to the parent
+  const submitDelete = () => {
+    onDelete(phone_number);
+    toggleModalTrash();
+  }
+
+
+  /* -------------------------------------------------------------------------- */
+  /*                               Render Methods                               */
+  /* -------------------------------------------------------------------------- */
 
   const Header = () => (
     <>
@@ -34,9 +74,54 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
     </>
   );
 
+  const EditIcon = () => {
+    const [number, onChangeNumber] = React.useState(phone_number);
+    return(
+    <>
+      <Feather style={styles.editIcon} name="edit"size={35} onPress={toggleModalEdit}/>
+      <Modal isVisible={isModalEdit} animationIn={'fadeIn'} animationOut={'fadeIn'}>
+        <View style={styles.modalView}>
+          <Text h1 color={colors.text}>Edit Phone Number</Text>
+          <TextInput style={sharedStyles.textBox} value={number} placeholder={phone_number} keyboardType="phone-pad" onChangeText={onChangeNumber}/>
+          <View style={{flex: 1, flexDirection: "row"}}>
+            <Pressable style={styles.cancelButton} onPress={toggleModalEdit}>
+              <Text color={colors.text}>Cancel</Text>
+            </Pressable>
+            <Pressable style={styles.doneButton} onPress={() => submitEdit(number)}>
+              <Text color={colors.text}>Done</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+    </>
+    )
+  }
+
+  const TrashIcon = () => (
+    <>
+      <Ionicons style={styles.trashIcon} name="trash"size={35} onPress={toggleModalTrash}/>
+      <Modal isVisible={isModalTrash} animationIn={'fadeIn'} animationOut={'fadeIn'}>
+        <View style={styles.modalView}>
+          <Text h1 color={colors.text}>Delete Phone Number</Text>
+          <Text h4 color={colors.text}>Are you sure you want to erase this phone number?</Text>
+          <View style={{flex: 1, flexDirection: "row"}}>
+            <Pressable style={styles.cancelButton} onPress={toggleModalTrash}>
+              <Text color={colors.text}>Cancel</Text>
+            </Pressable>
+            <Pressable style={styles.doneButton} onPress={submitDelete}>
+              <Text color={colors.text}>Yes</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+    </>
+  );
+
   return (
   <View style={[styles.container, style]}>
-    <Header />
+    <Header/>
+    <EditIcon/>
+    <TrashIcon/>
   </View>
   );
 };

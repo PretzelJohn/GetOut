@@ -1,15 +1,12 @@
 import React, { useMemo, useState } from "react";
 import { View, StyleProp, ViewStyle } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import Icon from "react-native-dynamic-vector-icons";
-import RNBounceable from "@freakycoder/react-native-bounceable";
 
-/**
- * ? Local Imports
- */
+/* Local Imports */
 import createStyles from "./ToggleItem.style";
 import Text from "../../../../shared/components/text-wrapper/TextWrapper";
 import { Switch } from 'react-native-switch';
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -18,20 +15,25 @@ interface ICardItemProps {
   data: boolean;
   name: String;
   description: String;
+  hasPermission?: boolean;
   onPress: (value : boolean) => void;
 }
 
-const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, onPress }) => {
+const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, hasPermission=true, onPress }) => {
   const systemTheme = useTheme();
   const { colors } = systemTheme;
   const styles = useMemo(() => createStyles(systemTheme), [systemTheme]);
 
+
+  //Updates the toggle state
   const [isEnabled, setIsEnabled] = useState(data);
   const toggle = () => {
-    onPress(isEnabled);
-    setIsEnabled((previous : Boolean) => !previous);
+    onPress(isEnabled && hasPermission);
+    setIsEnabled((previous : boolean) => !previous && hasPermission);
   }
 
+
+  //Render methods...
   const Info = () => (
     <>
       <View style={styles.keyContainer}>
@@ -46,8 +48,7 @@ const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, 
       <View style={styles.valueContainer}>
         <View style={{}}>
           <Switch 
-            value={isEnabled} 
-            onValueChange={() => {}} 
+            value={isEnabled}
             activeText={''}
             inActiveText={''}
             circleSize={20}
@@ -67,10 +68,12 @@ const ToggleItem: React.FC<ICardItemProps> = ({ style, data, name, description, 
   );
 
   return (
-    <RNBounceable style={[styles.container, style]} onPress={toggle}>
-      <Info />
-      <Action />
-    </RNBounceable>
+    <TouchableHighlight style={[styles.container, style]} onPress={toggle} underlayColor={colors.transparent}>
+      <View>
+        <Info />
+        <Action />
+      </View>
+    </TouchableHighlight>
   );
 };
 
