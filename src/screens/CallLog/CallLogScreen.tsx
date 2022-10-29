@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect, useCallback } from "react";
 import { View, FlatList, TouchableHighlight } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 /* Local Imports */
 import createStyles from "./CallLogScreen.style";
 import CallLogItem from "./components/card-item/CallLogItem";
+import ListEmpty from "../../shared/components/list-empty/ListEmpty";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
@@ -70,17 +71,20 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
       )
     };
 
-    const CallLogs = () => (
-      <View style={styles.listContainer}>
-        <FlatList
-          data={getCallList(showAll)}
-          style={{maxHeight: ScreenHeight-275}}
-          renderItem={({ item }) => (
-            <CallLogItem data={item} onPress={handleItemPress} />
-          )}
-        />
-      </View>
-    );
+    const CallLogs = () => {
+      return (
+        <View style={styles.listContainer}>
+          <FlatList
+            data={getCallList(showAll)}
+            style={{maxHeight: ScreenHeight-275}}
+            ListEmptyComponent={<ListEmpty message="No blocked or allowed incoming calls yet"/>}
+            renderItem={({ item }) => (
+              <CallLogItem data={item} onPress={handleItemPress} />
+            )}
+          />
+        </View>
+      );
+    };
 
     return (
       <SafeAreaView style={sharedStyles.container}>
