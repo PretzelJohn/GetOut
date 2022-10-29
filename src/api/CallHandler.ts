@@ -6,7 +6,6 @@ import { getBlockCalls, getUseContacts, getUseNotifications, getUseWhitelist, ge
 import notifee from '@notifee/react-native';
 import Contacts from 'react-native-contacts';
 
-let displayName : string = "";
 
 //Returns true if the phone number is in the whitelist or blacklist
 const _checkList = async(loader : Function, phoneNumber : string) => {
@@ -23,11 +22,9 @@ const _shouldBlock = async(data : any) => {
     if(!getBlockCalls()) return false;
 
     //Check if caller is in contacts
-    const contacts = await Contacts.getContactsByPhoneNumber(data.phoneNumber);
-    displayName = data.phoneNumber;
-    if(getUseContacts() && contacts.length == 0) return true; //Block if not in contact list
-    if(contacts.length > 0) {
-        displayName = contacts[0].displayName;
+    if(getUseContacts()) {
+        const contacts = await Contacts.getContactsByPhoneNumber(data.phoneNumber);
+        if(contacts == null || contacts == undefined || contacts.length == 0) return true; //Block if not in contact list
         return false; //Allow if in contact list
     }
 
@@ -69,12 +66,11 @@ export const HandleCall = async(data : any) => {
     //Block the call if it should and insert the call into db
     let block = await _shouldBlock(data);
     NativeModules.CallModule.sendResponse(block);
-    insert(displayName, data.timestamp, data.location, block);
+    insert(data.phoneNumber, data.timestamp, data.location, block);
 
     //Send notification if blocked and useNotifs = true
-    displayName = data.phoneNumber.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
-    if(block && useNotifs) _sendNotif("GetOut", "Blocked call from "+data.phoneNumber+". Tap for details.");
-    displayName = "";
+    const phoneNumber = data.phoneNumber.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+    if(block && useNotifs) _sendNotif("GetOut", "Blocked call from "+phoneNumber+". Tap for details.");
 }
 
 //Starts the sticky service (headless and internal)

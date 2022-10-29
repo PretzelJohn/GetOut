@@ -16,7 +16,7 @@ export const _loadSettings = async function() {
 
     // Query the documents in the collection
     await db.settings.find().exec().then((result : any[]) => {
-        if(!result) return;
+        if(!result || result.length == 0) return;
         contacts = result[0].contacts;
         notifications = result[0].notifications;
         whitelist = result[0].whitelist;
@@ -34,8 +34,6 @@ export const _loadSettings = async function() {
         theme: theme
     };
 
-    console.log('Settings:');
-    console.log(res);
     return res;
 }
 

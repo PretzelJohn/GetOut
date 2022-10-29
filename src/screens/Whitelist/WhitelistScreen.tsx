@@ -10,7 +10,8 @@ import { TextInput } from "react-native-gesture-handler";
 /* Local Imports */
 import createStyles from "./WhitelistScreen.style";
 import ListItem from "../../shared/components/list-item/ListItem";
- 
+import ListEmpty from "../../shared/components/list-empty/ListEmpty";
+
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import Styles from "../../shared/theme/styles";
@@ -18,6 +19,7 @@ import Styles from "../../shared/theme/styles";
 import { getWhitelist, insert, edit, remove } from "../../api/WhitelistInterface";
 import { IListItem } from "../../shared/components/list-item/IListItem";
 import { ScreenHeight } from "@freakycoder/react-native-helpers";
+
 
 
 interface WhitelistScreenProps {}
@@ -82,6 +84,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
       <FlatList
         data={getWhitelist(searchText)}
         style={{maxHeight: ScreenHeight-329}}
+        ListEmptyComponent={<ListEmpty message="No whitelisted phone numbers found"/>}
         renderItem={({ item }) => (
           <ListItem data={item} onEdit={submitEdit} onDelete={submitRemove} />
         )}

@@ -41,7 +41,7 @@ public class CallHandler extends CallScreeningService {
         details = callDetails;
 
         //Get the phone number (without the "tel:+1" part), timestamp, location, and whether to block
-        String phoneNumber = Uri.decode(callDetails.getHandle().toString().replace("tel:%2B1", ""));
+        String phoneNumber = Uri.decode(callDetails.getHandle().toString().replace("tel:%2B1", "").replace("tel:%2B", ""));
         long timestamp = callDetails.getCreationTimeMillis();
         String location = "Unknown"; //TODO: Get from geolocation library???
 

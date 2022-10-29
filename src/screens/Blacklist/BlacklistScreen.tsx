@@ -10,6 +10,7 @@ import { TextInput } from "react-native-gesture-handler";
 /* Local Imports */
 import createStyles from "./BlacklistScreen.style";
 import ListItem from "../../shared/components/list-item/ListItem";
+import ListEmpty from "../../shared/components/list-empty/ListEmpty";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
@@ -82,6 +83,7 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
       <FlatList
         data={getBlacklist(searchText)}
         style={{maxHeight: ScreenHeight-329}}
+        ListEmptyComponent={<ListEmpty message="No blacklisted phone numbers found"/>}
         renderItem={({ item }) => (
           <ListItem data={item} onEdit={submitEdit} onDelete={submitRemove} />
         )}
