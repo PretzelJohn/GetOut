@@ -90,11 +90,6 @@ const App = () => {
     }, 750);
   }, [scheme, isDarkMode]);
 
-  return (
-    <>
-      <Navigation/>
-    </>
-  );
 };
 
 export default App;
