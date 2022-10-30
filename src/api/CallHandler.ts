@@ -3,7 +3,7 @@ import { _loadBlacklist } from './BlacklistInterface';
 import { _loadWhitelist } from './WhitelistInterface';
 import { insert } from './CallLogInterface';
 import { getBlockCalls, getUseContacts, getUseNotifications, getUseWhitelist, getUseBlacklist, _loadSettings } from './SettingsInterface';
-import notifee from '@notifee/react-native';
+import notifee, { AndroidImportance } from '@notifee/react-native';
 import Contacts from 'react-native-contacts';
 
 
@@ -39,7 +39,8 @@ const _sendNotif = async(title : string, body : string) => {
     await notifee.requestPermission();
     const channelId = await notifee.createChannel({
         id: "CallHandler",
-        name: "CallHandler Channel"
+        name: "CallHandler Channel",
+        importance: AndroidImportance.MIN
     });
     await notifee.displayNotification({
         title: title,
