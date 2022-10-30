@@ -7,12 +7,10 @@ interface ICardItemProps {
 }
 
 const Slide: React.FC<ICardItemProps>  = ({ item }) => {
-  const { title, desc, backgroundColor } = item;
   return (
-    <View style={[styles.slide, { backgroundColor }]}>
-      <Text style={styles.text}>{title}</Text>
-      <Text style={styles.text}>{desc}</Text>
-    </View>
+    <>
+      {item.screen}
+    </>
   );
 };
 

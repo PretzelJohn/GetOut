@@ -1,5 +1,5 @@
 import { NativeModules } from 'react-native'
-import { check, request, requestNotifications, RESULTS } from 'react-native-permissions';
+import { check, openSettings, request, requestNotifications, RESULTS } from 'react-native-permissions';
 
 //Requests a permission and returns true if it was granted, or false otherwise
 export const getPermission = async function(permission : any, shouldRequest=false) : Promise<boolean> {
@@ -20,6 +20,7 @@ export const getPermission = async function(permission : any, shouldRequest=fals
             return true;
         case RESULTS.BLOCKED:
             console.log('The permission is denied and not requestable anymore');
+            openSettings();
             return false;
         default:
             console.log('The permission status is unknown');
