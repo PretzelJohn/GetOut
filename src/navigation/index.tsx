@@ -90,7 +90,7 @@ const Navigation = () => {
             theme = {isDarkMode ? DarkTheme : LightTheme}
         >
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name={SCREENS.HOME} component={WelcomeScreen} />
+            <Stack.Screen name={SCREENS.HOME} component={RenderTabNavigation} />
             <Stack.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
             <Stack.Screen name={SCREENS.WHITELIST} component={WhitelistScreen} />
             <Stack.Screen name={SCREENS.BLACKLIST} component={BlacklistScreen} />
