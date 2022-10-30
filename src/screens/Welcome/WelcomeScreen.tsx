@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { View, Image } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 /* Local Imports */
@@ -8,9 +8,15 @@ import createStyles from "./WelcomeScreen.style";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
-import fonts from "../../shared/theme/fonts";
 import Styles from "../../shared/theme/styles";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import { navigate, push } from "react-navigation-helpers";
+import { SCREENS } from "../../shared/constants/index";
+import { getPermission, getRole, Role } from "../../api/PermissionInterface";
+import { PERMISSIONS } from "react-native-permissions";
+import { StartService } from "../../api/CallHandler";
+
+export let initialRoute = SCREENS.CALLLOG;
 
 interface WelcomeScreenProps {}
 
@@ -19,6 +25,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
     const sharedStyles = useMemo(() => Styles(theme), [theme]);
+    const nav = useNavigation();
   
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
@@ -53,10 +60,40 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
       </View>
     );
 
-
+    //On "Get Started" button press - go to settings after requesting perms
+    const getStarted = async() => {
+      getRole(Role.CALL_SCREENING);
+      const hasPermission = await getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, true);
+      if(hasPermission) {
+        StartService(null);
+        console.log('navigating to settings screen...');
+        initialRoute = SCREENS.SETTINGS;
+        navigate("SettingsScreen");
+        return (<View><Text>Loading...</Text></View>);
+      }
+    }
   
+    //Check if welcome screen should load
+    const [loading, setLoading] = useState(true);
+    const checkForFirstTimeLoaded = async () => {
+      let result = await getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, false);
+      if(result) {
+        console.log('navigating to recents screen...');
+        initialRoute = SCREENS.CALLLOG;
+        navigate("RecentsScreen");
+        return (<View><Text>Loading...</Text></View>);
+      }
+      
+      setLoading(false);
+    };
+
+    useEffect(() => {
+      checkForFirstTimeLoaded();
+    }, []);
+
+
     return (
-      <SafeAreaView style={sharedStyles.container}>
+      <SafeAreaView style={[sharedStyles.container, {marginLeft: "5%", marginRight: "5%"}]}>
         <View style={sharedStyles.circle1}>
           <View style={sharedStyles.circle}/>
         </View>
@@ -67,10 +104,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
           <Header />
           <Content />
           <View style={{position: "absolute"}}>
-            <Image style={{resizeMode: "stretch", width: 350, height: 350, top: "20%", right: "10%"}} source={theme === "dark" ? require("../../../assets/img/getout_dark.png") : require("../../../assets/img/getout_light.png")} />
+            <Image style={{resizeMode: "stretch", width: 390, height: 390, top: "20%", right: "15%"}} source={theme === "dark" ? require("../../../assets/img/getout_dark.png") : require("../../../assets/img/getout_light.png")} />
           </View>
           <View style={{position: "absolute", justifyContent: "center", top: "80%",left: "5%", right: "5%"}}>
-            <TouchableHighlight style={{backgroundColor: colors.primary, borderRadius: 15, height: 80, borderColor: colors.primary}}>
+            <TouchableHighlight onPress={getStarted} style={{backgroundColor: colors.primary, borderRadius: 15, height: 80, borderColor: colors.primary}}>
               <Text color={colors.text} style={{top: "22%",fontSize: 30, alignSelf: "center",textAlign: "center"}}>Get Started</Text>
             </TouchableHighlight>
           </View>

@@ -1,15 +1,20 @@
 import React, { useState, useRef } from 'react';
 import { View, StyleSheet, FlatList, Text, Dimensions } from 'react-native';
+import { useTheme } from "@react-navigation/native";
 import Indicators from './components/Indicators';
 import Slide from './components/Slide';
-import ISlides from './components/ISlide';
+import ISlide from './components/ISlide';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 interface ICardItemProps {
-  slides: ISlides[];
+  slides: ISlide[];
   onDone: () => void ;
 }
 
 const Welcome:React.FC<ICardItemProps>  = ({ slides, onDone }) => {
+  const theme = useTheme();
+  const { colors } = theme;
+
   if (!slides || !slides.length) return null;
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
@@ -47,16 +52,16 @@ const Welcome:React.FC<ICardItemProps>  = ({ slides, onDone }) => {
         />
       </View>
       {currentSlideIndex < slides.length - 1 && (
-        <Text onPress={handleSkip} style={[styles.button, styles.leftButton]}>
+        <Text onPress={handleSkip} style={[styles.button, styles.leftButton, {color: colors.text}]}>
           Skip
         </Text>
       )}
       {currentSlideIndex < slides.length - 1 ? (
-        <Text onPress={handleNext} style={[styles.button, styles.rightButton]}>
+        <Text onPress={handleNext} style={[styles.button, styles.rightButton, {color: colors.text}]}>
           Next
         </Text>
       ) : (
-        <Text onPress={onDone} style={[styles.button, styles.rightButton]}>
+        <Text onPress={onDone} style={[styles.button, styles.rightButton, {color: colors.text}]}>
           Done
         </Text>
       )}

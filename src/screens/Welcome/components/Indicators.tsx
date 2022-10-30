@@ -35,12 +35,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   selected: {
-    backgroundColor: 'white',
+    backgroundColor: 'black',
   },
   unSelected: {
     backgroundColor: 'transparent',
     borderWidth: 2,
-    borderColor: 'white',
+    borderColor: 'black',
   },
 });
 
