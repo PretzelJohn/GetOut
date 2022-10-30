@@ -1,8 +1,15 @@
-import React, { useState, useRef } from 'react';
-import { View, StyleSheet, FlatList, Text, Dimensions } from 'react-native';
+import React, { useState, useRef, useMemo} from 'react';
+import { View, StyleSheet, FlatList, Text, Dimensions, Image } from 'react-native';
 import Indicators from './components/Indicators';
 import Slide from './components/Slide';
 import ISlides from './components/ISlide';
+import { useTheme } from "@react-navigation/native";
+
+/* Local Imports */
+import WelcomeScreen from "./WelcomeScreen";
+
+/* Shared Imports */
+import Styles from "../../shared/theme/styles";
 
 interface ICardItemProps {
   slides: ISlides[];
@@ -10,6 +17,10 @@ interface ICardItemProps {
 }
 
 const Welcome:React.FC<ICardItemProps>  = ({ slides, onDone }) => {
+  const theme = useTheme();
+  const { colors } = theme;
+  const sharedStyles = useMemo(() => Styles(theme), [theme]);
+
   if (!slides || !slides.length) return null;
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
@@ -47,9 +58,13 @@ const Welcome:React.FC<ICardItemProps>  = ({ slides, onDone }) => {
         />
       </View>
       {currentSlideIndex < slides.length - 1 && (
-        <Text onPress={handleSkip} style={[styles.button, styles.leftButton]}>
-          Skip
-        </Text>
+        <>
+          <WelcomeScreen/>
+          <Text onPress={handleSkip} style={[styles.button, styles.leftButton]}>
+            Skip
+          </Text>
+          <WelcomeScreen/>
+        </>
       )}
       {currentSlideIndex < slides.length - 1 ? (
         <Text onPress={handleNext} style={[styles.button, styles.rightButton]}>

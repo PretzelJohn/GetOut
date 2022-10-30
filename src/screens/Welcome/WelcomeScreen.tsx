@@ -51,7 +51,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
           </Text>
         </View>
       </View>
-    );
+    ); 
 
 
   

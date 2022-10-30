@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import React, { useEffect, useState } from 'react';
-import { StatusBar, useColorScheme, LogBox, Text, View, Platform } from "react-native";
+import { StatusBar, useColorScheme, LogBox, Platform } from "react-native";
 import SplashScreen from "react-native-splash-screen";
 
 /** Local Imports */
@@ -18,6 +18,7 @@ const App = () => {
   const isDarkMode = scheme === "dark";
   const [loading, setLoading] = useState(true);
   const [isFirstTimeLoad, setIsFirstTimeLoad] = useState(false);
+  
 
   const checkForFirstTimeLoaded = async () => {
     let result = await getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, false);
@@ -34,20 +35,16 @@ const App = () => {
   const slides = [
     {
       key: 1,
-      title: 'Welcome One',
+      title: 'Hello, welcome to: ',
       desc: 'Welcome Screen One Description!',
-      backgroundColor: 'red',
+      image: require('../assets/img/getout_dark.png'),
+      backgroundColor: 'blue',
     },
     {
       key: 2,
       title: 'Welcome Two',
       desc: 'Welcome Screen Two Description!',
-      backgroundColor: 'blue',
-    },
-    {
-      key: 3,
-      title: 'Welcome Three',
-      desc: 'Welcome Screen Three Description!',
+      image: require('../assets/img/getout_dark.png'),
       backgroundColor: 'green',
     },
   ];
