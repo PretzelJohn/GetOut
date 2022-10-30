@@ -59,7 +59,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
           </Text>
         </View>
       </View>
-    );
+    ); 
 
     //On "Get Started" button press - go to settings after requesting perms
     const onGetStarted = async() => {
