@@ -90,12 +90,6 @@ const App = () => {
     }, 750);
   }, [scheme, isDarkMode]);
 
-  //Request default app for spam blocking
-  if(Platform.OS === "android") {
-    getRole(Role.CALL_SCREENING);
-    StartService(null);
-  }
-
   return (
     <>
       <Navigation/>
