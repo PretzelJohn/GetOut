@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { View, Image } from "react-native";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { View, Image, useColorScheme } from "react-native";
+import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 /* Local Imports */
@@ -10,7 +10,7 @@ import createStyles from "./WelcomeScreen.style";
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import Styles from "../../shared/theme/styles";
 import { TouchableHighlight } from "react-native-gesture-handler";
-import { navigate, push } from "react-navigation-helpers";
+import { navigate } from "react-navigation-helpers";
 import { SCREENS } from "../../shared/constants/index";
 import { getPermission, getRole, Role } from "../../api/PermissionInterface";
 import { PERMISSIONS } from "react-native-permissions";
@@ -21,11 +21,11 @@ export let initialRoute = SCREENS.CALLLOG;
 interface WelcomeScreenProps {}
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
+    const scheme = useColorScheme();
     const theme = useTheme();
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
     const sharedStyles = useMemo(() => Styles(theme), [theme]);
-    const nav = useNavigation();
   
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
@@ -104,7 +104,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
           <Header />
           <Content />
           <View style={{position: "absolute"}}>
-            <Image style={{resizeMode: "stretch", width: 390, height: 390, top: "20%", right: "15%"}} source={theme === "dark" ? require("../../../assets/img/getout_dark.png") : require("../../../assets/img/getout_light.png")} />
+            <Image style={{resizeMode: "stretch", width: 390, height: 390, top: "20%", right: "15%"}} source={scheme === "dark" ? require("../../../assets/img/getout_dark.png") : require("../../../assets/img/getout_light.png")} />
           </View>
           <View style={{position: "absolute", justifyContent: "center", top: "80%",left: "5%", right: "5%"}}>
             <TouchableHighlight onPress={getStarted} style={{backgroundColor: colors.primary, borderRadius: 15, height: 80, borderColor: colors.primary}}>
