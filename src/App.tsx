@@ -1,14 +1,15 @@
 import "react-native-gesture-handler";
 import React, { useEffect, useState } from 'react';
-import { StatusBar, useColorScheme, LogBox, Text, View } from "react-native";
+import { StatusBar, useColorScheme, LogBox, Text, View, Platform } from "react-native";
 import SplashScreen from "react-native-splash-screen";
 
 /** Local Imports */
 import Navigation from './navigation';
 import Welcome from './screens/Welcome/Welcome';
 import { isAndroid } from "@freakycoder/react-native-helpers";
-import { getPermission } from "./api/PermissionInterface";
+import { getPermission, getRole, Role } from "./api/PermissionInterface";
 import { PERMISSIONS } from "react-native-permissions";
+import { StartService } from "./api/CallHandler";
 
 LogBox.ignoreAllLogs();
 
