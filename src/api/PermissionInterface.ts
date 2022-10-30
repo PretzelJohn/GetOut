@@ -3,7 +3,7 @@ import { check, request, requestNotifications, RESULTS } from 'react-native-perm
 
 //Requests a permission and returns true if it was granted, or false otherwise
 export const getPermission = async function(permission : any, shouldRequest=false) : Promise<boolean> {
-    const result = shouldRequest ? await request(permission) : check(permission);
+    const result = shouldRequest ? await request(permission) : await check(permission);
 
     switch (result) {
         case RESULTS.UNAVAILABLE:

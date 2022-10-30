@@ -25,7 +25,6 @@ public class RoleModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void requestRole(String role) {
-        if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.Q) return;
         RoleManager roleManager = (RoleManager) context.getSystemService(ROLE_SERVICE);
         Intent intent = roleManager.createRequestRoleIntent("android.app.role." + role);
         Activity activity = getCurrentActivity();
