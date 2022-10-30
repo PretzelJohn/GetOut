@@ -20,7 +20,6 @@ const App = () => {
   const [isFirstTimeLoad, setIsFirstTimeLoad] = useState(false);
 
   const checkForFirstTimeLoaded = async () => {
-    // const result = await AsyncStorage.getItem('isFirstTimeOpen');
     let result = await getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, false);
 
     if (!result) setIsFirstTimeLoad(true);
@@ -56,7 +55,12 @@ const App = () => {
   const handleDone = async () => {
     let result = await getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, true);
     if (result) setIsFirstTimeLoad(false);
-    // AsyncStorage.setItem('isFirstTimeOpen', 'no');
+
+    if (Platform.OS === 'android'){
+      getRole(Role.CALL_SCREENING);
+      StartService(null);
+
+    }
   };
 
   if (loading) return null;

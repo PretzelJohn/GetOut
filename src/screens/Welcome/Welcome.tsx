@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { View, StyleSheet, FlatList, Text, Dimensions } from 'react-native';
-import Indicators from './Indicators';
-import Slide from './Slide';
-import ISlides from './ISlide';
+import Indicators from './components/Indicators';
+import Slide from './components/Slide';
+import ISlides from './components/ISlide';
 
 interface ICardItemProps {
   slides: ISlides[];
