@@ -63,12 +63,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
 
     //On "Get Started" button press - go to settings after requesting perms
     const onGetStarted = async() => {
-      let hasPermission = true;
-      if(Platform.OS === "android") {
-        hasPermission = await getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, true);
-      } else if(Platform.OS === "ios") {
-        //Request iOS permissions
-      }
+      let hasPermission = await getPermission(Platform.OS === "android" ? PERMISSIONS.ANDROID.READ_CONTACTS : PERMISSIONS.IOS.CONTACTS, true);
 
       if(hasPermission) {
         if(Platform.OS === "android") {
@@ -89,7 +84,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
     //Check if welcome screen should load
     const [loading, setLoading] = useState(true);
     const checkForFirstTimeLoaded = async () => {
-      let hasPermission = await getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, false);
+      let hasPermission = await getPermission(Platform.OS === "android" ? PERMISSIONS.ANDROID.READ_CONTACTS : PERMISSIONS.IOS.CONTACTS, false);
+      
       if(hasPermission) {
         console.log('navigating to recents screen...');
         initialRoute = SCREENS.CALLLOG;
