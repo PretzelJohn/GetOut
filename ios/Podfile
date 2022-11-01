@@ -29,6 +29,7 @@ target 'GetOut' do
   target 'GetOutTests' do
     inherit! :complete
     pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+    
     # Pods for testing
   end
 

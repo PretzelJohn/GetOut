@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { useColorScheme } from "react-native";
+import { Platform, useColorScheme } from "react-native";
 import Icon from "react-native-dynamic-vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -65,12 +65,12 @@ const Navigation = () => {
                     tabBarHideOnKeyboard: true,
                     tabBarStyle: {
                         backgroundColor: isDarkMode ? palette.primary : palette.primary,
-                        height: 100
+                        height: Platform.OS === 'android' ? 100: 115
                     },
                     tabBarLabelStyle: {
                         fontSize: 18,
                         fontFamily: "JockeyOne-Regular",
-                        bottom: 15
+                        bottom: Platform.OS === 'android' ? 15: 10             
                     },
                 })}
                 initialRouteName={initialRoute}
