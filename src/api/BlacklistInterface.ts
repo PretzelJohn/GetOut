@@ -27,6 +27,13 @@ export const getBlacklist = function(searchText : string) : IListItem[] {
         const data = await _loadBlacklist(searchText);
         setData(data);
       }
+      const subscribe = async () => {
+        const db = await getDatabase();
+        db.blacklist.$.subscribe((event : any) => {
+          fetchData();
+        });
+      }
+      subscribe();
       fetchData();
     }, []);
 
