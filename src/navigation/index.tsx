@@ -1,14 +1,15 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import { Platform, useColorScheme } from "react-native";
 import Icon from "react-native-dynamic-vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { isReadyRef, NavigationEvent, navigationRef } from "react-navigation-helpers";
-import { BottomTabView, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { isReadyRef, navigationRef } from "react-navigation-helpers";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 /* Local Imports */
 import { SCREENS } from "../shared/constants";
 import { LightTheme, DarkTheme, palette } from "../shared/theme/themes";
+import { getSettings } from "../api/SettingsInterface";
 
 /* Screens */
 import WelcomeScreen, { initialRoute } from "../screens/Welcome/WelcomeScreen";
@@ -16,16 +17,16 @@ import CallLogScreen from "../screens/CallLog/CallLogScreen";
 import WhitelistScreen from "../screens/Whitelist/WhitelistScreen";
 import BlacklistScreen from "../screens/Blacklist/BlacklistScreen";
 import SettingsScreen from "../screens/Settings/SettingsScreen";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-
 
 /* Navigator Types */
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-const Navigation = () => {
-    const scheme = useColorScheme();
-    const isDarkMode = scheme === 'dark';
 
+const Navigation = () => { 
+    let theme = getSettings().theme;    // User-defined theme
+    let scheme = useColorScheme();      // System color scheme
+    let isDarkMode = (theme == 'system') ? (scheme === 'dark') : (theme === 'dark');
+    
     React.useEffect((): any => {
         return () => (isReadyRef.current = false);
     }, []);
