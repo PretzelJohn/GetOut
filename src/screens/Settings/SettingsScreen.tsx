@@ -40,7 +40,6 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
 
   const data = Settings.getSettings();
   const ToggleSettings = () => {
-
     return(
       <View style={styles.listContainer}>
         <ToggleItem style={{borderTopLeftRadius: 10, borderTopRightRadius: 10, marginTop: -5}} data={data.contacts} name="Use Contacts" description="Uses your contact list to block calls" onPress={(value : boolean) => {
