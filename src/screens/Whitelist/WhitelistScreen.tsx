@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState} from "react";
+import React, { useMemo, useState} from "react";
 import { View, FlatList, useColorScheme, Pressable } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import SearchBar from "react-native-dynamic-search-bar";
