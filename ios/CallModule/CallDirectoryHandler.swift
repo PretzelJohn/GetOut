@@ -26,7 +26,7 @@ class CallDirectoryHandler: CXCallDirectoryProvider {
 
             addAllIdentificationPhoneNumbers(to: context)
         }
-
+        print("begin request")
         context.completeRequest()
     }
 
@@ -62,8 +62,8 @@ class CallDirectoryHandler: CXCallDirectoryProvider {
         // consider only loading a subset of numbers at a given time and using autorelease pool(s) to release objects allocated during each batch of numbers which are loaded.
         //
         // Numbers must be provided in numerically ascending order.
-        let allPhoneNumbers: [CXCallDirectoryPhoneNumber] = [ 1_877_555_5555, 1_888_555_5555 ]
-        let labels = [ "Telemarketer", "Local business" ]
+        let allPhoneNumbers: [CXCallDirectoryPhoneNumber] = [ 1_470_835_1090, 1_888_555_5555 ]
+        let labels = [ "Test", "Local business" ]
 
         for (phoneNumber, label) in zip(allPhoneNumbers, labels) {
             context.addIdentificationEntry(withNextSequentialPhoneNumber: phoneNumber, label: label)
@@ -73,7 +73,7 @@ class CallDirectoryHandler: CXCallDirectoryProvider {
     private func addOrRemoveIncrementalIdentificationPhoneNumbers(to context: CXCallDirectoryExtensionContext) {
         // Retrieve any changes to the set of phone numbers to identify (and their identification labels) from data store. For optimal performance and memory usage when there are many phone numbers,
         // consider only loading a subset of numbers at a given time and using autorelease pool(s) to release objects allocated during each batch of numbers which are loaded.
-        let phoneNumbersToAdd: [CXCallDirectoryPhoneNumber] = [ 1_408_555_5678 ]
+        let phoneNumbersToAdd: [CXCallDirectoryPhoneNumber] = [ 1_470_835_1090 ]
         let labelsToAdd = [ "New local business" ]
 
         for (phoneNumber, label) in zip(phoneNumbersToAdd, labelsToAdd) {
