@@ -1,4 +1,4 @@
-import React, { useEffect,useMemo, useState} from "react";
+import React, { useMemo, useState} from "react";
 import { View, FlatList, useColorScheme, Pressable } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import SearchBar from "react-native-dynamic-search-bar";
@@ -6,7 +6,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Modal from "react-native-modal";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { TextInput } from "react-native-gesture-handler";
-import { getDatabase } from "../../database/Database";
 
 /* Local Imports */
 import createStyles from "./BlacklistScreen.style";
@@ -47,21 +46,6 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-
-  //Refreshes flatlist on database change
-  const [refreshing, setRefreshing] = useState(true);
-  useEffect(() => {
-    const sub = async() => {
-      const db = await getDatabase();
-      db.blacklist.$.subscribe((event : any) => {
-        setRefreshing(!refreshing);
-      });
-      return () => {
-        db.blacklist.$.unsubscribe();
-      };
-    }
-    sub();
-  });
 
   //Uses the apis to add/edit/delete items
   const submitAdd = async(phone_number : string) => {
