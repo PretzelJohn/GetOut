@@ -7,7 +7,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>GetOut</string>
 	<key>NSContactsUsageDescription</key>
-	<string>for blocking calls</string>
+	<string>For blocking calls.</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
