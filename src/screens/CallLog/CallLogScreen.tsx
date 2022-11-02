@@ -13,6 +13,7 @@ import Text from "../../shared/components/text-wrapper/TextWrapper";
 import { getCallList } from "../../api/CallLogInterface";
 import Styles from "../../shared/theme/styles";
 import { ScreenHeight } from "@freakycoder/react-native-helpers";
+import { getDatabase } from "../../database/Database";
 
 
 interface CallLogScreenProps {}
@@ -22,6 +23,21 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const styles = useMemo(() => createStyles(theme), [theme]);
     const sharedStyles = useMemo(() => Styles(theme), [theme]);
     const [ showAll, setShowAll ] = useState(true);
+    
+    //Refreshes flatlist on database change
+    const [refreshing, setRefreshing] = useState(true);
+    useEffect(() => {
+      const sub = async() => {
+        const db = await getDatabase();
+        db.callLog.$.subscribe((event : any) => {
+          setRefreshing(!refreshing);
+        });
+        return () => {
+          db.callLog.$.unsubscribe();
+        };
+      }
+      sub();
+    });
 
     const handleItemPress = () => {
       //NavigationService.push(SCREENS.CALLLOG);
@@ -76,6 +92,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
         <View style={styles.listContainer}>
           <FlatList
             data={getCallList(showAll)}
+            extraData={refreshing}
             style={{maxHeight: ScreenHeight-275}}
             ListEmptyComponent={<ListEmpty message="No blocked or allowed incoming calls yet"/>}
             renderItem={({ item }) => (
