@@ -27,6 +27,13 @@ export const getWhitelist = function(searchText : string) : IListItem[] {
         const data = await _loadWhitelist(searchText);
         setData(data);
       }
+      const subscribe = async () => {
+        const db = await getDatabase();
+        db.whitelist.$.subscribe((event : any) => {
+          fetchData();
+        });
+      }
+      subscribe();
       fetchData();
     }, []);
 
