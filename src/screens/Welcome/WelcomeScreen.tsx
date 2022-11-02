@@ -15,6 +15,7 @@ import { SCREENS } from "../../shared/constants/index";
 import { getPermission, getNotifPermission, getRole, Role } from "../../api/PermissionInterface";
 import { PERMISSIONS } from "react-native-permissions";
 import { StartService } from "../../api/CallHandler";
+import { ScreenWidth } from "@freakycoder/react-native-helpers";
 
 
 export let initialRoute = SCREENS.CALLLOG;
@@ -114,12 +115,12 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
         <View>
           <Header />
           <Content />
-          <View style={{position: "absolute"}}>
-            <Image style={{resizeMode: "stretch", width: 390, height: 390, top: "20%", right: "15%"}} source={scheme === "dark" ? require("../../../assets/img/getout_dark.png") : require("../../../assets/img/getout_light.png")} />
+          <View style={{position: "absolute", alignContent: "center", top: "12.5%"}}>
+            <Image style={{width: ScreenWidth, height: ScreenWidth}} source={scheme === "dark" ? require("../../../assets/img/getout_dark.png") : require("../../../assets/img/getout_light.png")} />
           </View>
-          <View style={{position: "absolute", justifyContent: "center", top: "80%",left: "5%", right: "5%"}}>
+          <View style={{position: "absolute", justifyContent: "center", top: "80%", left: "5%", right: "5%"}}>
             <TouchableHighlight underlayColor={colors.transparent} onPress={onGetStarted} style={{backgroundColor: colors.primary, borderRadius: 15, height: 80, borderColor: colors.primary}}>
-              <Text color={colors.text} style={{top: "22%",fontSize: 30, alignSelf: "center",textAlign: "center"}}>Get Started</Text>
+              <Text color={colors.text} style={{top: "22%", fontSize: 30, alignSelf: "center", textAlign: "center"}}>Get Started</Text>
             </TouchableHighlight>
           </View>
         </View>
