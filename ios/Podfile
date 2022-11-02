@@ -6,10 +6,12 @@ install! 'cocoapods', :deterministic_uuids => false
 
 target 'GetOut' do
   config = use_native_modules!
-
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts"
+  pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
   # Flags change depending on the env values.
   flags = get_default_flags()
-
   use_react_native!(
     :path => config[:reactNativePath],
     # Hermes is now enabled by default. Disable by setting this flag to false.
@@ -28,8 +30,10 @@ target 'GetOut' do
 
   target 'GetOutTests' do
     inherit! :complete
+    permissions_path = '../node_modules/react-native-permissions/ios'
     pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-    
+    pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts"
+    pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
     # Pods for testing
   end
 
@@ -40,6 +44,9 @@ target 'GetOut' do
       # necessary for Mac Catalyst builds
       :mac_catalyst_enabled => false
     )
+    installer.pods_project.build_configurations.each do |config|
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end
