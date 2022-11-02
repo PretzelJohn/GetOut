@@ -40,11 +40,10 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
 
   const data = Settings.getSettings();
   const ToggleSettings = () => {
-
     return(
       <View style={styles.listContainer}>
         <ToggleItem style={{borderTopLeftRadius: 10, borderTopRightRadius: 10, marginTop: -5}} data={data.contacts} name="Use Contacts" description="Uses your contact list to block calls" onPress={(value : boolean) => {
-          if(!value) Permissions.getPermission(PERMISSIONS.ANDROID.READ_CONTACTS, true);
+          if(!value) Permissions.getPermission(Platform.OS === "android" ? PERMISSIONS.ANDROID.READ_CONTACTS : PERMISSIONS.IOS.CONTACTS, true);
           Settings.setUseContacts(!value);
         }} />
         <ToggleItem data={data.notifications} name="Notifications" description="Silently notifies you when a call is blocked" onPress={(value : boolean) => {

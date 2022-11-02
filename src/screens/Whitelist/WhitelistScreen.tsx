@@ -50,20 +50,15 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
   };
 
   //Uses the apis to add/edit/delete items
-  const [loaded, setLoaded] = useState(false);
   const submitAdd = async(phone_number : string) => {
-    await insert(phone_number);
     toggleModal();
+    await insert(phone_number);
   }
   const submitEdit = async(old_number : string, new_number : string) => {
-    setLoaded(false);
     await edit(old_number, new_number);
-    setLoaded(true);
   }
   const submitRemove = async(phone_number : string) => {
-    setLoaded(false);
     await remove(phone_number);
-    setLoaded(true);
   }
   
 

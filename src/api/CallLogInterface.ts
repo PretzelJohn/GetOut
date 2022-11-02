@@ -19,10 +19,17 @@ const _load = async function(showAll : boolean) {
 export const getCallList = function (showAll : boolean) {
     const [data, setData] = useState(Array<ICallLogItem>);
     useEffect(() => {
-      const fetchData = async () => {
+      const fetchData = async() => {
         const data = await _load(showAll);
         setData(data);
       }
+      const subscribe = async () => {
+        const db = await getDatabase();
+        db.callLog.$.subscribe((event : any) => {
+          fetchData();
+        });
+      }
+      subscribe();
       fetchData();
     }, []);
 

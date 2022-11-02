@@ -1,5 +1,5 @@
 import { NativeModules } from 'react-native'
-import { check, openSettings, request, requestNotifications, RESULTS } from 'react-native-permissions';
+import { check, checkNotifications, openSettings, request, requestNotifications, RESULTS } from 'react-native-permissions';
 
 //Requests a permission and returns true if it was granted, or false otherwise
 export const getPermission = async function(permission : any, shouldRequest=false) : Promise<boolean> {
@@ -30,9 +30,9 @@ export const getPermission = async function(permission : any, shouldRequest=fals
 
 
 //Requests permission to send notifications and returns true if it was granted, or false otherwise
-export const getNotifPermission = async function() : Promise<boolean> {
+export const getNotifPermission = async function(shouldRequest=false) : Promise<boolean> {
     console.log('requesting notification permissions...');
-    const result = await requestNotifications(['alert', 'sound']);
+    const result = shouldRequest ? await requestNotifications(['alert', 'sound']) : await checkNotifications();
     return result.status === 'granted';
 } 
 
