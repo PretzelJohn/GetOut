@@ -100,6 +100,13 @@ export const getSettings = function() {
         const data = await _loadSettings();
         setData(data);
       }
+      const subscribe = async () => {
+        const db = await getDatabase();
+        db.settings.$.subscribe((event : any) => {
+          fetchData();
+        });
+      }
+      subscribe();
       fetchData();
     }, []);
 
