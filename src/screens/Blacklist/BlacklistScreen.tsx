@@ -18,17 +18,19 @@ import Styles from "../../shared/theme/styles";
 
 import {getBlacklist, insert, edit, remove} from "../../api/BlacklistInterface";
 import { ScreenHeight } from "@freakycoder/react-native-helpers";
-
+import {getSettings} from "../../api/SettingsInterface";
 
 interface BlacklistScreenProps {}
 
 const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
-  const theme = useTheme();
-  const { colors } = theme;
-  const styles = useMemo(() => createStyles(theme), [theme]);
-  const sharedStyles = useMemo(() => Styles(theme), [theme]);
-  const scheme = useColorScheme();
-  const isDarkMode = scheme === "dark";
+  const colorTheme = useTheme();
+  const { colors } = colorTheme;
+  const styles = useMemo(() => createStyles(colorTheme), [colorTheme]);
+  const sharedStyles = useMemo(() => Styles(colorTheme), [colorTheme]);
+
+  const theme = getSettings().theme;
+  let scheme = useColorScheme();      // System color scheme
+  let isDarkMode = (theme == 'system') ? (scheme === 'dark') : (theme === 'dark');
 
   
   /* -------------------------------------------------------------------------- */
