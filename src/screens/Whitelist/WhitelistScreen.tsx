@@ -98,7 +98,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
         <View style={styles.modalView}>
           <Text h1 color={colors.text}>Add phone number</Text>
           <Text h4 color={colors.text}>Enter the phone number you wish to add to the whitelist:</Text>
-          <TextInput style={sharedStyles.textBox} value={number} placeholder="(###) ###-####" keyboardType="phone-pad" onChangeText={onChangeNumber} />
+          <TextInput style={sharedStyles.textBox} value={number} placeholderTextColor="#777" placeholder="(###) ###-####" keyboardType="phone-pad" onChangeText={onChangeNumber} />
           <View style={{flex: 1, flexDirection: "row"}}>
             <Pressable style={styles.cancelButton} onPress={toggleModal}>
               <Text color={colors.text}>Cancel</Text>
