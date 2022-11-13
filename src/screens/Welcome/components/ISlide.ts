@@ -1,6 +1,6 @@
-export default interface ISlides {
+import React from "react";
+
+export default interface ISlide {
     key: number;
-    title: string;
-    desc: string;
-    backgroundColor: string;
+    screen: any;
   }

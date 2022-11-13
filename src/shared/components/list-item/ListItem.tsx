@@ -82,7 +82,7 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data, onEdit, onDelete }) =
       <Modal isVisible={isModalEdit} animationIn={'fadeIn'} animationOut={'fadeIn'}>
         <View style={styles.modalView}>
           <Text h1 color={colors.text}>Edit Phone Number</Text>
-          <TextInput style={sharedStyles.textBox} value={number} placeholder={phone_number} keyboardType="phone-pad" onChangeText={onChangeNumber}/>
+          <TextInput style={sharedStyles.textBox} value={number} placeholderTextColor="#777" placeholder={phone_number} keyboardType="phone-pad" onChangeText={onChangeNumber}/>
           <View style={{flex: 1, flexDirection: "row"}}>
             <Pressable style={styles.cancelButton} onPress={toggleModalEdit}>
               <Text color={colors.text}>Cancel</Text>

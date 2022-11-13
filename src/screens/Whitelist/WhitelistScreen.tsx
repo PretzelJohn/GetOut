@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState} from "react";
+import React, { useMemo, useState} from "react";
 import { View, FlatList, useColorScheme, Pressable } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import SearchBar from "react-native-dynamic-search-bar";
@@ -11,13 +11,13 @@ import { TextInput } from "react-native-gesture-handler";
 import createStyles from "./WhitelistScreen.style";
 import ListItem from "../../shared/components/list-item/ListItem";
 import ListEmpty from "../../shared/components/list-empty/ListEmpty";
+import { getWhitelist, insert, edit, remove } from "../../api/WhitelistInterface";
+import {getSettings} from "../../api/SettingsInterface";
+
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import Styles from "../../shared/theme/styles";
-
-import { getWhitelist, insert, edit, remove } from "../../api/WhitelistInterface";
-import { IListItem } from "../../shared/components/list-item/IListItem";
 import { ScreenHeight } from "@freakycoder/react-native-helpers";
 
 
@@ -25,12 +25,14 @@ import { ScreenHeight } from "@freakycoder/react-native-helpers";
 interface WhitelistScreenProps {}
 
 const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
-  const theme = useTheme();
-  const { colors } = theme;
-  const styles = useMemo(() => createStyles(theme), [theme]);
-  const sharedStyles = useMemo(() => Styles(theme), [theme]);
-  const scheme = useColorScheme();
-  const isDarkMode = scheme === "dark";
+  const colorTheme = useTheme();
+  const { colors } = colorTheme;
+  const styles = useMemo(() => createStyles(colorTheme), [colorTheme]);
+  const sharedStyles = useMemo(() => Styles(colorTheme), [colorTheme]);
+
+  const theme = getSettings().theme;
+  let scheme = useColorScheme();      // System color scheme
+  let isDarkMode = (theme == 'system') ? (scheme === 'dark') : (theme === 'dark');
 
 
   /* -------------------------------------------------------------------------- */
@@ -50,20 +52,15 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
   };
 
   //Uses the apis to add/edit/delete items
-  const [loaded, setLoaded] = useState(false);
   const submitAdd = async(phone_number : string) => {
-    await insert(phone_number);
     toggleModal();
+    await insert(phone_number);
   }
   const submitEdit = async(old_number : string, new_number : string) => {
-    setLoaded(false);
     await edit(old_number, new_number);
-    setLoaded(true);
   }
   const submitRemove = async(phone_number : string) => {
-    setLoaded(false);
     await remove(phone_number);
-    setLoaded(true);
   }
   
 
@@ -101,7 +98,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
         <View style={styles.modalView}>
           <Text h1 color={colors.text}>Add phone number</Text>
           <Text h4 color={colors.text}>Enter the phone number you wish to add to the whitelist:</Text>
-          <TextInput style={sharedStyles.textBox} value={number} placeholder="(###) ###-####" keyboardType="phone-pad" onChangeText={onChangeNumber} />
+          <TextInput style={sharedStyles.textBox} value={number} placeholderTextColor="#777" placeholder="(###) ###-####" keyboardType="phone-pad" onChangeText={onChangeNumber} />
           <View style={{flex: 1, flexDirection: "row"}}>
             <Pressable style={styles.cancelButton} onPress={toggleModal}>
               <Text color={colors.text}>Cancel</Text>
