@@ -76,10 +76,9 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
         }
 
         //Open settings screen
-        console.log('navigating to settings screen...');
         initialRoute = SCREENS.SETTINGS;
         navigate("SettingsScreen");
-        return (<View><Text>Loading...</Text></View>);
+        return (<View><Text h1 style={{textAlign: "center"}}>Loading...</Text></View>);
       }
     }
   
@@ -90,10 +89,9 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
       let hasNotifPermission = await getNotifPermission(false);
       
       if(hasContactPermission && hasNotifPermission) {
-        console.log('navigating to recents screen...');
         initialRoute = SCREENS.CALLLOG;
         navigate("RecentsScreen");
-        return (<View><Text>Loading...</Text></View>);
+        return (<View><Text h1 style={{textAlign: "center"}}>Loading...</Text></View>);
       }
       
       setLoading(false);
@@ -115,8 +113,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
         <View>
           <Header />
           <Content />
-          <View style={{position: "absolute", alignContent: "center", top: "12.5%"}}>
-            <Image style={{width: ScreenWidth, height: ScreenWidth}} source={scheme === "dark" ? require("../../../assets/img/getout_dark.png") : require("../../../assets/img/getout_light.png")} />
+          <View style={{position: "absolute"}}>
+            <Image style={{resizeMode: "stretch", width: ScreenWidth, height: ScreenWidth, top: "20%", right: "15%"}} source={scheme === "dark" ? require("../../../assets/img/getout_dark.png") : require("../../../assets/img/getout_light.png")} />
           </View>
           <View style={{position: "absolute", justifyContent: "center", top: "80%", left: "5%", right: "5%"}}>
             <TouchableHighlight underlayColor={colors.transparent} onPress={onGetStarted} style={{backgroundColor: colors.primary, borderRadius: 15, height: 80, borderColor: colors.primary}}>
