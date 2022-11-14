@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { View, Image, useColorScheme, Platform, BackHandler } from "react-native";
+import { View, Image, useColorScheme, Platform, Linking } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -73,6 +73,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
           StartService(null);
         } else {
           //iOS call blocking init
+          Linking.openURL("App-Prefs:Phone");
         }
 
         //Open settings screen

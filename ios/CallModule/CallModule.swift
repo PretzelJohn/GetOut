@@ -12,7 +12,7 @@ import CallKit
 
         CXCallDirectoryManager.sharedInstance.reloadExtension(withIdentifier: "org.reactjs.native.example.GetOut2.CallModule", completionHandler: nil)
     }
-
+  
     @objc static func requiresMainQueueSetup() -> Bool { return true }
 }
 
