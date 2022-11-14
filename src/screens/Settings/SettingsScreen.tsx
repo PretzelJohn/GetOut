@@ -16,7 +16,6 @@ import ToggleItem from "./components/toggle-item/ToggleItem";
 import SelectItem from "./components/select-item/SelectItem";
 import Styles from "../../shared/theme/styles";
 
-
 interface SettingsScreenProps {}
 
 const SettingsScreen: React.FC<SettingsScreenProps> = () => {
@@ -24,7 +23,6 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const sharedStyles = useMemo(() => Styles(theme), [theme]);
-
 
   /* -------------------------------------------------------------------------- */
   /*                               Render Methods                               */
