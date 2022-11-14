@@ -92,8 +92,8 @@ class CallDirectoryHandler: CXCallDirectoryProvider {
     }
 
     private func getBlacklist() -> [String] {
-      let defaults = UserDefaults.standard
-      let blacklist: [String]? = defaults.stringArray(forKey: "getoutBlacklist")
+      let defaults = UserDefaults(suiteName: "group.com.getout")
+      let blacklist: [String]? = defaults?.stringArray(forKey: "blacklist")
       NSLog("blacklist in UserDefaults is: %@", blacklist ?? [])
       return blacklist ?? []
     }

@@ -72,6 +72,8 @@
 		2AAF8CC929121D3500DF4EDE /* CallModule.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CallModule.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AAF8CCB29121D3500DF4EDE /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
 		2AAF8CCD29121D3500DF4EDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2ADF52B62922CEDE002880A9 /* GetOut.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = GetOut.entitlements; path = GetOut/GetOut.entitlements; sourceTree = "<group>"; };
+		2ADF52B72922CF03002880A9 /* CallModule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CallModule.entitlements; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-GetOut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetOut.debug.xcconfig"; path = "Target Support Files/Pods-GetOut/Pods-GetOut.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-GetOut.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetOut.release.xcconfig"; path = "Target Support Files/Pods-GetOut/Pods-GetOut.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-GetOut-GetOutTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetOut-GetOutTests.debug.xcconfig"; path = "Target Support Files/Pods-GetOut-GetOutTests/Pods-GetOut-GetOutTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		13B07FAE1A68108700A75B9A /* GetOut */ = {
 			isa = PBXGroup;
 			children = (
+				2ADF52B62922CEDE002880A9 /* GetOut.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -142,6 +145,7 @@
 		2AAF8CCA29121D3500DF4EDE /* CallModule */ = {
 			isa = PBXGroup;
 			children = (
+				2ADF52B72922CF03002880A9 /* CallModule.entitlements */,
 				2AAF8CCB29121D3500DF4EDE /* CallDirectoryHandler.swift */,
 				2AAF8CCD29121D3500DF4EDE /* Info.plist */,
 				2A6EF7582921CB0A0091A22B /* CallModule.swift */,
@@ -631,6 +635,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = GetOut/GetOut.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -664,6 +669,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = GetOut/GetOut.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -699,6 +705,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = CallModule/CallModule.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -742,6 +749,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = CallModule/CallModule.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
