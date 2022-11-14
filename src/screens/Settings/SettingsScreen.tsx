@@ -1,11 +1,12 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { Platform, View } from "react-native";
+import { Platform, View, NativeModules } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PERMISSIONS } from "react-native-permissions";
 
 /* Local Imports */
 import createStyles from './SettingsScreen.style';
+import { getBlacklist } from "../../api/BlacklistInterface";
 import * as Settings from '../../api/SettingsInterface'
 import * as Permissions from "../../api/PermissionInterface";
 import { StartService, StopService } from "../../api/CallHandler";
@@ -62,12 +63,18 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
     );
   };
 
-  const SelectSettings = () =>(
+  const blacklist = getBlacklist('');
+  const SelectSettings = () => (
     <View>
       <SelectItem data={data.theme} name="Select Theme" description={data.theme} onPress={(value: string) => {
         Settings.setTheme(value);
       }} />
-    </View>
+      <ToggleItem data={true} name="Load blacklist" description="Load blacklist (iOS)" onPress={(value : boolean) => {
+        //iOS call native module
+        NativeModules.CallModuleiOS.updateBlacklist(blacklist.map(x => x.phone_number));
+      }} />
+         
+   </View>
   );
 
   return (

@@ -26,7 +26,9 @@ class CallDirectoryHandler: CXCallDirectoryProvider {
 
             addAllIdentificationPhoneNumbers(to: context)
         }
-        print("begin request")
+        NSLog("begin request")
+        let blacklist = self.getBlacklist()
+        NSLog("Blacklist received: %@", blacklist)
         context.completeRequest()
     }
 
@@ -89,6 +91,12 @@ class CallDirectoryHandler: CXCallDirectoryProvider {
         // Record the most-recently loaded set of identification entries in data store for the next incremental load...
     }
 
+    private func getBlacklist() -> [String] {
+      let defaults = UserDefaults.standard
+      let blacklist: [String]? = defaults.stringArray(forKey: "getoutBlacklist")
+      NSLog("blacklist in UserDefaults is: %@", blacklist ?? [])
+      return blacklist ?? []
+    }
 }
 
 extension CallDirectoryHandler: CXCallDirectoryExtensionContextDelegate {

@@ -27,10 +27,6 @@ const App = () => {
       SplashScreen.hide();
     }, 750);
   }, [scheme, isDarkMode]);
-
-  //iOS call native module
-  const blacklist = getBlacklist('');
-  NativeModules.CallModuleiOS.updateBlacklist(blacklist.map(x => x.phone_number));
  
   return (
     <Navigation/>
