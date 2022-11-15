@@ -17,16 +17,9 @@ class CallDirectoryHandler: CXCallDirectoryProvider {
         // and identification entries which have been added or removed since the last time this extension's data was loaded.
         // But the extension must still be prepared to provide the full set of data at any time, so add all blocking
         // and identification phone numbers if the request is not incremental.
-        if context.isIncremental {
-            addOrRemoveIncrementalBlockingPhoneNumbers(to: context)
-
-            addOrRemoveIncrementalIdentificationPhoneNumbers(to: context)
-        } else {
-            addAllBlockingPhoneNumbers(to: context)
-
-            addAllIdentificationPhoneNumbers(to: context)
-        }
-        print("begin request")
+      
+        NSLog("begin request")
+        addAllBlockingPhoneNumbers(to: context)
         context.completeRequest()
     }
 
@@ -35,60 +28,22 @@ class CallDirectoryHandler: CXCallDirectoryProvider {
         // consider only loading a subset of numbers at a given time and using autorelease pool(s) to release objects allocated during each batch of numbers which are loaded.
         //
         // Numbers must be provided in numerically ascending order.
-        let allPhoneNumbers: [CXCallDirectoryPhoneNumber] = [ 1_408_555_5555, 1_800_555_5555 ]
+        let allPhoneNumbers: [String] = getBlacklist()
+        NSLog("allPhoneNumbers: %@", allPhoneNumbers)
         for phoneNumber in allPhoneNumbers {
-            context.addBlockingEntry(withNextSequentialPhoneNumber: phoneNumber)
+            let phInt = Int64(phoneNumber as String)
+            context.addBlockingEntry(withNextSequentialPhoneNumber: phInt!)
+            NSLog("Blocked number added")
         }
     }
 
-    private func addOrRemoveIncrementalBlockingPhoneNumbers(to context: CXCallDirectoryExtensionContext) {
-        // Retrieve any changes to the set of phone numbers to block from data store. For optimal performance and memory usage when there are many phone numbers,
-        // consider only loading a subset of numbers at a given time and using autorelease pool(s) to release objects allocated during each batch of numbers which are loaded.
-        let phoneNumbersToAdd: [CXCallDirectoryPhoneNumber] = [ 1_408_555_1234 ]
-        for phoneNumber in phoneNumbersToAdd {
-            context.addBlockingEntry(withNextSequentialPhoneNumber: phoneNumber)
-        }
-
-        let phoneNumbersToRemove: [CXCallDirectoryPhoneNumber] = [ 1_800_555_5555 ]
-        for phoneNumber in phoneNumbersToRemove {
-            context.removeBlockingEntry(withPhoneNumber: phoneNumber)
-        }
-
-        // Record the most-recently loaded set of blocking entries in data store for the next incremental load...
+    private func getBlacklist() -> [String] {
+      let defaults = UserDefaults(suiteName: "group.com.getout")
+      let blacklist: [String]? = defaults?.stringArray(forKey: "blacklist")
+      NSLog("blacklist in UserDefaults is: %@", blacklist ?? [])
+      return blacklist ?? []
     }
-
-    private func addAllIdentificationPhoneNumbers(to context: CXCallDirectoryExtensionContext) {
-        // Retrieve phone numbers to identify and their identification labels from data store. For optimal performance and memory usage when there are many phone numbers,
-        // consider only loading a subset of numbers at a given time and using autorelease pool(s) to release objects allocated during each batch of numbers which are loaded.
-        //
-        // Numbers must be provided in numerically ascending order.
-        let allPhoneNumbers: [CXCallDirectoryPhoneNumber] = [ 1_470_835_1090, 1_888_555_5555 ]
-        let labels = [ "Test", "Local business" ]
-
-        for (phoneNumber, label) in zip(allPhoneNumbers, labels) {
-            context.addIdentificationEntry(withNextSequentialPhoneNumber: phoneNumber, label: label)
-        }
-    }
-
-    private func addOrRemoveIncrementalIdentificationPhoneNumbers(to context: CXCallDirectoryExtensionContext) {
-        // Retrieve any changes to the set of phone numbers to identify (and their identification labels) from data store. For optimal performance and memory usage when there are many phone numbers,
-        // consider only loading a subset of numbers at a given time and using autorelease pool(s) to release objects allocated during each batch of numbers which are loaded.
-        let phoneNumbersToAdd: [CXCallDirectoryPhoneNumber] = [ 1_470_835_1090 ]
-        let labelsToAdd = [ "New local business" ]
-
-        for (phoneNumber, label) in zip(phoneNumbersToAdd, labelsToAdd) {
-            context.addIdentificationEntry(withNextSequentialPhoneNumber: phoneNumber, label: label)
-        }
-
-        let phoneNumbersToRemove: [CXCallDirectoryPhoneNumber] = [ 1_888_555_5555 ]
-
-        for phoneNumber in phoneNumbersToRemove {
-            context.removeIdentificationEntry(withPhoneNumber: phoneNumber)
-        }
-
-        // Record the most-recently loaded set of identification entries in data store for the next incremental load...
-    }
-
+  
 }
 
 extension CallDirectoryHandler: CXCallDirectoryExtensionContextDelegate {

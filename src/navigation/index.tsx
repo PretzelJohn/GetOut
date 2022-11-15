@@ -1,22 +1,23 @@
 import React from "react";
 import { Platform, useColorScheme } from "react-native";
-import Icon from "react-native-dynamic-vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { isReadyRef, navigationRef } from "react-navigation-helpers";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Icon from "react-native-dynamic-vector-icons";
 
 /* Local Imports */
-import { SCREENS } from "../shared/constants";
-import { LightTheme, DarkTheme, palette } from "../shared/theme/themes";
 import { getSettings } from "../api/SettingsInterface";
-
-/* Screens */
 import WelcomeScreen, { initialRoute } from "../screens/Welcome/WelcomeScreen";
 import CallLogScreen from "../screens/CallLog/CallLogScreen";
 import WhitelistScreen from "../screens/Whitelist/WhitelistScreen";
 import BlacklistScreen from "../screens/Blacklist/BlacklistScreen";
 import SettingsScreen from "../screens/Settings/SettingsScreen";
+
+/* Shared Imports */
+import { SCREENS } from "../shared/constants";
+import { LightTheme, DarkTheme, palette } from "../shared/theme/themes";
+
 
 /* Navigator Types */
 const Tab = createBottomTabNavigator();
@@ -77,8 +78,12 @@ const Navigation = () => {
                 initialRouteName={initialRoute}
                 >
                 
-                <Tab.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
-                <Tab.Screen name={SCREENS.WHITELIST} component={WhitelistScreen} />
+                {Platform.OS === "android" &&
+                    <>
+                        <Tab.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
+                        <Tab.Screen name={SCREENS.WHITELIST} component={WhitelistScreen} />
+                    </>
+                }
                 <Tab.Screen name={SCREENS.BLACKLIST} component={BlacklistScreen} />
                 <Tab.Screen name={SCREENS.SETTINGS} component={SettingsScreen} />
             </Tab.Navigator>
@@ -95,9 +100,13 @@ const Navigation = () => {
             >
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name={"WelcomeScreen"} component={WelcomeScreen} />
-                <Stack.Screen name={"RecentsScreen"} component={RenderTabNavigation} />
-                <Stack.Screen name={"AllowedScreen"} component={WhitelistScreen} />
-                <Stack.Screen name={"BlockedScreen"} component={BlacklistScreen} />
+                {Platform.OS === "android" &&
+                    <>
+                        <Stack.Screen name={"RecentsScreen"} component={RenderTabNavigation} />
+                        <Stack.Screen name={"AllowedScreen"} component={WhitelistScreen} />
+                    </>
+                }
+                <Stack.Screen name={"BlockedScreen"} component={RenderTabNavigation} />
                 <Stack.Screen name={"SettingsScreen"} component={RenderTabNavigation} />
             </Stack.Navigator>
         </NavigationContainer>

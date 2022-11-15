@@ -26,7 +26,7 @@ const App = () => {
       SplashScreen.hide();
     }, 750);
   }, [scheme, isDarkMode]);
-
+ 
   return (
     <Navigation/>
   );
