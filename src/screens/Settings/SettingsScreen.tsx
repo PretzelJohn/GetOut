@@ -71,10 +71,10 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
         <ToggleItem style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 10}} data={data.block_calls} name="Block Calls" description="Prevents spammers from interrupting you" onPress={async(value : boolean) => {
           await Settings.setBlockCalls(!value);
           if(value) {
-            console.log("updating blacklist to []");
             if(Platform.OS === "android") {
               StopService();
             } else {
+              console.log("updating blacklist to []");
               NativeModules.CallModuleiOS.updateBlacklist([]);
             }
           } else {
