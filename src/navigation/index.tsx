@@ -1,30 +1,33 @@
 import React from "react";
-import { useColorScheme } from "react-native";
-import Icon from "react-native-dynamic-vector-icons";
+import { Platform, useColorScheme } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { isReadyRef, navigationRef } from "react-navigation-helpers";
-import { BottomTabView, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Icon from "react-native-dynamic-vector-icons";
 
 /* Local Imports */
-import { SCREENS } from "../shared/constants";
-import { LightTheme, DarkTheme, palette } from "../shared/theme/themes";
-
-/* Screens */
-import WelcomeScreen from "../screens/Welcome/WelcomeScreen";
+import { getSettings } from "../api/SettingsInterface";
+import WelcomeScreen, { initialRoute } from "../screens/Welcome/WelcomeScreen";
 import CallLogScreen from "../screens/CallLog/CallLogScreen";
 import WhitelistScreen from "../screens/Whitelist/WhitelistScreen";
 import BlacklistScreen from "../screens/Blacklist/BlacklistScreen";
 import SettingsScreen from "../screens/Settings/SettingsScreen";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+
+/* Shared Imports */
+import { SCREENS } from "../shared/constants";
+import { LightTheme, DarkTheme, palette } from "../shared/theme/themes";
+
 
 /* Navigator Types */
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-const Navigation = () => {
-    const scheme = useColorScheme();
-    const isDarkMode = scheme === 'dark';
 
+const Navigation = () => { 
+    let theme = getSettings().theme;    // User-defined theme
+    let scheme = useColorScheme();      // System color scheme
+    let isDarkMode = (theme == 'system') ? (scheme === 'dark') : (theme === 'dark');
+    
     React.useEffect((): any => {
         return () => (isReadyRef.current = false);
     }, []);
@@ -57,29 +60,35 @@ const Navigation = () => {
         return (
             <Tab.Navigator
                 screenOptions={({ route }) => ({
-                headerShown: false, 
-                tabBarIcon: ({ focused, color, size }) => RenderTabIcon(route, focused, color, size),
-                tabBarActiveTintColor: palette.black,
-                tabBarInactiveTintColor: palette.shadow,
-                tabBarHideOnKeyboard: true,
-                tabBarStyle: {
-                    backgroundColor: isDarkMode ? palette.primary : palette.primary,
-                    height: 100
-                },
-                tabBarLabelStyle: {
-                    fontSize: 18,
-                    fontFamily: "JockeyOne-Regular",
-                    bottom: 15
-                  },
+                    headerShown: false, 
+                    tabBarIcon: ({ focused, color, size }) => RenderTabIcon(route, focused, color, size),
+                    tabBarActiveTintColor: palette.black,
+                    tabBarInactiveTintColor: palette.shadow,
+                    tabBarHideOnKeyboard: true,
+                    tabBarStyle: {
+                        backgroundColor: isDarkMode ? palette.primary : palette.primary,
+                        height: Platform.OS === 'android' ? 100: 115
+                    },
+                    tabBarLabelStyle: {
+                        fontSize: 18,
+                        fontFamily: "JockeyOne-Regular",
+                        bottom: Platform.OS === 'android' ? 15: 10             
+                    },
                 })}
+                initialRouteName={initialRoute}
                 >
-                <Tab.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
-                <Tab.Screen name={SCREENS.WHITELIST} component={WhitelistScreen} />
+                
+                {Platform.OS === "android" &&
+                    <>
+                        <Tab.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
+                        <Tab.Screen name={SCREENS.WHITELIST} component={WhitelistScreen} />
+                    </>
+                }
                 <Tab.Screen name={SCREENS.BLACKLIST} component={BlacklistScreen} />
                 <Tab.Screen name={SCREENS.SETTINGS} component={SettingsScreen} />
             </Tab.Navigator>
         );
-    };  
+    };
 
     return (
         <NavigationContainer 
@@ -88,14 +97,18 @@ const Navigation = () => {
                 isReadyRef.current = true;
             }}
             theme = {isDarkMode ? DarkTheme : LightTheme}
-        >
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name={SCREENS.HOME} component={RenderTabNavigation} />
-            <Stack.Screen name={SCREENS.CALLLOG} component={CallLogScreen} />
-            <Stack.Screen name={SCREENS.WHITELIST} component={WhitelistScreen} />
-            <Stack.Screen name={SCREENS.BLACKLIST} component={BlacklistScreen} />
-            <Stack.Screen name={SCREENS.SETTINGS} component={SettingsScreen} />
-        </Stack.Navigator>
+            >
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <Stack.Screen name={"WelcomeScreen"} component={WelcomeScreen} />
+                {Platform.OS === "android" &&
+                    <>
+                        <Stack.Screen name={"RecentsScreen"} component={RenderTabNavigation} />
+                        <Stack.Screen name={"AllowedScreen"} component={WhitelistScreen} />
+                    </>
+                }
+                <Stack.Screen name={"BlockedScreen"} component={RenderTabNavigation} />
+                <Stack.Screen name={"SettingsScreen"} component={RenderTabNavigation} />
+            </Stack.Navigator>
         </NavigationContainer>
     );
 };

@@ -12,9 +12,15 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		22698C94A6DC47BC94D62BEE /* JockeyOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ACA6BF73A19848069DBF552E /* JockeyOne-Regular.ttf */; };
+		2A6EF7592921CB0A0091A22B /* CallModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EF7582921CB0A0091A22B /* CallModule.swift */; };
+		2A6EF75A2921CB0A0091A22B /* CallModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EF7582921CB0A0091A22B /* CallModule.swift */; };
+		2A6EF75C2921CC0E0091A22B /* CallModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EF75B2921CC0E0091A22B /* CallModule.m */; };
+		2A6EF75D2921CC0E0091A22B /* CallModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EF75B2921CC0E0091A22B /* CallModule.m */; };
+		2AAF8CCC29121D3500DF4EDE /* CallDirectoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF8CCB29121D3500DF4EDE /* CallDirectoryHandler.swift */; };
+		2AAF8CD029121D3500DF4EDE /* CallModule.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2AAF8CC929121D3500DF4EDE /* CallModule.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7699B88040F8A987B510C191 /* libPods-GetOut-GetOutTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-GetOut-GetOutTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		22698C94A6DC47BC94D62BEE /* JockeyOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ACA6BF73A19848069DBF552E /* JockeyOne-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,7 +31,28 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = GetOut;
 		};
+		2AAF8CCE29121D3500DF4EDE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2AAF8CC829121D3500DF4EDE;
+			remoteInfo = CallModule;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2AAF8CD129121D3600DF4EDE /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2AAF8CD029121D3500DF4EDE /* CallModule.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* GetOutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GetOutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,14 +65,23 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GetOut/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = GetOut/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-GetOut-GetOutTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GetOut-GetOutTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A6EF7562921CB090091A22B /* GetOut-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GetOut-Bridging-Header.h"; sourceTree = "<group>"; };
+		2A6EF7572921CB090091A22B /* GetOutTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GetOutTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		2A6EF7582921CB0A0091A22B /* CallModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallModule.swift; sourceTree = "<group>"; };
+		2A6EF75B2921CC0E0091A22B /* CallModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallModule.m; sourceTree = "<group>"; };
+		2AAF8CC929121D3500DF4EDE /* CallModule.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CallModule.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AAF8CCB29121D3500DF4EDE /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
+		2AAF8CCD29121D3500DF4EDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2ADF52B62922CEDE002880A9 /* GetOut.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = GetOut.entitlements; path = GetOut/GetOut.entitlements; sourceTree = "<group>"; };
+		2ADF52B72922CF03002880A9 /* CallModule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CallModule.entitlements; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-GetOut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetOut.debug.xcconfig"; path = "Target Support Files/Pods-GetOut/Pods-GetOut.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-GetOut.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetOut.release.xcconfig"; path = "Target Support Files/Pods-GetOut/Pods-GetOut.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-GetOut-GetOutTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetOut-GetOutTests.debug.xcconfig"; path = "Target Support Files/Pods-GetOut-GetOutTests/Pods-GetOut-GetOutTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-GetOut.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GetOut.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = GetOut/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-GetOut-GetOutTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetOut-GetOutTests.release.xcconfig"; path = "Target Support Files/Pods-GetOut-GetOutTests/Pods-GetOut-GetOutTests.release.xcconfig"; sourceTree = "<group>"; };
+		ACA6BF73A19848069DBF552E /* JockeyOne-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "JockeyOne-Regular.ttf"; path = "../assets/fonts/JockeyOne-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		ACA6BF73A19848069DBF552E /* JockeyOne-Regular.ttf */ = {isa = PBXFileReference; name = "JockeyOne-Regular.ttf"; path = "../assets/fonts/JockeyOne-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +98,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C80B921A6F3F58F76C31292 /* libPods-GetOut.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AAF8CC629121D3500DF4EDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +131,7 @@
 		13B07FAE1A68108700A75B9A /* GetOut */ = {
 			isa = PBXGroup;
 			children = (
+				2ADF52B62922CEDE002880A9 /* GetOut.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -96,6 +140,27 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = GetOut;
+			sourceTree = "<group>";
+		};
+		2AAF8CCA29121D3500DF4EDE /* CallModule */ = {
+			isa = PBXGroup;
+			children = (
+				2ADF52B72922CF03002880A9 /* CallModule.entitlements */,
+				2AAF8CCB29121D3500DF4EDE /* CallDirectoryHandler.swift */,
+				2AAF8CCD29121D3500DF4EDE /* Info.plist */,
+				2A6EF7582921CB0A0091A22B /* CallModule.swift */,
+				2A6EF7562921CB090091A22B /* GetOut-Bridging-Header.h */,
+				2A6EF7572921CB090091A22B /* GetOutTests-Bridging-Header.h */,
+				2A6EF75B2921CC0E0091A22B /* CallModule.m */,
+			);
+			path = CallModule;
+			sourceTree = "<group>";
+		};
+		2ABFB332290CC3D700A8CD21 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -108,6 +173,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		54B9CD575487412ABFF0BC6A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ACA6BF73A19848069DBF552E /* JockeyOne-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,9 +191,11 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				2ABFB332290CC3D700A8CD21 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* GetOut */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* GetOutTests */,
+				2AAF8CCA29121D3500DF4EDE /* CallModule */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -136,6 +211,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* GetOut.app */,
 				00E356EE1AD99517003FC87E /* GetOutTests.xctest */,
+				2AAF8CC929121D3500DF4EDE /* CallModule.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,15 +226,6 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		54B9CD575487412ABFF0BC6A /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				ACA6BF73A19848069DBF552E /* JockeyOne-Regular.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -196,15 +263,34 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
 				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				2AAF8CD129121D3600DF4EDE /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2AAF8CCF29121D3500DF4EDE /* PBXTargetDependency */,
 			);
 			name = GetOut;
 			productName = GetOut;
 			productReference = 13B07F961A680F5B00A75B9A /* GetOut.app */;
 			productType = "com.apple.product-type.application";
+		};
+		2AAF8CC829121D3500DF4EDE /* CallModule */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2AAF8CD429121D3600DF4EDE /* Build configuration list for PBXNativeTarget "CallModule" */;
+			buildPhases = (
+				2AAF8CC529121D3500DF4EDE /* Sources */,
+				2AAF8CC629121D3500DF4EDE /* Frameworks */,
+				2AAF8CC729121D3500DF4EDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CallModule;
+			productName = CallModule;
+			productReference = 2AAF8CC929121D3500DF4EDE /* CallModule.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -212,14 +298,20 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						LastSwiftMigration = 1410;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1410;
+					};
+					2AAF8CC829121D3500DF4EDE = {
+						CreatedOnToolsVersion = 14.0.1;
+						LastSwiftMigration = 1410;
 					};
 				};
 			};
@@ -238,6 +330,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* GetOut */,
 				00E356ED1AD99517003FC87E /* GetOutTests */,
+				2AAF8CC829121D3500DF4EDE /* CallModule */,
 			);
 		};
 /* End PBXProject section */
@@ -257,6 +350,13 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				22698C94A6DC47BC94D62BEE /* JockeyOne-Regular.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AAF8CC729121D3500DF4EDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +518,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* GetOutTests.m in Sources */,
+				2A6EF75A2921CB0A0091A22B /* CallModule.swift in Sources */,
+				2A6EF75D2921CC0E0091A22B /* CallModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +528,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				2A6EF75C2921CC0E0091A22B /* CallModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				2A6EF7592921CB0A0091A22B /* CallModule.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AAF8CC529121D3500DF4EDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AAF8CCC29121D3500DF4EDE /* CallDirectoryHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +550,11 @@
 			target = 13B07F861A680F5B00A75B9A /* GetOut */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
+		2AAF8CCF29121D3500DF4EDE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2AAF8CC829121D3500DF4EDE /* CallModule */;
+			targetProxy = 2AAF8CCE29121D3500DF4EDE /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -447,10 +564,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				CODE_SIGN_STYLE = Manual;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QFAMWGZ4ZC;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -467,10 +585,12 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.--PRODUCT-NAME-rfc1034identifier-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CallModule/GetOutTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GetOut.app/GetOut";
 			};
 			name = Debug;
@@ -481,11 +601,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				CODE_SIGN_STYLE = Manual;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = QFAMWGZ4ZC;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = GetOutTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -498,10 +619,11 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.--PRODUCT-NAME-rfc1034identifier-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CallModule/GetOutTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GetOut.app/GetOut";
 			};
 			name = Release;
@@ -510,13 +632,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-GetOut.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = GetOut/GetOut.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QFAMWGZ4ZC;
 				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = GetOut/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -530,6 +655,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.GetOut2;
 				PRODUCT_NAME = GetOut;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CallModule/GetOut-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -540,12 +666,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-GetOut.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = GetOut/GetOut.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QFAMWGZ4ZC;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = GetOut/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -559,8 +688,97 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.GetOut2;
 				PRODUCT_NAME = GetOut;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CallModule/GetOut-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		2AAF8CD229121D3600DF4EDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = CallModule/CallModule.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = QFAMWGZ4ZC;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CallModule/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CallModule;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.GetOut2.CallModule;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2AAF8CD329121D3600DF4EDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = CallModule/CallModule.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = QFAMWGZ4ZC;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CallModule/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CallModule;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.GetOut2.CallModule;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -718,6 +936,15 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2AAF8CD429121D3600DF4EDE /* Build configuration list for PBXNativeTarget "CallModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AAF8CD229121D3600DF4EDE /* Debug */,
+				2AAF8CD329121D3600DF4EDE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

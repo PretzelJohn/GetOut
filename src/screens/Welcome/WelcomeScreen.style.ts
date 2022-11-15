@@ -8,6 +8,7 @@ interface Style {
   buttonStyle: ViewStyle;
   buttonTextStyle: TextStyle;
   header: ViewStyle;
+  headerContainer: ViewStyle;
   contentContainer: ViewStyle;
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
@@ -50,9 +51,12 @@ export default (theme: ExtendedTheme) => {
       alignItems: "center",
       justifyContent: "space-between",
     },
+    headerContainer: {
+      justifyContent: "center",
+    },
     contentContainer: {
       flex: 1,
-      marginTop: 16,
+      justifyContent: "center",
     },
     listContainer: {
       marginTop: 8,

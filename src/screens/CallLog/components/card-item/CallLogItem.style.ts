@@ -69,7 +69,6 @@ export default (theme: ExtendedTheme) => {
       justifyContent: "center"
     },
     answeredIcon: {
-      color: colors.text,
       position: 'absolute', 
       top: '23%',
       left: "-11%"

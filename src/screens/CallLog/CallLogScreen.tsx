@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect, useCallback } from "react";
 import { View, FlatList, TouchableHighlight } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -6,11 +6,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 /* Local Imports */
 import createStyles from "./CallLogScreen.style";
 import CallLogItem from "./components/card-item/CallLogItem";
+import ListEmpty from "../../shared/components/list-empty/ListEmpty";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
-import { getCallList, insert } from "../../api/CallLogInterface";
+import { getCallList } from "../../api/CallLogInterface";
 import Styles from "../../shared/theme/styles";
+import { ScreenHeight } from "@freakycoder/react-native-helpers";
 
 
 interface CallLogScreenProps {}
@@ -19,35 +21,34 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const { colors } = theme;
     const styles = useMemo(() => createStyles(theme), [theme]);
     const sharedStyles = useMemo(() => Styles(theme), [theme]);
+    const [ showAll, setShowAll ] = useState(true);
 
     const handleItemPress = () => {
       //NavigationService.push(SCREENS.CALLLOG);
     };
-
-    //Insert mock data - will be removed for production
-    insert('678-923-1102', 1664349720000, 'Mableton, GA', false);
-    insert('678-223-8694', 1663912800000, 'Mableton, GA', true);
-    insert('970-885-8195', 1663887600000, 'Fort Collins, CO', true);
-    insert('470-303-1102', 1663797600000, 'Atlanta, GA', false);
-
+    
     
     /* -------------------------------------------------------------------------- */
     /*                               Render Methods                               */
     /* -------------------------------------------------------------------------- */
 
     const Header = () => {
-      const [ isPressed, setIsPressed ] = React.useState(true);
+      
       const allProps = {
         activeOpacity: 1,
         underlayColor: colors.primary,
-        style: [styles.allButton, {backgroundColor: isPressed ? colors.transparent : colors.secondary}],
-        onPress: () => setIsPressed(true)
+        style: [styles.allButton, {backgroundColor: showAll ? colors.transparent : colors.secondary}],
+        onPress: () => {
+          setShowAll(true);
+        }
       };
       const missedProps = {
         activeOpacity: 1,
         underlayColor: colors.primary,
-        style: [styles.missedButton, {backgroundColor: isPressed ? colors.secondary : colors.transparent}],
-        onPress: () => setIsPressed(false)
+        style: [styles.missedButton, {backgroundColor: showAll ? colors.secondary : colors.transparent}],
+        onPress: () => {
+          setShowAll(false);
+        }
       }; 
       return(
       <>
@@ -62,7 +63,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
           </View>
           <View style={{justifyContent: 'flex-start', alignItems: 'center'}}>
             <TouchableHighlight {...missedProps}>
-              <Text color={colors.text} style={styles.allmissedButtons}>Missed</Text>
+              <Text color={colors.text} style={styles.allmissedButtons}>Blocked</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -70,16 +71,20 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
       )
     };
 
-    const CallLogs = () => (
-      <View style={styles.listContainer}>
-        <FlatList
-          data={getCallList()}
-          renderItem={({ item }) => (
-            <CallLogItem data={item} onPress={handleItemPress} />
-          )}
-        />
-      </View>
-    );
+    const CallLogs = () => {
+      return (
+        <View style={styles.listContainer}>
+          <FlatList
+            data={getCallList(showAll)}
+            style={{maxHeight: ScreenHeight-275}}
+            ListEmptyComponent={<ListEmpty message="No blocked or allowed incoming calls yet"/>}
+            renderItem={({ item }) => (
+              <CallLogItem data={item} onPress={handleItemPress} />
+            )}
+          />
+        </View>
+      );
+    };
 
     return (
       <SafeAreaView style={sharedStyles.container}>

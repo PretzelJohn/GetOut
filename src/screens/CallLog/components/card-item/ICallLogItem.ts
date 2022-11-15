@@ -1,7 +1,7 @@
 // TODO: Possibly change for input sanitization
 export interface ICallLogItem {
-    number: string;
+    phone_number: string;
     location: string;
-    date: string;
-    time: string;
+    timestamp: number;
+    blocked: boolean;
 }

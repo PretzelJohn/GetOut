@@ -4,30 +4,17 @@ import { getDatabase } from "../database/Database";
 
 
 //Private function that loads the whitelist
-export const _load = async function(searchText : string) : Promise<IListItem[]> {
+export const _loadWhitelist = async function(searchText : string) : Promise<IListItem[]> {
     //Create/connect to the database
     const db = await getDatabase();
 
     //Initialize empty list and search regex
-    let list : Array<IListItem> = [];
-    searchText = searchText.replace(/[^0-9]/gim,"");
-    let regex = new RegExp(searchText.trim());
+    let search = searchText.replace(/[^0-9]/gim,"");
+    let regex = new RegExp(search.trim());
 
     //Find all matching documents in the database
-    await db.whitelist.find({
-        selector: {
-            phone_number: {$regex: regex}
-        }
-    }).exec().then((result: any[]) => {
-        if(!result) return;
-        for(let i = 0; i < result.length; i++) {
-            list.push({
-                phone_number: result[i].phone_number
-            });
-        }
-    });
-
-    return list;
+    const query = { selector: { phone_number: {$regex: regex} }, limit: 100 };
+    return await db.whitelist.find(query).exec();
 }
 
 
@@ -37,9 +24,16 @@ export const getWhitelist = function(searchText : string) : IListItem[] {
 
     useEffect(() => {
       const fetchData = async () => {
-        const data = await _load(searchText);
+        const data = await _loadWhitelist(searchText);
         setData(data);
       }
+      const subscribe = async () => {
+        const db = await getDatabase();
+        db.whitelist.$.subscribe((event : any) => {
+          fetchData();
+        });
+      }
+      subscribe();
       fetchData();
     }, []);
 
