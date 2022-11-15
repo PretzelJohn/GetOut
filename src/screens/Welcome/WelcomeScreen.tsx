@@ -1,21 +1,21 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { View, Image, useColorScheme, Platform, Linking } from "react-native";
+import { TouchableHighlight } from "react-native-gesture-handler";
 import { useTheme } from "@react-navigation/native";
+import { navigate } from "react-navigation-helpers";
+import { PERMISSIONS } from "react-native-permissions";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ScreenWidth } from "@freakycoder/react-native-helpers";
 
 /* Local Imports */
 import createStyles from "./WelcomeScreen.style";
+import { StartService } from "../../api/CallHandler";
+import { getPermission, getNotifPermission, getRole, Role } from "../../api/PermissionInterface";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import Styles from "../../shared/theme/styles";
-import { TouchableHighlight } from "react-native-gesture-handler";
-import { navigate } from "react-navigation-helpers";
 import { SCREENS } from "../../shared/constants/index";
-import { getPermission, getNotifPermission, getRole, Role } from "../../api/PermissionInterface";
-import { PERMISSIONS } from "react-native-permissions";
-import { StartService } from "../../api/CallHandler";
-import { ScreenWidth } from "@freakycoder/react-native-helpers";
 
 
 export let initialRoute = SCREENS.CALLLOG;
@@ -72,7 +72,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
           getRole(Role.CALL_SCREENING);
           StartService(null);
         } else {
-          //iOS call blocking init
+          //TODO: Open modal with instructions to enable call directory extension
           Linking.openURL("App-Prefs:Phone");
         }
 
@@ -90,8 +90,14 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
       let hasNotifPermission = await getNotifPermission(false);
       
       if(hasContactPermission && hasNotifPermission) {
-        initialRoute = SCREENS.CALLLOG;
-        navigate("RecentsScreen");
+        if(Platform.OS === "android") {
+          initialRoute = SCREENS.CALLLOG;
+          navigate("RecentsScreen");
+        } else {
+          initialRoute = SCREENS.BLACKLIST;
+          navigate("BlockedScreen");
+        }
+        
         return (<View><Text h1 style={{textAlign: "center"}}>Loading...</Text></View>);
       }
       
