@@ -1,16 +1,15 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { View, Image, useColorScheme, Platform, Linking } from "react-native";
+import { View, Image, useColorScheme, Platform } from "react-native";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { useTheme } from "@react-navigation/native";
 import { navigate } from "react-navigation-helpers";
-import { PERMISSIONS } from "react-native-permissions";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 
 /* Local Imports */
 import createStyles from "./WelcomeScreen.style";
 import { StartService } from "../../api/CallHandler";
-import { getPermission, getNotifPermission, getRole, Role } from "../../api/PermissionInterface";
+import { getNotifPermission, getRole, Role } from "../../api/PermissionInterface";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
@@ -64,16 +63,15 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
 
     //On "Get Started" button press - go to settings after requesting perms
     const onGetStarted = async() => {
-      let hasContactPermission = await getPermission(Platform.OS === "android" ? PERMISSIONS.ANDROID.READ_CONTACTS : PERMISSIONS.IOS.CONTACTS, true);
       let hasNotifPermission = await getNotifPermission(true);
 
-      if(hasContactPermission && hasNotifPermission) {
+      if(hasNotifPermission) {
         if(Platform.OS === "android") {
           getRole(Role.CALL_SCREENING);
           StartService(null);
         } else {
           //TODO: Open modal with instructions to enable call directory extension
-          Linking.openURL("App-Prefs:Phone");
+          
         }
 
         //Open settings screen
@@ -86,10 +84,9 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
     //Check if welcome screen should load
     const [loading, setLoading] = useState(true);
     const checkForFirstTimeLoaded = async () => {
-      let hasContactPermission = await getPermission(Platform.OS === "android" ? PERMISSIONS.ANDROID.READ_CONTACTS : PERMISSIONS.IOS.CONTACTS, false);
       let hasNotifPermission = await getNotifPermission(false);
       
-      if(hasContactPermission && hasNotifPermission) {
+      if(hasNotifPermission) {
         if(Platform.OS === "android") {
           initialRoute = SCREENS.CALLLOG;
           navigate("RecentsScreen");

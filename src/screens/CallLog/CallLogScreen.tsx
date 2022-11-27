@@ -22,10 +22,6 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
     const styles = useMemo(() => createStyles(theme), [theme]);
     const sharedStyles = useMemo(() => Styles(theme), [theme]);
     const [ showAll, setShowAll ] = useState(true);
-
-    const handleItemPress = () => {
-      //NavigationService.push(SCREENS.CALLLOG);
-    };
     
     
     /* -------------------------------------------------------------------------- */
@@ -79,7 +75,7 @@ const CallLogScreen: React.FC<CallLogScreenProps> = () => {
             style={{maxHeight: ScreenHeight-275}}
             ListEmptyComponent={<ListEmpty message="No blocked or allowed incoming calls yet"/>}
             renderItem={({ item }) => (
-              <CallLogItem data={item} onPress={handleItemPress} />
+              <CallLogItem data={item}/>
             )}
           />
         </View>

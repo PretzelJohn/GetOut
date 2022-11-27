@@ -19,15 +19,14 @@ type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 interface ICardItemProps {
   style?: CustomStyleProp;
   data: ICallLogItem;
-  onPress: () => void;
 }
 
-const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
+const CallLogItem: React.FC<ICardItemProps> = ({ style, data }) => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  const { phone_number, location, timestamp, blocked } = data;
+  const { phone_number, timestamp, blocked } = data;
   const phoneNumber = phone_number.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2 $3");
   const datetime = new Date(timestamp);
   const date = datetime.toLocaleDateString();
@@ -40,7 +39,7 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data, onPress }) => {
         {phoneNumber} 
       </Text>
       <Text color={colors.text} style={styles.locationTextStyle} >
-        {blocked ? "Blocked call" : "Allowed Call"} ● {location}                       
+        {blocked ? "Blocked call" : "Allowed Call"}
       </Text>
     </>
   );

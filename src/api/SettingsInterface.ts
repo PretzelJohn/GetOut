@@ -8,6 +8,7 @@ let whitelist = true;
 let blacklist = true;
 let block_calls = true;
 let theme = "system";
+let lastTheme = "system";
 
 //Private function that loads the settings interface
 export const _loadSettings = async function() {
@@ -96,18 +97,21 @@ export const setTheme = async function(value: string) {
 export const getSettings = function() {
     const [data, setData] = useState(Object);
     useEffect(() => {
-      const fetchData = async () => {
-        const data = await _loadSettings();
-        setData(data);
-      }
-      const subscribe = async () => {
-        const db = await getDatabase();
-        db.settings.$.subscribe((event : any) => {
-          fetchData();
-        });
-      }
-      subscribe();
-      fetchData();
+        const fetchData = async () => {
+            const data = await _loadSettings();
+            setData(data);
+        }
+        const subscribe = async () => {
+            const db = await getDatabase();
+            db.settings.$.subscribe((event : any) => {
+                if(theme !== lastTheme) {
+                    fetchData();
+                    lastTheme = theme;
+                }
+            });
+        }
+        subscribe();
+        fetchData();
     }, []);
 
     return data;
