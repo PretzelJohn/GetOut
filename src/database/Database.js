@@ -5,10 +5,10 @@ import { getRxStoragePouch, addPouchPlugin } from 'rxdb/plugins/pouchdb';
 import SQLite from 'react-native-sqlite-2'
 import SQLiteAdapterFactory from 'pouchdb-adapter-react-native-sqlite'
 
-import callLogCollection from './models/CallLogModel';
-import blacklistCollection from './models/BlacklistModel';
-import whitelistCollection from './models/WhitelistModel';
-import settingsCollection from './models/SettingsModel';
+import * as callLog from './models/CallLogModel';
+import * as blacklist from './models/BlacklistModel';
+import * as whitelist from './models/WhitelistModel';
+import * as settings from './models/SettingsModel';
 
 
 //Enable the SQLite plugin for PouchDB
@@ -17,7 +17,7 @@ addPouchPlugin(SQLiteAdapter);
 
 
 //Create the database instance
-let dbCache = null;
+let database = null;
 
 const _create = async function() {
     //Create/connect to the database
@@ -29,10 +29,10 @@ const _create = async function() {
     });
     
     //Add the collections to the database
-    await db.addCollections(callLogCollection);
-    await db.addCollections(whitelistCollection);
-    await db.addCollections(blacklistCollection);
-    await db.addCollections(settingsCollection);
+    await db.addCollections(callLog.collection);
+    await db.addCollections(whitelist.collection);
+    await db.addCollections(blacklist.collection);
+    await db.addCollections(settings.collection);
 
     return db;
 }
@@ -40,8 +40,6 @@ const _create = async function() {
 
 //Returns the new or cached db instance
 export function getDatabase() {
-    if(!dbCache) {
-        dbCache = _create();
-    }
-    return dbCache;
+    if(!database) database = _create();
+    return database;
 }

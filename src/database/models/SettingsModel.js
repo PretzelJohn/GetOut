@@ -1,7 +1,7 @@
 
 
 // Define the schema for the settings entries
-const settingsSchema = {
+const schema = {
     title: 'Settings',
     description: 'contains user preferences',
     version: 0,
@@ -41,10 +41,8 @@ const settingsSchema = {
 }
 
 // Define the collection for storage and ORM
-const settingsCollection = {
+export const collection = {
     settings: {
-        schema: settingsSchema
+        schema: schema
     }
 }
-
-export default settingsCollection;
