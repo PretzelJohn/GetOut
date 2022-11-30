@@ -59,8 +59,8 @@ const CallLogItem: React.FC<ICardItemProps> = ({ style, data }) => {
 
   useEffect(() => {
     const onLoad = async function() {
-      setIsWhitelisted(await _checkList(getWhitelist, number));
-      setIsBlacklisted(await _checkList(getBlacklist, number));
+      setIsWhitelisted(await _checkList(getWhitelist, phone_number));
+      setIsBlacklisted(await _checkList(getBlacklist, phone_number));
     }
     onLoad();
   }, []);
