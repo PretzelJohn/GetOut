@@ -7,7 +7,7 @@ import notifee, { AndroidImportance } from '@notifee/react-native';
 
 
 //Returns true if the phone number is in the whitelist or blacklist
-const _checkList = async(loader : Function, phoneNumber : string) => {
+export const _checkList = async(loader : Function, phoneNumber : string) => {
     const list = await loader('');
     for(let i = 0; i < list.length; i++) {
         const phone_number = list[i].phone_number;
