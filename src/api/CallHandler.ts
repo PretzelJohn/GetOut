@@ -4,16 +4,13 @@ import { _loadWhitelist } from './WhitelistInterface';
 import { insert } from './CallLogInterface';
 import { getBlockCalls, getUseContacts, getUseNotifications, getUseWhitelist, getUseBlacklist, _loadSettings } from './SettingsInterface';
 import notifee, { AndroidImportance } from '@notifee/react-native';
+import { IListItem } from '@shared-components/list-item/IListItem';
 
 
 //Returns true if the phone number is in the whitelist or blacklist
-export const _checkList = async(loader : Function, phoneNumber : string) => {
-    const list = await loader('');
-    for(let i = 0; i < list.length; i++) {
-        const phone_number = list[i].phone_number;
-        if(phoneNumber === phone_number) return true;
-    }
-    return false;
+export const checkList = async(loader : Function, phoneNumber : string) => {
+    const phone_number: IListItem[] = await loader(phoneNumber);
+    return (phone_number.length > 0);
 }
 
 //Returns true if the call should be blocked, false otherwise
@@ -23,8 +20,8 @@ const _shouldBlock = async(data : any) => {
     //Check if caller is in contacts
     let block = false;
     if(getUseContacts()) block = true; //Block if not in contacts
-    if(getUseBlacklist() && await _checkList(_loadBlacklist, data.phoneNumber)) block = true; //Block if in blacklist
-    if(getUseWhitelist() && block && await _checkList(_loadWhitelist, data.phoneNumber)) block = false; //Allow if in whitelist
+    if(getUseBlacklist() && await checkList(_loadBlacklist, data.phoneNumber)) block = true; //Block if in blacklist
+    if(getUseWhitelist() && block && await checkList(_loadWhitelist, data.phoneNumber)) block = false; //Allow if in whitelist
     return block;
 }
 

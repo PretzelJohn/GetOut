@@ -9,12 +9,13 @@ import { ScreenWidth } from "@freakycoder/react-native-helpers";
 /* Local Imports */
 import createStyles from "./WelcomeScreen.style";
 import { StartService } from "../../api/CallHandler";
-import { getNotifPermission, getRole, Role } from "../../api/PermissionInterface";
+import { getNotifPermission, getPermission, getRole, Role } from "../../api/PermissionInterface";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import Styles from "../../shared/theme/styles";
 import { SCREENS } from "../../shared/constants/index";
+import { PERMISSIONS } from "react-native-permissions";
 
 
 export let initialRoute = SCREENS.CALLLOG;
@@ -63,9 +64,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
 
     //On "Get Started" button press - go to settings after requesting perms
     const onGetStarted = async() => {
+      let hasContactPermission = await getPermission(Platform.OS === "android" ? PERMISSIONS.ANDROID.READ_CONTACTS : PERMISSIONS.IOS.CONTACTS, true);
       let hasNotifPermission = await getNotifPermission(true);
 
-      if(hasNotifPermission) {
+      if(hasContactPermission && hasNotifPermission) {
         if(Platform.OS === "android") {
           getRole(Role.CALL_SCREENING);
           StartService(null);
@@ -84,9 +86,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
     //Check if welcome screen should load
     const [loading, setLoading] = useState(true);
     const checkForFirstTimeLoaded = async () => {
+      let hasContactPermission = await getPermission(Platform.OS === "android" ? PERMISSIONS.ANDROID.READ_CONTACTS : PERMISSIONS.IOS.CONTACTS, false);
       let hasNotifPermission = await getNotifPermission(false);
       
-      if(hasNotifPermission) {
+      if(hasContactPermission && hasNotifPermission) {
         if(Platform.OS === "android") {
           initialRoute = SCREENS.CALLLOG;
           navigate("RecentsScreen");

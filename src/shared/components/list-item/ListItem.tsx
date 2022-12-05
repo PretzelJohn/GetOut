@@ -23,6 +23,17 @@ interface ICardItemProps {
   onDelete: (phone_number : string) => void;
 }
 
+//Returns a formatted version of the given phone number
+export const format = (number : string) => {
+  const stripped = strip(number);
+  let fmt = stripped.length > 6 ? "($1) $2 $3" : stripped.length > 3 ? "($1) $2" : "($1)";
+  return stripped.replace(/(\d{3}(?=(\d{1,3})(\d{0,4})))(\d{0,3}(?=(\d{1,4})))(\d{0,4})$/, fmt);
+}
+
+//Returns a stripped version of the given formatted phone number
+export const strip = (number : string) => {
+  return number.replace(/\D/g, '');
+}
 
 const ListItem: React.FC<ICardItemProps> = ({ style, data, onEdit, onDelete }) => {
   const theme = useTheme();
@@ -30,7 +41,7 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data, onEdit, onDelete }) =
   const styles = useMemo(() => createStyles(theme), [theme]);
   const sharedStyles = useMemo(() => Styles(theme), [theme]);
   const phone_number = data.phone_number;
-  //const phone_number = formatPhoneNumber(data.phone_number);
+  const phoneNumber = format(phone_number);
   
 
   /* -------------------------------------------------------------------------- */
@@ -69,7 +80,7 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data, onEdit, onDelete }) =
   const Header = () => (
     <>
       <Text color={colors.text} style={{fontSize: 25}}>
-        {phone_number}
+        {phoneNumber}
       </Text>
     </>
   );
@@ -82,12 +93,12 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data, onEdit, onDelete }) =
       <Modal isVisible={isModalEdit} animationIn={'fadeIn'} animationOut={'fadeIn'}>
         <View style={styles.modalView}>
           <Text h1 color={colors.text}>Edit Phone Number</Text>
-          <TextInput style={sharedStyles.textBox} value={number} placeholderTextColor="#777" placeholder={phone_number} keyboardType="phone-pad" onChangeText={onChangeNumber}/>
+          <TextInput style={sharedStyles.textBox} value={format(number)} placeholderTextColor="#777" placeholder={format(number)} keyboardType="phone-pad" maxLength={14} onChangeText={onChangeNumber}/>
           <View style={{flex: 1, flexDirection: "row"}}>
             <Pressable style={styles.cancelButton} onPress={toggleModalEdit}>
               <Text color={colors.text}>Cancel</Text>
             </Pressable>
-            <Pressable style={styles.doneButton} onPress={() => submitEdit(number)}>
+            <Pressable style={styles.doneButton} onPress={() => submitEdit(strip(number))}>
               <Text color={colors.text}>Done</Text>
             </Pressable>
           </View>
