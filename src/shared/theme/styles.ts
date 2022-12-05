@@ -9,6 +9,7 @@ interface Style {
     circle: ViewStyle;
     header: ViewStyle;
     textBox: ViewStyle;
+    modalView: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -46,6 +47,15 @@ export default (theme: ExtendedTheme) => {
             textAlign: "center",
             color: colors.text,
             width: "90%"
+        },
+        modalView:{
+            justifyContent: "center", 
+            alignItems: "center", 
+            backgroundColor: colors.dynamicBackground, 
+            paddingTop: 25,
+            paddingBottom: 85, 
+            borderColor: colors.black,
+            borderWidth: 1.5
         }
     })
 }

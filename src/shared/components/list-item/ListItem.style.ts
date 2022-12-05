@@ -14,7 +14,6 @@ interface Style {
   trashIcon: ViewStyle;
   cancelButton: ViewStyle;
   doneButton: ViewStyle;
-  modalView: ViewStyle;
 } 
 
 export default (theme: ExtendedTheme) => {
@@ -86,15 +85,6 @@ export default (theme: ExtendedTheme) => {
       borderRadius: 10,
       marginTop: 10,
       backgroundColor: colors.transparent 
-    },
-    modalView:{
-      justifyContent: "center", 
-      alignItems: "center", 
-      backgroundColor: colors.dynamicBackground, 
-      paddingTop: 25,
-      paddingBottom: 85, 
-      borderColor: colors.black,
-      borderWidth: 1.5
     }
   });
 };

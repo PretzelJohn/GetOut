@@ -1,6 +1,6 @@
 
 //Define the schema for the call log entries
-const blacklistSchema = {
+const schema = {
     title: 'Blacklist',
     description: 'contains user blacklist preferences',
     version: 0,
@@ -15,10 +15,8 @@ const blacklistSchema = {
 }
 
 //Define the collection for storage and ORM methods
-const blacklistCollection = {
+export const collection = {
     blacklist: {
-        schema: blacklistSchema
+        schema: schema
     }
 }
-
-export default blacklistCollection;

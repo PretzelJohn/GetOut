@@ -8,9 +8,10 @@ let whitelist = true;
 let blacklist = true;
 let block_calls = true;
 let theme = "system";
+let lastTheme = "system";
 
 //Private function that loads the settings interface
-export const _loadSettings = async function() {
+export const _loadSettings = async function() : Promise<ISettingItem> {
     // Create/connect to the database
     const db = await getDatabase();
 
@@ -38,7 +39,7 @@ export const _loadSettings = async function() {
 }
 
 
-const _update = async function() {
+const _update = async function() : Promise<void> {
     //Create/connect to the database
     const db = await getDatabase();
 
@@ -55,37 +56,37 @@ const _update = async function() {
 
 // ---------- Setters ----------
 //Updates a setting
-export const setUseContacts = async function(value: boolean) {
+export const setUseContacts = async function(value: boolean) : Promise<void> {
     contacts = value;
     await _update();
 }
 
 //Updates a setting
-export const setUseNotifications = async function(value: boolean) {
+export const setUseNotifications = async function(value: boolean) : Promise<void> {
     notifications = value;
     await _update();
 }
 
 //Updates a setting
-export const setUseWhitelist = async function(value: boolean) {
+export const setUseWhitelist = async function(value: boolean) : Promise<void> {
     whitelist = value;
     await _update();
 }
 
 //Updates a setting
-export const setUseBlacklist = async function(value: boolean) {
+export const setUseBlacklist = async function(value: boolean) : Promise<void> {
     blacklist = value;
     await _update();
 }
 
 //Updates a setting
-export const setBlockCalls = async function(value: boolean) {
+export const setBlockCalls = async function(value: boolean) : Promise<void> {
     block_calls = value;
     await _update();
 }
 
 //Updates a setting
-export const setTheme = async function(value: string) {
+export const setTheme = async function(value: string) : Promise<void> {
     theme = value;
     await _update();
 }
@@ -93,29 +94,32 @@ export const setTheme = async function(value: string) {
 
 // ---------- Getters ----------
 //Return the result of _load, since its async
-export const getSettings = function() {
+export const getSettings = function() : ISettingItem {
     const [data, setData] = useState(Object);
     useEffect(() => {
-      const fetchData = async () => {
-        const data = await _loadSettings();
-        setData(data);
-      }
-      const subscribe = async () => {
-        const db = await getDatabase();
-        db.settings.$.subscribe((event : any) => {
-          fetchData();
-        });
-      }
-      subscribe();
-      fetchData();
+        const fetchData = async () => {
+            const data = await _loadSettings();
+            setData(data);
+        }
+        const subscribe = async () => {
+            const db = await getDatabase();
+            db.settings.$.subscribe((event : any) => {
+                if(theme !== lastTheme) {
+                    fetchData();
+                    lastTheme = theme;
+                }
+            });
+        }
+        subscribe();
+        fetchData();
     }, []);
 
     return data;
 }
 
-export const getUseContacts = function() { return contacts; }
-export const getUseNotifications = function() { return notifications; }
-export const getUseWhitelist = function() { return whitelist; }
-export const getUseBlacklist = function() { return blacklist; }
-export const getBlockCalls = function() { return block_calls; }
-export const getTheme = function() { return theme; }
+export const getUseContacts = function() : boolean { return contacts; }
+export const getUseNotifications = function() : boolean { return notifications; }
+export const getUseWhitelist = function() : boolean { return whitelist; }
+export const getUseBlacklist = function() : boolean { return blacklist; }
+export const getBlockCalls = function() : boolean { return block_calls; }
+export const getTheme = function() : string { return theme; }

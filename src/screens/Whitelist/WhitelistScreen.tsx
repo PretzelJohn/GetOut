@@ -9,15 +9,15 @@ import { TextInput } from "react-native-gesture-handler";
 
 /* Local Imports */
 import createStyles from "./WhitelistScreen.style";
-import ListItem from "../../shared/components/list-item/ListItem";
-import ListEmpty from "../../shared/components/list-empty/ListEmpty";
 import { getWhitelist, insert, edit, remove } from "../../api/WhitelistInterface";
-import {getSettings} from "../../api/SettingsInterface";
+import { getSettings } from "../../api/SettingsInterface";
 
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import Styles from "../../shared/theme/styles";
+import ListItem, { format, strip } from "../../shared/components/list-item/ListItem";
+import ListEmpty from "../../shared/components/list-empty/ListEmpty";
 import { ScreenHeight } from "@freakycoder/react-native-helpers";
 
 
@@ -53,7 +53,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
 
   //Uses the apis to add/edit/delete items
   const submitAdd = async(phone_number : string) => {
-    toggleModal();
+    setModalVisible(!isModalVisible);
     await insert(phone_number);
   }
   const submitEdit = async(old_number : string, new_number : string) => {
@@ -95,15 +95,15 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
     <>
       <AntDesign style={styles.plusIcon} name="pluscircle"size={42} onPress={toggleModal}/>
       <Modal isVisible={isModalVisible} animationIn={'fadeIn'} animationOut={'fadeIn'}>
-        <View style={styles.modalView}>
+        <View style={sharedStyles.modalView}>
           <Text h1 color={colors.text}>Add phone number</Text>
           <Text h4 color={colors.text}>Enter the phone number you wish to add to the whitelist:</Text>
-          <TextInput style={sharedStyles.textBox} value={number} placeholderTextColor="#777" placeholder="(###) ###-####" keyboardType="phone-pad" onChangeText={onChangeNumber} />
+          <TextInput style={sharedStyles.textBox} value={format(number)} placeholderTextColor="#777" placeholder="(###) ### ####" keyboardType="phone-pad" onChangeText={onChangeNumber} />
           <View style={{flex: 1, flexDirection: "row"}}>
             <Pressable style={styles.cancelButton} onPress={toggleModal}>
               <Text color={colors.text}>Cancel</Text>
             </Pressable>
-            <Pressable style={styles.addButton} onPress={() => submitAdd(number)}>
+            <Pressable style={styles.addButton} onPress={() => submitAdd(strip(number))}>
               <Text color={colors.text}>Add</Text>
             </Pressable>
           </View>
