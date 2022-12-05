@@ -1,6 +1,6 @@
 
 //Define the schema for the call log entries
-const callLogSchema = {
+const schema = {
     title: 'Call Log',
     description: 'contains user call history',
     version: 0,
@@ -21,9 +21,6 @@ const callLogSchema = {
         timestamp: {
             type: 'number'
         },
-        location: {
-            type: 'string'
-        },
         blocked: {
             type: 'boolean'
         }
@@ -33,10 +30,8 @@ const callLogSchema = {
 }
 
 //Define the collection for storage and ORM methods
-const callLogCollection = {
+export const collection = {
     callLog: {
-        schema: callLogSchema
+        schema: schema
     }
 }
-
-export default callLogCollection;

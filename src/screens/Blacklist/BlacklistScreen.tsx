@@ -9,14 +9,14 @@ import { TextInput } from "react-native-gesture-handler";
 
 /* Local Imports */
 import createStyles from "./BlacklistScreen.style";
-import ListItem from "../../shared/components/list-item/ListItem";
-import ListEmpty from "../../shared/components/list-empty/ListEmpty";
-import {getBlacklist, insert, edit, remove} from "../../api/BlacklistInterface";
-import {getSettings} from "../../api/SettingsInterface";
+import { getBlacklist, insert, edit, remove} from "../../api/BlacklistInterface";
+import { getSettings } from "../../api/SettingsInterface";
 
 /* Shared Imports */
 import Text from "../../shared/components/text-wrapper/TextWrapper";
 import Styles from "../../shared/theme/styles";
+import ListItem, { format, strip } from "../../shared/components/list-item/ListItem";
+import ListEmpty from "../../shared/components/list-empty/ListEmpty";
 import { ScreenHeight } from "@freakycoder/react-native-helpers";
 
 
@@ -94,15 +94,15 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
       <>
         <AntDesign style={styles.plusIcon} name="pluscircle"size={42} onPress={toggleModal}/>
         <Modal isVisible={isModalVisible} animationIn={'fadeIn'} animationOut={'fadeIn'}>
-          <View style={styles.modalView}>
+          <View style={sharedStyles.modalView}>
             <Text h1 color={colors.text}>Add phone number</Text>
             <Text h4 color={colors.text}>Enter the phone number you wish to add to the blacklist:</Text>
-            <TextInput style={sharedStyles.textBox} value={number} placeholderTextColor="#777" placeholder="(###) ###-####" keyboardType="phone-pad" onChangeText={onChangeNumber} />
+            <TextInput style={sharedStyles.textBox} value={format(number)} placeholderTextColor="#777" placeholder="(###) ### ####" keyboardType="phone-pad" onChangeText={onChangeNumber} />
             <View style={{flex: 1, flexDirection: "row"}}>
               <Pressable style={styles.cancelButton} onPress={toggleModal}>
                 <Text color={colors.text}>Cancel</Text>
               </Pressable>
-              <Pressable style={styles.addButton} onPress={() => submitAdd(number)}>
+              <Pressable style={styles.addButton} onPress={() => submitAdd(strip(number))}>
                 <Text color={colors.text}>Add</Text>
               </Pressable>
             </View>

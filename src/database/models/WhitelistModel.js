@@ -1,6 +1,6 @@
 
 //Define the schema for the call log entries
-const whitelistSchema = {
+const schema = {
     title: 'Whitelist',
     description: 'contains user whitelist preferences',
     version: 0,
@@ -15,10 +15,8 @@ const whitelistSchema = {
 }
 
 //Define the collection for storage and ORM methods
-const whitelistCollection = {
+export const collection = {
     whitelist: {
-        schema: whitelistSchema
+        schema: schema
     }
 }
-
-export default whitelistCollection;

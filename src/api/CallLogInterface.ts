@@ -4,7 +4,7 @@ import { getDatabase } from '../database/Database';
 
 
 //Private function that loads the call log
-const _load = async function(showAll : boolean) {
+const _load = async function(showAll : boolean) : Promise<ICallLogItem[]> {
     //Create/connect to the database
     const db = await getDatabase();
 
@@ -16,7 +16,7 @@ const _load = async function(showAll : boolean) {
 
 
 //Return the result of _load, since its async
-export const getCallList = function (showAll : boolean) {
+export const getCallList = function (showAll : boolean) : ICallLogItem[] {
     const [data, setData] = useState(Array<ICallLogItem>);
     useEffect(() => {
       const fetchData = async() => {
@@ -38,7 +38,7 @@ export const getCallList = function (showAll : boolean) {
 
 
 //Inserts or updates a call log entry
-export const insert = async function(phone_number : string, timestamp=Date.now(), location='', blocked=false) {
+export const insert = async function(phone_number : string, timestamp=Date.now(), location='', blocked=false) : Promise<void> {
     //Create/connect to the database
     const db = await getDatabase();
 

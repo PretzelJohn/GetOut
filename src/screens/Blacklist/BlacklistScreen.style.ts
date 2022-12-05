@@ -10,7 +10,6 @@ interface Style {
   contentContainer: ViewStyle;
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
-  modalView: ViewStyle;
   cancelButton: ViewStyle;
   addButton: ViewStyle;
   plusIcon: ViewStyle;
@@ -61,15 +60,6 @@ export default (theme: ExtendedTheme) => {
       height: 50,
       width: 50,
       borderRadius: 30,
-    },
-    modalView:{
-      justifyContent: "center", 
-      alignItems: "center", 
-      backgroundColor: colors.dynamicBackground, 
-      paddingTop: 25,
-      paddingBottom: 85, 
-      borderColor: colors.black,
-      borderWidth: 1.5
     },
     cancelButton: {
       width: 70, 
