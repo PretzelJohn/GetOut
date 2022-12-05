@@ -12,6 +12,7 @@ interface Style {
   contentContainer: ViewStyle;
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
+  doneButton: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -66,5 +67,15 @@ export default (theme: ExtendedTheme) => {
       width: 50,
       borderRadius: 30,
     },
+    doneButton: {
+      width: 70, 
+      height: 40, 
+      justifyContent: "center", 
+      alignItems: "center",
+      borderRadius: 10,
+      marginTop: 10,
+      marginRight: 10,
+      backgroundColor: colors.transparent 
+    }
   });
 };

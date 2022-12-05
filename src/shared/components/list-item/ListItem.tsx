@@ -91,7 +91,7 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data, onEdit, onDelete }) =
     <>
       <Feather style={styles.editIcon} name="edit"size={35} onPress={toggleModalEdit}/>
       <Modal isVisible={isModalEdit} animationIn={'fadeIn'} animationOut={'fadeIn'}>
-        <View style={styles.modalView}>
+        <View style={sharedStyles.modalView}>
           <Text h1 color={colors.text}>Edit Phone Number</Text>
           <TextInput style={sharedStyles.textBox} value={format(number)} placeholderTextColor="#777" placeholder={format(number)} keyboardType="phone-pad" maxLength={14} onChangeText={onChangeNumber}/>
           <View style={{flex: 1, flexDirection: "row"}}>
@@ -112,7 +112,7 @@ const ListItem: React.FC<ICardItemProps> = ({ style, data, onEdit, onDelete }) =
     <>
       <Ionicons style={styles.trashIcon} name="trash"size={35} onPress={toggleModalTrash}/>
       <Modal isVisible={isModalTrash} animationIn={'fadeIn'} animationOut={'fadeIn'}>
-        <View style={styles.modalView}>
+        <View style={sharedStyles.modalView}>
           <Text h1 color={colors.text}>Delete Phone Number</Text>
           <Text h4 color={colors.text}>Are you sure you want to erase this phone number?</Text>
           <View style={{flex: 1, flexDirection: "row"}}>

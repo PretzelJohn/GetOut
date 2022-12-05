@@ -53,7 +53,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
 
   //Uses the apis to add/edit/delete items
   const submitAdd = async(phone_number : string) => {
-    toggleModal();
+    setModalVisible(!isModalVisible);
     await insert(phone_number);
   }
   const submitEdit = async(old_number : string, new_number : string) => {
@@ -95,7 +95,7 @@ const WhitelistScreen: React.FC<WhitelistScreenProps> = () => {
     <>
       <AntDesign style={styles.plusIcon} name="pluscircle"size={42} onPress={toggleModal}/>
       <Modal isVisible={isModalVisible} animationIn={'fadeIn'} animationOut={'fadeIn'}>
-        <View style={styles.modalView}>
+        <View style={sharedStyles.modalView}>
           <Text h1 color={colors.text}>Add phone number</Text>
           <Text h4 color={colors.text}>Enter the phone number you wish to add to the whitelist:</Text>
           <TextInput style={sharedStyles.textBox} value={format(number)} placeholderTextColor="#777" placeholder="(###) ### ####" keyboardType="phone-pad" onChangeText={onChangeNumber} />

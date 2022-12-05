@@ -94,7 +94,7 @@ const BlacklistScreen: React.FC<BlacklistScreenProps> = () => {
       <>
         <AntDesign style={styles.plusIcon} name="pluscircle"size={42} onPress={toggleModal}/>
         <Modal isVisible={isModalVisible} animationIn={'fadeIn'} animationOut={'fadeIn'}>
-          <View style={styles.modalView}>
+          <View style={sharedStyles.modalView}>
             <Text h1 color={colors.text}>Add phone number</Text>
             <Text h4 color={colors.text}>Enter the phone number you wish to add to the blacklist:</Text>
             <TextInput style={sharedStyles.textBox} value={format(number)} placeholderTextColor="#777" placeholder="(###) ### ####" keyboardType="phone-pad" onChangeText={onChangeNumber} />
